@@ -2,27 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interactable : MonoBehaviour
+public class Interactable : Lifeform
 {
+    [SerializeField] private protected Player player;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         
     }
+
     private void OnMouseDown()
     {
-        Ranger ranger = GetComponent<Ranger>();
-        
-        if (ranger != null)
+        if (player.currentObject != null)
         {
-            ranger.SelectObject();
+            player.DeselectObject();
+        }
+
+        Ranger ranger = GetComponent<Ranger>();
+
+        if (ranger != null && !ranger.duringAnimation)
+        {
+            player.SelectObject(ranger);
         }
     }
+
 }

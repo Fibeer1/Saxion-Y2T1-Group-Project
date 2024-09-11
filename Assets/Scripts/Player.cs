@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlayerCamera : MonoBehaviour
+public class Player : MonoBehaviour
 {
     private bool canMove = true;
     public Interactable currentObject;
-    public GameObject currentObjectLight;
-    [SerializeField] private float cameraSpeed = 3;
+    [SerializeField] private float cameraSpeedDamper = 5;
     [SerializeField] private GameObject moveIndicator;
-    [SerializeField] private GameObject selectionLight;
+    Vector3 movement;
 
 
     void Start()
     {
-        
+
     }
 
     private void Update()
@@ -31,23 +30,11 @@ public class PlayerCamera : MonoBehaviour
         {
             return;
         }
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.position += Vector3.forward / cameraSpeed;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.position -= Vector3.right / cameraSpeed;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.position -= Vector3.forward / cameraSpeed;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.position += Vector3.right / cameraSpeed;
-        }
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.z = Input.GetAxisRaw("Vertical");
+        movement.Normalize();
+        movement /= cameraSpeedDamper;
+        transform.position += movement / cameraSpeedDamper;
     }
 
     private void HandleObjectInputs()
@@ -64,15 +51,26 @@ public class PlayerCamera : MonoBehaviour
 
         if (currentObject.GetComponent<Ranger>() != null)
         {
+            Ranger ranger = currentObject.GetComponent<Ranger>();
             if (Input.GetKey(KeyCode.Mouse1))
             {
                 Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out RaycastHit hit))
                 {
+                    if (ranger.target != null)
+                    {
+                        ranger.DeselectTarget();
+                    }                    
                     if (hit.transform.tag == "Ground")
                     {
                         Instantiate(moveIndicator, hit.point, Quaternion.identity);
-                        currentObject.GetComponent<NavMeshAgent>().SetDestination(hit.point);                        
+                        ranger.GetComponent<NavMeshAgent>().SetDestination(hit.point);
+                        ranger.GetComponent<NavMeshAgent>().speed = ranger.defaultSpeed;
+                    }
+                    else if (hit.transform.GetComponent<Poacher>() != null)
+                    {
+                        ranger.SelectTarget(hit.transform);
+                        ranger.GetComponent<NavMeshAgent>().speed = ranger.runSpeed;
                     }
                 }
                 DeselectObject();
@@ -83,13 +81,12 @@ public class PlayerCamera : MonoBehaviour
     public void SelectObject(Interactable clickedObject)
     {
         currentObject = clickedObject;
-        Vector3 intendedObjectPosition = currentObject.transform.position + Vector3.up * 2;
-        currentObjectLight = Instantiate(selectionLight, intendedObjectPosition, Quaternion.identity);
+        currentObject.GetComponentInChildren<Renderer>().material.SetColor("_EmissionColor", new Color(0.5f, 0.5f, 0.5f));
     }
 
     public void DeselectObject()
     {
+        currentObject.GetComponentInChildren<Renderer>().material.SetColor("_EmissionColor", new Color(0f, 0f, 0f));
         currentObject = null;
-        Destroy(currentObjectLight);
     }
 }
