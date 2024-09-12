@@ -123,6 +123,7 @@ NavMeshSettings:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!1001 &895859211
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -232,6 +233,8 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1695599962}
   m_SourcePrefab: {fileID: 100100000, guid: 8e93eb53d583aad448060c7d56de191c, type: 3}
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 --- !u!1 &1523030228
@@ -428,12 +431,13 @@ Transform:
   m_GameObject: {fileID: 1548959685}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.12, y: -4.37, z: 0.83}
+  m_LocalPosition: {x: -0.12, y: 0.51, z: 0.83}
   m_LocalScale: {x: 23.535, y: 23.535, z: 23.535}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 --- !u!95 &1695599960
 Animator:
@@ -524,6 +528,8 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8e93eb53d583aad448060c7d56de191c, type: 3}
   m_PrefabInstance: {fileID: 645972348706637755}
   m_PrefabAsset: {fileID: 0}
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 --- !u!1 &1705306385
 GameObject:
@@ -618,11 +624,14 @@ Transform:
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 8.784, y: -75.878, z: 2.2}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!1 &919132148842661722 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8e93eb53d583aad448060c7d56de191c, type: 3}
   m_PrefabInstance: {fileID: 895859211}
   m_PrefabAsset: {fileID: 0}
+=======
+>>>>>>> Stashed changes
 --- !u!1001 &4375906990781076877
 =======
 --- !u!1001 &645972348706637755
@@ -645,7 +654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 656155787375762886, guid: b24bd68e558749447b3928455a8142fd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.370001
+      value: 0.5099993
       objectReference: {fileID: 0}
     - target: {fileID: 656155787375762886, guid: b24bd68e558749447b3928455a8142fd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -876,6 +885,9 @@ SceneRoots:
   m_Roots:
   - {fileID: 1523030230}
   - {fileID: 1705306388}
+<<<<<<< Updated upstream
   - {fileID: 645972348706637755}
+=======
+>>>>>>> Stashed changes
   - {fileID: 1548959689}
   - {fileID: 4375906990781076877}
