@@ -68,7 +68,8 @@ public class Ranger : Interactable
             StartCoroutine(poacherHit.TurnTowardsTarget(transform, 0.5f));
             StartCoroutine(TurnTowardsTarget(poacherHit.transform, 0.5f));           
             navMeshAgent.destination = transform.position;
-            animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);           
+            animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);
+            GameManager.poachers.Remove(poacherHit);
             StartCoroutine(RemoveObject(poacherHit.gameObject));
         }
         else if (other.tag == "Trap" && !duringAnimation)

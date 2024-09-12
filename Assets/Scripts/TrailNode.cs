@@ -20,4 +20,13 @@ public class TrailNode : Entity
             Destroy(gameObject);
         }
     }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Poacher>() != null)
+        {
+            other.GetComponent<Poacher>().FollowAnimalTrail(this);
+        }
+    }
 }

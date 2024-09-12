@@ -39,6 +39,7 @@ public class Animal : Wanderer
             transform.Rotate(0, 0, 5);
             yield return new WaitForSeconds(0.01f);
         }
+        GameManager.animals.Remove(this);
         yield return new WaitForSeconds(1.5f);
         if (trapTriggered != null)
         {

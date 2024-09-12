@@ -5,7 +5,6 @@ using UnityEngine;
 public class FOVEntity : MonoBehaviour
 {
     private Renderer[] meshRenderers;
-    [SerializeField] private Collider coll;
     public bool isBeingSeen = false;
 
     private void Start()

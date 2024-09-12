@@ -114,7 +114,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e7289eef8e48a4da00c9a348468bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coll: {fileID: 6346815281688071468}
   isBeingSeen: 0
 --- !u!135 &6346815281688071468
 SphereCollider:
@@ -131,7 +130,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

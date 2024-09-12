@@ -66,9 +66,8 @@ public class Poacher : Wanderer
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void FollowAnimalTrail(TrailNode animalFootprint)
     {
-        TrailNode animalFootprint = other.GetComponent<TrailNode>();
         if (animalFootprint != null)
         {
             followingTrail = true;
