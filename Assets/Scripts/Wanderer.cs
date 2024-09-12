@@ -5,11 +5,10 @@ using UnityEngine.AI;
 
 public class Wanderer : Lifeform
 {
-    [SerializeField] private GameObject trailNode;
+    [SerializeField] private protected GameObject trailNode;
     public List<TrailNode> trail;
     public float trailTimer = 1;
     public float trailTimerDuration = 1;
-    private bool shouldRotateFootprint = false;
     [SerializeField] private protected float wanderTimer = 10;
     private protected NavMeshAgent navMeshAgent;
     private protected Animator animator;
@@ -46,13 +45,7 @@ public class Wanderer : Lifeform
         if (trailTimer <= 0)
         {
             trailTimer = trailTimerDuration;
-
             TrailNode currentTrailNode = Instantiate(trailNode, transform.position, transform.rotation).GetComponent<TrailNode>();
-            if (shouldRotateFootprint)
-            {
-                currentTrailNode.transform.Rotate(0, 0, 180);
-            }
-            shouldRotateFootprint = !shouldRotateFootprint;
             if (!shouldKeepTrackOfTrails)
             {
                 return;

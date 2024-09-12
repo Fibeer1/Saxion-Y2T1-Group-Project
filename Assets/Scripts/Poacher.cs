@@ -23,7 +23,6 @@ public class Poacher : Wanderer
             return;
         }
 
-        HandleTrailLeaving();
         if (!followingTrail)
         {
             HandleWandering();
@@ -34,11 +33,21 @@ public class Poacher : Wanderer
         }
     }
 
+    void Footstep(int footstepIndex)
+    {
+
+        TrailNode currentTrailNode = Instantiate(trailNode, transform.position, transform.rotation).GetComponent<TrailNode>();
+        if (footstepIndex == 0)
+        {
+            currentTrailNode.transform.Rotate(0, 0, 180);
+        }
+    }
+
     private void HandleTrailFollowing()
     {
         float distance = Vector3.Distance(transform.position, targetAnimal.transform.position);
         Debug.Log(distance);
-        if (distance < 10)
+        if (distance < 5)
         {
             StartCoroutine(ShootAnimal());
         }

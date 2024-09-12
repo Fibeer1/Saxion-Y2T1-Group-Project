@@ -26,6 +26,7 @@ public class Animal : Wanderer
 
     public IEnumerator Die()
     {
+        navMeshAgent.enabled = false;
         for (int i = 0; i < 20; i++)
         {
             transform.Rotate(0, 0, 5);

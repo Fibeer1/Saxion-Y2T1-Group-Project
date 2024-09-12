@@ -51,6 +51,11 @@ public class Ranger : Interactable
         }        
     }
 
+    void Footstep()
+    {
+        //Error prevention, must remove when the real assets are imported
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Poacher>() != null && !duringAnimation)

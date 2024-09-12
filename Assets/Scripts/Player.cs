@@ -43,16 +43,32 @@ public class Player : MonoBehaviour
         {
             return;
         }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                if (hit.transform.tag == "Ground")
+                {
+                    DeselectObject();
+                    return;
+                }
+            }
+        }
+        
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             DeselectObject();
+            return;
         }
 
 
         if (currentObject.GetComponent<Ranger>() != null)
         {
             Ranger ranger = currentObject.GetComponent<Ranger>();
-            if (Input.GetKey(KeyCode.Mouse1))
+            if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out RaycastHit hit))
@@ -73,7 +89,6 @@ public class Player : MonoBehaviour
                         ranger.GetComponent<NavMeshAgent>().speed = ranger.runSpeed;
                     }
                 }
-                DeselectObject();
             }
         }
     }
