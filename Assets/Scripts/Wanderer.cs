@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Wanderer : Lifeform
+public class Wanderer : Entity
 {
     [SerializeField] private protected GameObject trailNode;
     public List<TrailNode> trail;

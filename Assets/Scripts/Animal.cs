@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Animal : Wanderer
 {
     public bool isDead = false;
+    private GameObject trapTriggered;
 
     private void Start()
     {
@@ -22,10 +23,16 @@ public class Animal : Wanderer
         }
         HandleWandering();
         HandleTrailLeaving();
-    }     
+    }
 
     public IEnumerator Die()
     {
+        if (isDead)
+        {
+            yield break;
+        }
+
+        isDead = true;
         navMeshAgent.enabled = false;
         for (int i = 0; i < 20; i++)
         {
@@ -33,6 +40,19 @@ public class Animal : Wanderer
             yield return new WaitForSeconds(0.01f);
         }
         yield return new WaitForSeconds(1.5f);
+        if (trapTriggered != null)
+        {
+            Destroy(trapTriggered);
+        }
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Trap")
+        {
+            trapTriggered = other.gameObject;
+            StartCoroutine(Die());
+        }
     }
 }

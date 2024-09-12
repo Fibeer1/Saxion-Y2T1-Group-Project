@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Ranger : Interactable
-{
+{   
     private Animator animator;
     private NavMeshAgent navMeshAgent;
     public Transform target;
     public float defaultSpeed;
-    public float runSpeed;
+    public float runSpeed;   
     public bool duringAnimation = false;
 
 
@@ -19,7 +19,7 @@ public class Ranger : Interactable
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         defaultSpeed = navMeshAgent.speed;
-        runSpeed = defaultSpeed + 7.5f;
+        runSpeed = defaultSpeed + 7.5f;        
     }
 
 
@@ -63,19 +63,30 @@ public class Ranger : Interactable
             duringAnimation = true;
             Poacher poacherHit = other.GetComponent<Poacher>();
             poacherHit.GetComponent<NavMeshAgent>().destination = poacherHit.transform.position;
+            poacherHit.GetComponent<NavMeshAgent>().enabled = false;
             DeselectTarget();
             StartCoroutine(poacherHit.TurnTowardsTarget(transform, 0.5f));
             StartCoroutine(TurnTowardsTarget(poacherHit.transform, 0.5f));           
             navMeshAgent.destination = transform.position;
             animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);           
-            StartCoroutine(CatchPoacher(poacherHit));
+            StartCoroutine(RemoveObject(poacherHit.gameObject));
+        }
+        else if (other.tag == "Trap" && !duringAnimation)
+        {
+            GameObject trap = other.gameObject;
+            duringAnimation = true;
+            DeselectTarget();
+            StartCoroutine(TurnTowardsTarget(trap.transform, 0.5f));
+            navMeshAgent.destination = transform.position;
+            animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);
+            StartCoroutine(RemoveObject(trap));
         }
     }
 
-    private IEnumerator CatchPoacher(Poacher poacher)
+    private IEnumerator RemoveObject(GameObject gameobject)
     {
         yield return new WaitForSeconds(1);
-        Destroy(poacher.gameObject);
+        Destroy(gameobject);
         duringAnimation = false;
         
     }

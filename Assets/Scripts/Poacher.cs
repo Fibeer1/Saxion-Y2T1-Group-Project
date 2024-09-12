@@ -8,12 +8,15 @@ public class Poacher : Wanderer
     private bool followingTrail = false;
     private Animal targetAnimal;
     private bool duringAnimation = false;
+    [SerializeField] private GameObject trapPrefab;
+    [SerializeField] private float trapTimer;
 
-    void Start()
+    private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         shouldKeepTrackOfTrails = false;
+        trapTimer = 60;
     }
     
     private void Update()
@@ -22,9 +25,9 @@ public class Poacher : Wanderer
         {
             return;
         }
-
         if (!followingTrail)
         {
+            HandleTraps();
             HandleWandering();
         }
         else
@@ -40,6 +43,16 @@ public class Poacher : Wanderer
         if (footstepIndex == 0)
         {
             currentTrailNode.transform.Rotate(0, 0, 180);
+        }
+    }
+
+    private void HandleTraps()
+    {
+        trapTimer -= Time.deltaTime;
+        if (trapTimer <= 0)
+        {
+            trapTimer = 60;
+            Instantiate(trapPrefab, transform.position, transform.rotation);
         }
     }
 

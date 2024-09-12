@@ -2,14 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interactable : Lifeform
+public class Interactable : Entity
 {
     [SerializeField] private protected Player player;
-
-    void Update()
-    {
-        
-    }
 
     private void OnMouseDown()
     {

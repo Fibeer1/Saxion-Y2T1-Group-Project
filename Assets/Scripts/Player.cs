@@ -88,6 +88,10 @@ public class Player : MonoBehaviour
                         ranger.SelectTarget(hit.transform);
                         ranger.GetComponent<NavMeshAgent>().speed = ranger.runSpeed;
                     }
+                    else if (hit.transform.tag == "Trap")
+                    {
+                        ranger.SelectTarget(hit.transform);
+                    }
                 }
             }
         }

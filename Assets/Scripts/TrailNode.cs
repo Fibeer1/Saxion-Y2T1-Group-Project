@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrailNode : MonoBehaviour
+public class TrailNode : Entity
 {
     public Animal animal;
     public TrailNode nextTrailNode;
