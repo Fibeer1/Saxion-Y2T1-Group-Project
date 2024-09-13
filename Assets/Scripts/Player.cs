@@ -9,12 +9,13 @@ public class Player : MonoBehaviour
     public Interactable currentObject;
     [SerializeField] private float cameraSpeedDamper = 5;
     [SerializeField] private GameObject moveIndicator;
-    Vector3 movement;
+    private Rigidbody rb;
+    private Vector3 movement;
 
 
     void Start()
     {
-
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -34,7 +35,7 @@ public class Player : MonoBehaviour
         movement.z = Input.GetAxisRaw("Vertical");
         movement.Normalize();
         movement /= cameraSpeedDamper;
-        transform.position += movement / cameraSpeedDamper;
+        rb.MovePosition(rb.position + movement / cameraSpeedDamper);
     }
 
     private void HandleObjectInputs()
@@ -68,7 +69,7 @@ public class Player : MonoBehaviour
         if (currentObject.GetComponent<Ranger>() != null)
         {
             Ranger ranger = currentObject.GetComponent<Ranger>();
-            if (Input.GetKeyDown(KeyCode.Mouse1))
+            if (Input.GetKeyDown(KeyCode.Mouse1) && !ranger.duringAnimation)
             {
                 Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out RaycastHit hit))

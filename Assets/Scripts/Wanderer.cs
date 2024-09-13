@@ -10,6 +10,7 @@ public class Wanderer : Entity
     public float trailTimer = 1;
     public float trailTimerDuration = 1;
     [SerializeField] private protected float wanderTimer = 10;
+    [SerializeField] private protected float wanderTimerDuration;
     private protected NavMeshAgent navMeshAgent;
     private protected Animator animator;
     private bool shouldWander = true;
@@ -25,7 +26,7 @@ public class Wanderer : Entity
         if (wanderTimer <= 0)
         {
             PickRandomPosition(25);
-            wanderTimer = 10;
+            wanderTimer = wanderTimerDuration;
             if (GetComponent<Animal>() != null)
             {
                 GetComponent<Animal>().trailTimer = 0;

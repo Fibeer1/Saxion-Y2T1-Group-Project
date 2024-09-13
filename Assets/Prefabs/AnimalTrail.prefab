@@ -55,11 +55,11 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
+  m_MotionVectors: 0
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animal: {fileID: 0}
   nextTrailNode: {fileID: 0}
-  lifeTime: 15
+  lifeTime: 60
 --- !u!114 &7850094830038451926
 MonoBehaviour:
   m_ObjectHideFlags: 0

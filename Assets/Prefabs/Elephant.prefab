@@ -1724,7 +1724,8 @@ MonoBehaviour:
   trail: []
   trailTimer: 1
   trailTimerDuration: 1.5
-  wanderTimer: 10
+  wanderTimer: 30
+  wanderTimerDuration: 30
   isDead: 0
 --- !u!114 &-276403674334417318
 MonoBehaviour:
@@ -1733,7 +1734,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8874110268834517978}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36e7289eef8e48a4da00c9a348468bce, type: 3}
   m_Name: 
