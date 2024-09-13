@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class FieldOfViewTrigger : MonoBehaviour
 {
-    [SerializeField] private string type; //Can be Sensor or Vision
+    public string type; //Can be Sensor or Vision
+    private TextMeshPro sensorName;
     [SerializeField] private List<GameObject> sensorCollisions = new List<GameObject>();
     [SerializeField] private Renderer circleRenderer;
     private Color originalColor;
@@ -14,6 +16,7 @@ public class FieldOfViewTrigger : MonoBehaviour
         if (type == "Sensor")
         {
             originalColor = circleRenderer.material.color;
+            sensorName = GetComponentInChildren<TextMeshPro>();
         }
     }
 
@@ -41,6 +44,7 @@ public class FieldOfViewTrigger : MonoBehaviour
             other.gameObject.GetComponent<TrailNode>() == null)
         {
             sensorCollisions.Add(other.gameObject);
+            TextPopup.PopUpText("Movement detected in " + sensorName.text, 0.5f, 5);
         }
     }
 
