@@ -2019,8 +2019,8 @@ MonoBehaviour:
   trail: []
   trailTimer: 1
   trailTimerDuration: 0.6
-  wanderTimer: 10
-  wanderTimerDuration: 10
+  wanderTimer: 5
+  wanderTimerDuration: 5
   trapPrefab: {fileID: 485911522869029594, guid: 08da777225a303a4bb8afea4380d17e6, type: 3}
   trapTimer: 0
 --- !u!114 &3823158168604681657
@@ -2036,9 +2036,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBeingSeen: 0
-  ignoreRaycastLayer:
-    serializedVersion: 2
-    m_Bits: 4
 --- !u!195 &4039003460749825987
 NavMeshAgent:
   m_ObjectHideFlags: 0

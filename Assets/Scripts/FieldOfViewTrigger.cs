@@ -6,6 +6,8 @@ using TMPro;
 public class FieldOfViewTrigger : MonoBehaviour
 {
     public string type; //Can be Sensor or Vision
+    [SerializeField] private GameObject targetMarker;
+    private GameObject currentMarker;
     private TextMeshPro sensorName;
     [SerializeField] private List<GameObject> sensorCollisions = new List<GameObject>();
     [SerializeField] private Renderer circleRenderer;
@@ -20,23 +22,6 @@ public class FieldOfViewTrigger : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (type == "Sensor")
-        {
-            if (sensorCollisions.Count != 0)
-            {
-                circleRenderer.material.color = new Color(1, 1, 0, originalColor.a);
-            }
-            else
-            {
-                circleRenderer.material.color = originalColor;
-            }
-
-        }
-    }
-
-
     private void OnTriggerEnter(Collider other)
     {
         if (type == "Sensor" && 
@@ -45,6 +30,12 @@ public class FieldOfViewTrigger : MonoBehaviour
         {
             sensorCollisions.Add(other.gameObject);
             TextPopup.PopUpText("Movement detected in " + sensorName.text, 0.5f, 5);
+            if (currentMarker == null)
+            {
+                currentMarker = Instantiate(targetMarker, FindObjectOfType<Canvas>().transform);
+                currentMarker.GetComponent<TargetMarker>().target = transform;
+            }
+            circleRenderer.material.color = new Color(1, 1, 0, originalColor.a);
         }
     }
 
@@ -65,6 +56,14 @@ public class FieldOfViewTrigger : MonoBehaviour
         if (type == "Sensor" && sensorCollisions.Contains(other.gameObject))
         {
             sensorCollisions.Remove(other.gameObject);
+            if (sensorCollisions.Count == 0)
+            {
+                circleRenderer.material.color = originalColor;
+            }
+            if (currentMarker != null)
+            {
+                Destroy(currentMarker);
+            }
         }
     }
 

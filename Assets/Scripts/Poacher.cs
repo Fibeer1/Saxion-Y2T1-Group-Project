@@ -58,9 +58,14 @@ public class Poacher : Wanderer
 
     private void HandleTrailFollowing()
     {
+        if (targetAnimal == null)
+        {
+            return;
+        }
+
         float distance = Vector3.Distance(transform.position, targetAnimal.transform.position);
         Debug.Log(distance);
-        if (distance < 5)
+        if (distance < 10)
         {
             StartCoroutine(ShootAnimal());
         }

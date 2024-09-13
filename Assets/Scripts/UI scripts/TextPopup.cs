@@ -20,7 +20,7 @@ public class TextPopup : MonoBehaviour
     {
         if (textMesh.gameObject.activeInHierarchy)
         {
-            textMesh.text = textMesh.text + "\n " + text;
+            textMesh.text = textMesh.text + "\n" + text;
             yield break;
         }
         textMesh.text = text;
