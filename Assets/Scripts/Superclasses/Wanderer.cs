@@ -22,16 +22,19 @@ public class Wanderer : Entity
         {
             return;
         }
-        wanderTimer -= Time.deltaTime;
-        if (wanderTimer <= 0)
+        if (navMeshAgent.velocity.magnitude <= 1)
         {
-            PickRandomPosition(25);
-            wanderTimer = wanderTimerDuration;
-            if (GetComponent<Animal>() != null)
+            wanderTimer -= Time.deltaTime;
+            if (wanderTimer <= 0)
             {
-                GetComponent<Animal>().trailTimer = 0;
-            }            
-        }
+                PickRandomPosition(25);
+                wanderTimer = wanderTimerDuration;
+                if (GetComponent<Animal>() != null)
+                {
+                    GetComponent<Animal>().trailTimer = 0;
+                }
+            }
+        }        
         animator.SetFloat("MoveSpeed", navMeshAgent.velocity.magnitude);
     }
 

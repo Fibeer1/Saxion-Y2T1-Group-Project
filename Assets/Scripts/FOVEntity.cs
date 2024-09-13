@@ -6,10 +6,13 @@ public class FOVEntity : MonoBehaviour
 {
     private Renderer[] meshRenderers;
     public bool isBeingSeen = false;
+    private LayerMask originalLayer;
+    [SerializeField] private LayerMask ignoreRaycastLayer;
 
     private void Start()
     {
         meshRenderers = GetComponentsInChildren<Renderer>();
+        originalLayer = gameObject.layer;
         foreach (var renderer in meshRenderers)
         {
             renderer.enabled = false;
@@ -28,13 +31,15 @@ public class FOVEntity : MonoBehaviour
             foreach (var renderer in meshRenderers)
             {
                 renderer.enabled = true;
+                gameObject.layer = originalLayer;
             }
         }
         else
         {
             foreach (var renderer in meshRenderers)
             {
-                renderer.enabled = false;
+                renderer.enabled = false;               
+                gameObject.layer = ignoreRaycastLayer.value;
             }
         }
     }

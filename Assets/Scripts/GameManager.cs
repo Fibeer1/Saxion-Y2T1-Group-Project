@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static List<Ranger> rangers = new List<Ranger>();
     public static List<Poacher> poachers = new List<Poacher>();
     public static List<Animal> animals = new List<Animal>();
+    [SerializeField] private TextMeshProUGUI rangerCount;
+    [SerializeField] private TextMeshProUGUI poacherCount;
+    [SerializeField] private TextMeshProUGUI animalCount;
+
     private bool hasGameEnded = false;
 
     private void Start()
@@ -24,16 +29,19 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
+        poacherCount.text = "Poachers left: " + poachers.Count;
+        rangerCount.text = "Rangers: " + rangers.Count;
+        animalCount.text = "Animals left: " + animals.Count;
 
         if (poachers.Count == 0)
         {
             hasGameEnded = true;
-            Debug.Log("You win!");
+            EndScreen.ToggleEndScreen("You win! \n You caught all poachers.", 0.5f, 0.1f);
         }
         if (animals.Count == 0)
         {
             hasGameEnded = true;
-            Debug.Log("You lose!");
+            EndScreen.ToggleEndScreen("You lose! \n The poachers killed all animals.", 0.5f, 0.1f);
         }
     }
 }

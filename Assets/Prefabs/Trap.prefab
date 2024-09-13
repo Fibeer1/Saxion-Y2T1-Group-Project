@@ -119,3 +119,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBeingSeen: 0
+  ignoreRaycastLayer:
+    serializedVersion: 2
+    m_Bits: 4

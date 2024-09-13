@@ -2036,6 +2036,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBeingSeen: 0
+  ignoreRaycastLayer:
+    serializedVersion: 2
+    m_Bits: 4
 --- !u!195 &4039003460749825987
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -136,6 +136,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBeingSeen: 0
+  ignoreRaycastLayer:
+    serializedVersion: 2
+    m_Bits: 4
 --- !u!54 &-5545237866861609345
 Rigidbody:
   m_ObjectHideFlags: 0
