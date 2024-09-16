@@ -34,8 +34,7 @@ public class Wanderer : Entity
                     GetComponent<Animal>().trailTimer = 0;
                 }
             }
-        }        
-        animator.SetFloat("MoveSpeed", navMeshAgent.velocity.magnitude);
+        }
     }
 
     private protected void HandleTrailLeaving()

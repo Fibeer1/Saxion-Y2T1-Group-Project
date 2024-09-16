@@ -2741,7 +2741,7 @@ MonoBehaviour:
   currentObject: {fileID: 0}
   selectionCirclePrefab: {fileID: 6158910173999244613, guid: 83373d3117e963946807350662561868, type: 3}
   currentSelectionCircle: {fileID: 0}
-  cameraSpeedDamper: 1
+  cameraSpeedDamper: 1.5
   moveIndicator: {fileID: 6610607166004219918, guid: 9697246fac9d1a0478abe3290a258701, type: 3}
 --- !u!54 &963194230
 Rigidbody:
@@ -4984,6 +4984,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1716233477}
     m_Modifications:
+    - target: {fileID: 4039003460749825987, guid: 4dccbd1f13f7c544e802e4ac7453c6a6, type: 3}
+      propertyPath: m_Acceleration
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 5899477927772055219, guid: 4dccbd1f13f7c544e802e4ac7453c6a6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 689.09

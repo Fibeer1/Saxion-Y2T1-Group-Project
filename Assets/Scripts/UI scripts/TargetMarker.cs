@@ -44,7 +44,7 @@ public class TargetMarker : MonoBehaviour
         Vector2 markerRectTransform = GetComponent<RectTransform>().position;
         Vector2 direction = markerPos - markerRectTransform;
 
-        transform.up = -direction;
+        transform.up = direction;
 
         transform.position = targetPos;
     }

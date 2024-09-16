@@ -21,6 +21,7 @@ public class Animal : Wanderer
         {
             return;
         }
+        animator.SetFloat("MoveSpeed", navMeshAgent.velocity.magnitude);
         HandleWandering();
         HandleTrailLeaving();
     }

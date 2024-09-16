@@ -21,7 +21,7 @@ public class Poacher : Wanderer
         shouldKeepTrackOfTrails = false;
         trapTimer = 60;
         defaultSpeed = navMeshAgent.speed;
-        runSpeed = defaultSpeed + 3;
+        runSpeed = defaultSpeed + 2;
     }
     
     private void Update()
@@ -30,6 +30,7 @@ public class Poacher : Wanderer
         {
             return;
         }
+        animator.SetFloat("MoveSpeed", navMeshAgent.velocity.magnitude);
         HandleRunningFromRangers();
         if (targetRanger != null)
         {
@@ -44,8 +45,6 @@ public class Poacher : Wanderer
         {
             HandleTrailFollowing();
         }
-
-        
     }
 
     void Footstep(int footstepIndex)
@@ -82,7 +81,7 @@ public class Poacher : Wanderer
         {
             return;
         }
-        Vector3 difference = (targetRanger.transform.position + transform.position) * 5;
+        Vector3 difference = transform.position - (targetRanger.transform.position - transform.position) * 5;
         navMeshAgent.SetDestination(difference);
         float distance = Vector3.Distance(transform.position, targetRanger.transform.position);
         Debug.Log("Ranger distance: " + distance);
