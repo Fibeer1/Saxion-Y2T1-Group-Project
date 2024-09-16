@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class TargetMarker : MonoBehaviour
 {
     public Transform target;
-    private Transform playerCam;
+    private Camera playerCam;
 
     private void Start()
     {
-        playerCam = FindObjectOfType<Camera>().transform;
+        playerCam = FindObjectOfType<Camera>();
     }
 
     private void Update()
@@ -21,10 +21,10 @@ public class TargetMarker : MonoBehaviour
         float minY = GetComponent<Image>().GetPixelAdjustedRect().height / 2;
         float maxY = Screen.height - minY;
 
-        Vector2 targetPos = Camera.main.WorldToScreenPoint(target.position + Vector3.up * 1.5f);
+        Vector2 targetPos = playerCam.WorldToScreenPoint(target.position + Vector3.up * 1.5f);
 
         //If the target is behind the camera
-        if (Vector3.Dot(target.position - playerCam.position, playerCam.forward) < 0)
+        if (Vector3.Dot(target.position - playerCam.transform.position, playerCam.transform.forward) < 0)
         {
             if (targetPos.x < Screen.width / 2)
             {
@@ -39,12 +39,6 @@ public class TargetMarker : MonoBehaviour
 
         targetPos.x = Mathf.Clamp(targetPos.x, minX, maxX);
         targetPos.y = Mathf.Clamp(targetPos.y, minY, maxY);
-
-        Vector2 markerPos = Camera.main.WorldToScreenPoint(transform.position);
-        Vector2 markerRectTransform = GetComponent<RectTransform>().position;
-        Vector2 direction = markerPos - markerRectTransform;
-
-        transform.up = direction;
 
         transform.position = targetPos;
     }

@@ -21,7 +21,7 @@ public class Ranger : Interactable
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         defaultSpeed = navMeshAgent.speed;
-        runSpeed = defaultSpeed + 7.5f;        
+        runSpeed = defaultSpeed + 7.5f;
     }
 
 
