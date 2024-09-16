@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
 {
     private bool canMove = true;
     public Interactable currentObject;
+    [SerializeField] private GameObject selectionCirclePrefab;
+    public GameObject currentSelectionCircle;
     [SerializeField] private float cameraSpeedDamper = 5;
     [SerializeField] private GameObject moveIndicator;
     private Rigidbody rb;
@@ -20,9 +22,12 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        HandleMovement();
         HandleObjectInputs();
+    }
 
+    private void FixedUpdate()
+    {
+        HandleMovement();
     }
 
     private void HandleMovement()
@@ -100,13 +105,18 @@ public class Player : MonoBehaviour
 
     public void SelectObject(Interactable clickedObject)
     {
+        if (currentObject != null)
+        {
+            DeselectObject();
+        }
         currentObject = clickedObject;
-        currentObject.GetComponentInChildren<Renderer>().material.SetColor("_EmissionColor", new Color(0.5f, 0.5f, 0.5f));
+        currentSelectionCircle = Instantiate(selectionCirclePrefab, currentObject.transform.position, Quaternion.identity, currentObject.transform);
     }
 
     public void DeselectObject()
     {
-        currentObject.GetComponentInChildren<Renderer>().material.SetColor("_EmissionColor", new Color(0f, 0f, 0f));
+        Destroy(currentSelectionCircle);
+        currentSelectionCircle = null;
         currentObject = null;
     }
 }

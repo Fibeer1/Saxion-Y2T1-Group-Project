@@ -5,11 +5,14 @@ using UnityEngine.AI;
 
 public class Poacher : Wanderer
 {
-    private bool followingTrail = false;
+    [SerializeField] private bool followingTrail = false;
     private Animal targetAnimal;
+    [SerializeField] private Ranger targetRanger;
     private bool duringAnimation = false;
     [SerializeField] private GameObject trapPrefab;
     [SerializeField] private float trapTimer;
+    private float defaultSpeed;
+    private float runSpeed; //Must be lower than the rangers' speed
 
     private void Start()
     {
@@ -17,11 +20,18 @@ public class Poacher : Wanderer
         animator = GetComponent<Animator>();
         shouldKeepTrackOfTrails = false;
         trapTimer = 60;
+        defaultSpeed = navMeshAgent.speed;
+        runSpeed = defaultSpeed + 3;
     }
     
     private void Update()
     {
         if (duringAnimation)
+        {
+            return;
+        }
+        HandleRunningFromRangers();
+        if (targetRanger != null)
         {
             return;
         }
@@ -34,12 +44,14 @@ public class Poacher : Wanderer
         {
             HandleTrailFollowing();
         }
+
+        
     }
 
     void Footstep(int footstepIndex)
     {
 
-        TrailNode currentTrailNode = Instantiate(trailNode, transform.position, transform.rotation).GetComponent<TrailNode>();
+        TrailNode currentTrailNode = Instantiate(trailNodePrefab, transform.position, transform.rotation).GetComponent<TrailNode>();
         if (footstepIndex == 0)
         {
             currentTrailNode.transform.Rotate(0, 0, 180);
@@ -56,6 +68,31 @@ public class Poacher : Wanderer
         }
     }
 
+    public void TargetRanger(Ranger ranger)
+    {
+        targetAnimal = null;
+        targetRanger = ranger;
+        followingTrail = false;
+        navMeshAgent.speed = runSpeed;
+    }
+
+    private void HandleRunningFromRangers()
+    {
+        if (targetRanger == null)
+        {
+            return;
+        }
+        Vector3 difference = (targetRanger.transform.position + transform.position) * 5;
+        navMeshAgent.SetDestination(difference);
+        float distance = Vector3.Distance(transform.position, targetRanger.transform.position);
+        Debug.Log("Ranger distance: " + distance);
+        if (distance > 15)
+        {
+            navMeshAgent.speed = defaultSpeed;
+            targetRanger = null;
+        }
+    }
+
     private void HandleTrailFollowing()
     {
         if (targetAnimal == null)
@@ -67,7 +104,7 @@ public class Poacher : Wanderer
         Debug.Log(distance);
         if (distance < 10)
         {
-            StartCoroutine(ShootAnimal());
+            StartCoroutine(ShootAnimal(targetAnimal));
         }
     }
 
@@ -95,7 +132,7 @@ public class Poacher : Wanderer
         }
     }
 
-    private IEnumerator ShootAnimal()
+    public IEnumerator ShootAnimal(Animal animal)
     {
         duringAnimation = true;
         StartCoroutine(TurnTowardsTarget(targetAnimal.transform, 0.5f));

@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI poacherCount;
     [SerializeField] private TextMeshProUGUI animalCount;
 
+
+    public int money;
     private bool hasGameEnded = false;
 
     private void Start()

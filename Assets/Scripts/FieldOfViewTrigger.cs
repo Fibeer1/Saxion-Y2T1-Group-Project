@@ -22,6 +22,28 @@ public class FieldOfViewTrigger : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (sensorCollisions.Count != 0)
+        {
+            for (int i = 0; i < sensorCollisions.Count; i++)
+            {
+                if (sensorCollisions[i] == null)
+                {
+                    sensorCollisions.Remove(sensorCollisions[i]);
+                }
+            }
+        }
+        else if (type == "Sensor")
+        {
+            circleRenderer.material.color = originalColor;
+            if (currentMarker != null)
+            {
+                Destroy(currentMarker);
+            }
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (type == "Sensor" && 

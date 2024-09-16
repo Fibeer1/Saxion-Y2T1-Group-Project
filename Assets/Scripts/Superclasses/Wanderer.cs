@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Wanderer : Entity
 {
-    [SerializeField] private protected GameObject trailNode;
+    [SerializeField] private protected GameObject trailNodePrefab;
     public List<TrailNode> trail;
     public float trailTimer = 1;
     public float trailTimerDuration = 1;
@@ -49,7 +49,7 @@ public class Wanderer : Entity
         if (trailTimer <= 0)
         {
             trailTimer = trailTimerDuration;
-            TrailNode currentTrailNode = Instantiate(trailNode, transform.position, transform.rotation).GetComponent<TrailNode>();
+            TrailNode currentTrailNode = Instantiate(trailNodePrefab, transform.position, transform.rotation).GetComponent<TrailNode>();
             if (!shouldKeepTrackOfTrails)
             {
                 return;

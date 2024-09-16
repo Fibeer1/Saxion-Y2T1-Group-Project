@@ -8,6 +8,8 @@ public class Ranger : Interactable
     private Animator animator;
     private NavMeshAgent navMeshAgent;
     public Transform target;
+    [SerializeField] private GameObject targetCirclePrefab;
+    public GameObject currentTargetCircle;
     public float defaultSpeed;
     public float runSpeed;   
     public bool duringAnimation = false;
@@ -39,14 +41,15 @@ public class Ranger : Interactable
             DeselectTarget();
         }
         target = pTarget;
-        target.GetComponentInChildren<Renderer>().material.SetColor("_EmissionColor", new Color(0.5f, 0.5f, 0));
+        currentTargetCircle = Instantiate(targetCirclePrefab, target.position, Quaternion.identity, target);
     }
 
     public void DeselectTarget()
     {
         if (target != null)
         {
-            target.GetComponentInChildren<Renderer>().material.SetColor("_EmissionColor", new Color(0, 0, 0));
+            Destroy(currentTargetCircle);
+            currentTargetCircle = null;
             target = null;
         }        
     }
