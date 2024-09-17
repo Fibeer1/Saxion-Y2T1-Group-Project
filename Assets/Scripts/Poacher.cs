@@ -141,12 +141,16 @@ public class Poacher : Wanderer
 
     public IEnumerator ShootAnimal(Animal animal)
     {
+        if (duringAnimation)
+        {
+            yield break;
+        }
         duringAnimation = true;
         StartCoroutine(TurnTowardsTarget(targetAnimal.transform, 0.5f));
         navMeshAgent.destination = transform.position;
         animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);
         yield return new WaitForSeconds(1);
-        targetAnimal.StartCoroutine(targetAnimal.Die());
+        animal.StartCoroutine(targetAnimal.Die());
         duringAnimation = false;
         followingTrail = false;
     }
