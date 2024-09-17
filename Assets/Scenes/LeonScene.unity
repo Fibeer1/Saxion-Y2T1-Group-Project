@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 413864213}
   - component: {fileID: 413864212}
   m_Layer: 0
-  m_Name: rr
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -426,9 +426,9 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3824525474104359391, guid: 709a4b8464cafb14f9b36264b8f8aed2, type: 3}
+    - target: {fileID: 5393700826340424479, guid: f768e8fe6b8780a43b2e4d469e0aa699, type: 3}
       propertyPath: m_Name
-      value: ElephantProper
+      value: Elephant
       objectReference: {fileID: 0}
     - target: {fileID: 3836874508031404770, guid: 709a4b8464cafb14f9b36264b8f8aed2, type: 3}
       propertyPath: m_Enabled
@@ -438,43 +438,43 @@ PrefabInstance:
       propertyPath: m_ReceiveShadows
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4492517698342511461, guid: 709a4b8464cafb14f9b36264b8f8aed2, type: 3}
+    - target: {fileID: 7952239783055964913, guid: f768e8fe6b8780a43b2e4d469e0aa699, type: 3}
       propertyPath: m_LocalPosition.x
       value: -16.295994
       objectReference: {fileID: 0}
-    - target: {fileID: 4492517698342511461, guid: 709a4b8464cafb14f9b36264b8f8aed2, type: 3}
+    - target: {fileID: 7952239783055964913, guid: f768e8fe6b8780a43b2e4d469e0aa699, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.52000046
       objectReference: {fileID: 0}
-    - target: {fileID: 4492517698342511461, guid: 709a4b8464cafb14f9b36264b8f8aed2, type: 3}
+    - target: {fileID: 7952239783055964913, guid: f768e8fe6b8780a43b2e4d469e0aa699, type: 3}
       propertyPath: m_LocalPosition.z
       value: 3.6756
       objectReference: {fileID: 0}
-    - target: {fileID: 4492517698342511461, guid: 709a4b8464cafb14f9b36264b8f8aed2, type: 3}
+    - target: {fileID: 7952239783055964913, guid: f768e8fe6b8780a43b2e4d469e0aa699, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.9996835
       objectReference: {fileID: 0}
-    - target: {fileID: 4492517698342511461, guid: 709a4b8464cafb14f9b36264b8f8aed2, type: 3}
+    - target: {fileID: 7952239783055964913, guid: f768e8fe6b8780a43b2e4d469e0aa699, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4492517698342511461, guid: 709a4b8464cafb14f9b36264b8f8aed2, type: 3}
+    - target: {fileID: 7952239783055964913, guid: f768e8fe6b8780a43b2e4d469e0aa699, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0.025159065
       objectReference: {fileID: 0}
-    - target: {fileID: 4492517698342511461, guid: 709a4b8464cafb14f9b36264b8f8aed2, type: 3}
+    - target: {fileID: 7952239783055964913, guid: f768e8fe6b8780a43b2e4d469e0aa699, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4492517698342511461, guid: 709a4b8464cafb14f9b36264b8f8aed2, type: 3}
+    - target: {fileID: 7952239783055964913, guid: f768e8fe6b8780a43b2e4d469e0aa699, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4492517698342511461, guid: 709a4b8464cafb14f9b36264b8f8aed2, type: 3}
+    - target: {fileID: 7952239783055964913, guid: f768e8fe6b8780a43b2e4d469e0aa699, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -2.883
       objectReference: {fileID: 0}
-    - target: {fileID: 4492517698342511461, guid: 709a4b8464cafb14f9b36264b8f8aed2, type: 3}
+    - target: {fileID: 7952239783055964913, guid: f768e8fe6b8780a43b2e4d469e0aa699, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
@@ -526,7 +526,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 709a4b8464cafb14f9b36264b8f8aed2, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: f768e8fe6b8780a43b2e4d469e0aa699, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
