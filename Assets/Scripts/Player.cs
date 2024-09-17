@@ -38,9 +38,24 @@ public class Player : MonoBehaviour
         }
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.z = Input.GetAxisRaw("Vertical");
+
+        bool[] movementChecks = 
+            { 
+                movement.x > 0 && Physics.Raycast(transform.position, Vector3.right, 10), //Right
+                movement.z > 0 && Physics.Raycast(transform.position, Vector3.forward, 10), //Forward
+                movement.x < 0 && Physics.Raycast(transform.position, -Vector3.right, 10), //Left
+                movement.z < 0 && Physics.Raycast(transform.position, -Vector3.forward, 10), //Back
+            };
+        foreach (var check in movementChecks)
+        {
+            if (check)
+            {
+                return;
+            }
+        }
         movement.Normalize();
         movement /= cameraSpeedDamper;
-        rb.MovePosition(rb.position + movement / cameraSpeedDamper);
+        rb.MovePosition(rb.position + movement);
     }
 
     private void HandleObjectInputs()

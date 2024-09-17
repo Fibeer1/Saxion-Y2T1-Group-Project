@@ -7,6 +7,7 @@ public class Animal : Wanderer
 {
     public bool isDead = false;
     private GameObject trapTriggered;
+    private int animalValue = 100; //Placeholder value
 
     private void Start()
     {
@@ -47,6 +48,8 @@ public class Animal : Wanderer
             Destroy(trapTriggered);
         }
         FOVDebug.FindFOVEntities();
+        FindObjectOfType<GameManager>().HandleMoneyChange("One of your animals has died.\nMoney deducted: " + 
+            animalValue + "$", animalValue);
         Destroy(gameObject);
     }
 

@@ -8,7 +8,7 @@ public class FieldOfViewTrigger : MonoBehaviour
     public string type; //Can be Sensor or Vision
     [SerializeField] private GameObject targetMarker;
     private GameObject currentMarker;
-    private TextMeshPro sensorName;
+    public TextMeshPro sensorName;
     [SerializeField] private List<GameObject> sensorCollisions = new List<GameObject>();
     [SerializeField] private Renderer circleRenderer;
     private Color originalColor;

@@ -12,12 +12,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI rangerCount;
     [SerializeField] private TextMeshProUGUI animalCount;
     [SerializeField] private TextMeshProUGUI moneyCount;
+    [SerializeField] private TMP_Dropdown sensorList;
+
+
     [SerializeField] private float passiveIncomeTimer;
     private float passiveIncomeTimeMin = 25f;
     private float passiveIncomeTimeMax = 60f;
 
 
-    public float money;
+    public int money;
     private int donationMoneyMin = 50;
     private int donationMoneyMax = 250;
 
@@ -28,6 +31,24 @@ public class GameManager : MonoBehaviour
         rangers = FindObjectsOfType<Ranger>().ToList();
         poachers = FindObjectsOfType<Poacher>().ToList();
         animals = FindObjectsOfType<Animal>().ToList();
+        List<FieldOfViewTrigger> sensors = FindObjectsOfType<FieldOfViewTrigger>().ToList();
+        TMP_Dropdown.OptionDataList sensorsList = new TMP_Dropdown.OptionDataList();
+        
+        for (int i = 0; i < sensors.Count; i++)
+        {
+            if (sensors[i].type == "Vision")
+            {
+                sensors.Remove(sensors[i]);
+                continue;
+            }            
+        }
+        foreach (var sensor in sensors)
+        {
+            TMP_Dropdown.OptionData sensorData = new TMP_Dropdown.OptionData(sensor.sensorName.text);
+            sensorsList.options.Add(sensorData);
+        }
+        sensorList.ClearOptions();        
+        sensorList.AddOptions(sensorsList.options);
         passiveIncomeTimer = Random.Range(passiveIncomeTimeMin, passiveIncomeTimeMax);
         money = 100; //Starting amount
     }
@@ -41,7 +62,7 @@ public class GameManager : MonoBehaviour
         }
         
 
-        moneyCount.text = "$" + (int)money;
+        moneyCount.text = "$" + money;
         rangerCount.text = "Rangers: " + rangers.Count;
         animalCount.text = "Animals left: " + animals.Count;
 
@@ -58,6 +79,11 @@ public class GameManager : MonoBehaviour
             hasGameEnded = true;
             EndScreen.ToggleEndScreen("You lose!\nThe poachers killed all animals.", 0.5f, 0.1f);
         }
+        if (money <= 0)
+        {
+            hasGameEnded = true;
+            EndScreen.ToggleEndScreen("You lose!\nYou ran out of money.", 0.5f, 0.1f);
+        }
     }
 
     private void HandlePassiveIncome()
@@ -66,13 +92,13 @@ public class GameManager : MonoBehaviour
         if (passiveIncomeTimer <= 0)
         {
             passiveIncomeTimer = Random.Range(passiveIncomeTimeMin, passiveIncomeTimeMax);
-            float moneyReceived = Random.Range(donationMoneyMin, donationMoneyMax);
-            money += moneyReceived;
-            HandleMoneyChange("Donation received!\nMoney gained: " + (int)moneyReceived + "$");
+            int moneyReceived = Random.Range(donationMoneyMin, donationMoneyMax);
+            HandleMoneyChange("Donation received!\nMoney gained: " + moneyReceived + "$", moneyReceived);
         }
     }
-    public void HandleMoneyChange(string text)
+    public void HandleMoneyChange(string text, int moneyChange)
     {
         TextPopup.PopUpText(text, 0.5f, 2);
+        money += moneyChange;
     }
 }

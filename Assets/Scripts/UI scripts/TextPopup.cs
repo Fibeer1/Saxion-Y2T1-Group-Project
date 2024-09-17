@@ -22,7 +22,9 @@ public class TextPopup : MonoBehaviour
         if (textMesh.gameObject.activeInHierarchy)
         {
             textMesh.text = textMesh.text + "\n" + text;
-            elapsedTime--; //Increase the lifetime of the text by 1 second each time text is added
+            Debug.Log("Before: " + elapsedTime);
+            elapsedTime -= 3; //Increase the lifetime of the text by 1 second each time text is added
+            Debug.Log("After: " + elapsedTime);
             yield break;
         }
         textMesh.text = text;

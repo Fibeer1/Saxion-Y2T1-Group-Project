@@ -67,6 +67,7 @@ public class Ranger : Interactable
             Poacher poacherHit = other.GetComponent<Poacher>();
             poacherHit.GetComponent<NavMeshAgent>().destination = poacherHit.transform.position;
             poacherHit.GetComponent<NavMeshAgent>().enabled = false;
+            poacherHit.duringAnimation = true;
             DeselectTarget();
             StartCoroutine(poacherHit.TurnTowardsTarget(transform, 0.5f));
             StartCoroutine(TurnTowardsTarget(poacherHit.transform, 0.5f));           
@@ -74,6 +75,8 @@ public class Ranger : Interactable
             animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);
             GameManager.poachers.Remove(poacherHit);
             StartCoroutine(RemoveObject(poacherHit.gameObject));
+            FindObjectOfType<GameManager>().HandleMoneyChange("Poacher arrested!\nMoney received: " +
+            poacherHit.poacherValue + "$", poacherHit.poacherValue);
         }
         else if (other.tag == "Trap" && !duringAnimation)
         {

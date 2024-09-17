@@ -8,11 +8,12 @@ public class Poacher : Wanderer
     [SerializeField] private bool followingTrail = false;
     private Animal targetAnimal;
     [SerializeField] private Ranger targetRanger;
-    private bool duringAnimation = false;
+    public bool duringAnimation = false;
     [SerializeField] private GameObject trapPrefab;
     [SerializeField] private float trapTimer;
     private float defaultSpeed;
     private float runSpeed; //Must be lower than the rangers' speed
+    public int poacherValue = 100;
 
     private void Start()
     {
