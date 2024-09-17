@@ -16,7 +16,8 @@ public class TrailNode : Entity
             if (animal != null)
             {
                 animal.trail.Remove(this);
-            }            
+            }
+            FOVDebug.FindFOVEntities();
             Destroy(gameObject);
         }
     }

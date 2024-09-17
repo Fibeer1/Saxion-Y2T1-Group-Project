@@ -8,6 +8,7 @@ public class TextPopup : MonoBehaviour
     public static TextPopup instance;
     private Vector3 originalPosition;
     [SerializeField] private TextMeshProUGUI textMesh;
+    private float elapsedTime = 0;
 
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class TextPopup : MonoBehaviour
         if (textMesh.gameObject.activeInHierarchy)
         {
             textMesh.text = textMesh.text + "\n" + text;
+            elapsedTime--; //Increase the lifetime of the text by 1 second each time text is added
             yield break;
         }
         textMesh.text = text;
@@ -29,7 +31,7 @@ public class TextPopup : MonoBehaviour
         textMesh.transform.localPosition = originalPosition;        
         textMesh.alpha = 0;
         
-        float elapsedTime = 0;
+        elapsedTime = 0;
         float fadeElapsedTime = 0;
         
         while (true)

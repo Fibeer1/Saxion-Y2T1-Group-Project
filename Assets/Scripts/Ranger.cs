@@ -92,6 +92,7 @@ public class Ranger : Interactable
         yield return new WaitForSeconds(1);
         Destroy(gameobject);
         duringAnimation = false;
+        FOVDebug.FindFOVEntities();
         
     }
 }

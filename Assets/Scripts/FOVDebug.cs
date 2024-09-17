@@ -7,6 +7,7 @@ public class FOVDebug : MonoBehaviour
 {
     public static FOVDebug instance;
     private List<FOVEntity> fovEntities = new List<FOVEntity>();
+    private bool shouldEnableEntities = true;
 
     private void Awake()
     {
@@ -29,11 +30,12 @@ public class FOVDebug : MonoBehaviour
                     List<Renderer> entityRenderers = entity.GetComponentsInChildren<Renderer>().ToList();
                     foreach (var renderer in entityRenderers)
                     {
-                        renderer.enabled = !entity.isBeingSeen;
+                        renderer.enabled = !shouldEnableEntities;
                     }
                 }
-                entity.enabled = !entity.enabled;
+                entity.enabled = shouldEnableEntities;                
             }
+            shouldEnableEntities = !shouldEnableEntities;
         }
     }
 
