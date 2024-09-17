@@ -10,11 +10,17 @@ public class GameManager : MonoBehaviour
     public static List<Poacher> poachers = new List<Poacher>();
     public static List<Animal> animals = new List<Animal>();
     [SerializeField] private TextMeshProUGUI rangerCount;
-    [SerializeField] private TextMeshProUGUI poacherCount;
     [SerializeField] private TextMeshProUGUI animalCount;
+    [SerializeField] private TextMeshProUGUI moneyCount;
+    [SerializeField] private float passiveIncomeTimer;
+    private float passiveIncomeTimeMin = 25f;
+    private float passiveIncomeTimeMax = 60f;
 
 
-    public int money;
+    public float money;
+    private int donationMoneyMin = 50;
+    private int donationMoneyMax = 250;
+
     private bool hasGameEnded = false;
 
     private void Start()
@@ -22,6 +28,8 @@ public class GameManager : MonoBehaviour
         rangers = FindObjectsOfType<Ranger>().ToList();
         poachers = FindObjectsOfType<Poacher>().ToList();
         animals = FindObjectsOfType<Animal>().ToList();
+        passiveIncomeTimer = Random.Range(passiveIncomeTimeMin, passiveIncomeTimeMax);
+        money = 100; //Starting amount
     }
 
 
@@ -31,19 +39,40 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
-        poacherCount.text = "Poachers left: " + poachers.Count;
+        
+
+        moneyCount.text = "$" + (int)money;
         rangerCount.text = "Rangers: " + rangers.Count;
         animalCount.text = "Animals left: " + animals.Count;
+
+        HandlePassiveIncome();
+
 
         if (poachers.Count == 0)
         {
             hasGameEnded = true;
-            EndScreen.ToggleEndScreen("You win! \n You caught all poachers.", 0.5f, 0.1f);
+            EndScreen.ToggleEndScreen("You win!\nYou caught all poachers.", 0.5f, 0.1f);
         }
         if (animals.Count == 0)
         {
             hasGameEnded = true;
-            EndScreen.ToggleEndScreen("You lose! \n The poachers killed all animals.", 0.5f, 0.1f);
+            EndScreen.ToggleEndScreen("You lose!\nThe poachers killed all animals.", 0.5f, 0.1f);
         }
+    }
+
+    private void HandlePassiveIncome()
+    {
+        passiveIncomeTimer -= Time.deltaTime;
+        if (passiveIncomeTimer <= 0)
+        {
+            passiveIncomeTimer = Random.Range(passiveIncomeTimeMin, passiveIncomeTimeMax);
+            float moneyReceived = Random.Range(donationMoneyMin, donationMoneyMax);
+            money += moneyReceived;
+            HandleMoneyChange("Donation received!\nMoney gained: " + (int)moneyReceived + "$");
+        }
+    }
+    public void HandleMoneyChange(string text)
+    {
+        TextPopup.PopUpText(text, 0.5f, 2);
     }
 }

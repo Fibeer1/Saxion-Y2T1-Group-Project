@@ -46,6 +46,7 @@ public class Animal : Wanderer
         {
             Destroy(trapTriggered);
         }
+        FOVDebug.FindFOVEntities();
         Destroy(gameObject);
     }
 

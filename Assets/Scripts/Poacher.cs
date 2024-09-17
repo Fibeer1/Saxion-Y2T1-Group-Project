@@ -55,6 +55,7 @@ public class Poacher : Wanderer
         {
             currentTrailNode.transform.Rotate(0, 0, 180);
         }
+        FOVDebug.FindFOVEntities();
     }
 
     private void HandleTraps()

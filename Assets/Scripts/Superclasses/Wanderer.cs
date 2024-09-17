@@ -60,6 +60,7 @@ public class Wanderer : Entity
                 //If there are other nodes before this one, add it to the last spawned node as its next node
                 trail[trail.IndexOf(currentTrailNode) - 1].nextTrailNode = currentTrailNode;
             }
+            FOVDebug.FindFOVEntities();
         }
     }
 
