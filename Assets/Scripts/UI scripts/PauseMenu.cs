@@ -20,6 +20,10 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if (player.currentObject != null)
+            {
+                return;
+            }
             if (paused)
             {
                 Resume();

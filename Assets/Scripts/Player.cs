@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject moveIndicator;
     private Rigidbody rb;
     private Vector3 movement;
+    private bool isMoving;
 
 
     void Start()
@@ -27,6 +28,10 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isMoving)
+        {
+            return;
+        }
         HandleMovement();
     }
 
@@ -134,4 +139,41 @@ public class Player : MonoBehaviour
         currentSelectionCircle = null;
         currentObject = null;
     }
+
+    public IEnumerator MoveTowardsPosition(Vector3 position)
+    {
+        if (isMoving)
+        {
+            yield break;
+        }
+
+        isMoving = true;
+
+        float elapsedTime = 0;
+        float duration = 3;
+        position.z -= 20;
+        position.y += 20;
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            transform.position = Vector3.Lerp(transform.position, position, elapsedTime / duration);           
+            bool[] movementChecks =
+            {
+                movement.x > 0 && Physics.Raycast(transform.position, Vector3.right, 10), //Right
+                movement.z > 0 && Physics.Raycast(transform.position, Vector3.forward, 10), //Forward
+                movement.x < 0 && Physics.Raycast(transform.position, -Vector3.right, 10), //Left
+                movement.z < 0 && Physics.Raycast(transform.position, -Vector3.forward, 10), //Back
+            };
+            foreach (var check in movementChecks)
+            {
+                if (check)
+                {
+                    yield break;
+                }
+            }
+            yield return null;
+        }
+        isMoving = false;
+    }
+
 }
