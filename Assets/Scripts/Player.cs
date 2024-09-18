@@ -140,7 +140,7 @@ public class Player : MonoBehaviour
         currentObject = null;
     }
 
-    public IEnumerator MoveTowardsPosition(Vector3 position)
+    public IEnumerator MoveTowardsPosition(Vector3 position, float duration)
     {
         if (isMoving)
         {
@@ -148,15 +148,18 @@ public class Player : MonoBehaviour
         }
 
         isMoving = true;
-
         float elapsedTime = 0;
-        float duration = 3;
         position.z -= 20;
         position.y += 20;
         while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime;
-            transform.position = Vector3.Lerp(transform.position, position, elapsedTime / duration);           
+            if (Vector3.Distance(transform.position, position) < 0.1f)
+            {
+                isMoving = false;
+                yield break;
+            }
+            transform.position = Vector3.Slerp(transform.position, position, elapsedTime / duration);           
             bool[] movementChecks =
             {
                 movement.x > 0 && Physics.Raycast(transform.position, Vector3.right, 10), //Right
@@ -168,6 +171,7 @@ public class Player : MonoBehaviour
             {
                 if (check)
                 {
+                    isMoving = false;
                     yield break;
                 }
             }

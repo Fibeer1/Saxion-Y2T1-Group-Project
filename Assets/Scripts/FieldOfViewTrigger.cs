@@ -9,6 +9,7 @@ public class FieldOfViewTrigger : MonoBehaviour
     [SerializeField] private GameObject targetMarker;
     private GameObject currentMarker;
     public TextMeshPro sensorName;
+    public TMP_Dropdown.OptionData dropdownSensor;
     [SerializeField] private List<GameObject> sensorCollisions = new List<GameObject>();
     [SerializeField] private Renderer circleRenderer;
     private Color originalColor;
@@ -19,6 +20,7 @@ public class FieldOfViewTrigger : MonoBehaviour
         {
             originalColor = circleRenderer.material.color;
             sensorName = GetComponentInChildren<TextMeshPro>();
+
         }
     }
 
@@ -86,6 +88,7 @@ public class FieldOfViewTrigger : MonoBehaviour
             {
                 Destroy(currentMarker);
             }
+            
         }
     }
 

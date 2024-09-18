@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 40785726}
   - component: {fileID: 40785727}
   - component: {fileID: 40785728}
+  - component: {fileID: 40785729}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -272,6 +273,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paused: 0
+--- !u!114 &40785729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40785721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfdefd916fba62c45952f64c50f28abf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensorList: {fileID: 286951544}
+  sensors: []
 --- !u!1 &81597186
 GameObject:
   m_ObjectHideFlags: 0
@@ -818,7 +833,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8800756138328561464, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.96000004
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8800756138328561464, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1087,7 +1102,19 @@ MonoBehaviour:
     m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 40785729}
+        m_TargetAssemblyTypeName: SensorDropdown, Assembly-CSharp
+        m_MethodName: SwitchToSensor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &286951545
 MonoBehaviour:
@@ -1157,7 +1184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8800756138328561464, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.96000004
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8800756138328561464, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1363,7 +1390,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8800756138328561464, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.96000004
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8800756138328561464, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2199,7 +2226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8800756138328561464, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.96000004
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8800756138328561464, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2520,7 +2547,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8800756138328561464, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.96000004
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8800756138328561464, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3219,7 +3246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8800756138328561464, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.96000004
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8800756138328561464, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3261,6 +3288,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
+--- !u!114 &925050982 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8206500510761723644, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
+  m_PrefabInstance: {fileID: 7938850022001140499}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &939037322
 GameObject:
   m_ObjectHideFlags: 0
@@ -4160,7 +4198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8800756138328561464, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.96000004
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8800756138328561464, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4628,7 +4666,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8800756138328561464, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.96000004
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8800756138328561464, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4973,7 +5011,6 @@ MonoBehaviour:
   rangerCount: {fileID: 2018346112}
   animalCount: {fileID: 559720902}
   moneyCount: {fileID: 345667384}
-  sensorList: {fileID: 286951544}
   passiveIncomeTimer: 0
   money: 0
 --- !u!4 &1621311533
@@ -5540,7 +5577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8800756138328561464, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.96000004
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8800756138328561464, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6945,6 +6982,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6745640010597091771, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
+      propertyPath: sensorName
+      value: 
+      objectReference: {fileID: 925050982}
     - target: {fileID: 7093553132468360951, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -6959,7 +7000,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8800756138328561464, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.96000004
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8800756138328561464, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_LocalPosition.z

@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1407431605028696269}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -132,7 +132,7 @@ Transform:
   m_GameObject: {fileID: 2744010080848071850}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 12.5, y: 0.005, z: 12.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -255,7 +255,7 @@ Transform:
   m_GameObject: {fileID: 8180113672223536588}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 683.38, y: 0.96, z: 232.91}
+  m_LocalPosition: {x: 683.38, y: 0, z: 232.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -278,6 +278,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: Sensor
   targetMarker: {fileID: 27156463347279055, guid: a17cd64b56f59914a978de3ac5bfd20c, type: 3}
+  sensorName: {fileID: 8206500510761723644}
+  dropdownSensor:
+    m_Text: 
+    m_Image: {fileID: 0}
   sensorCollisions: []
   circleRenderer: {fileID: 4783007123323664378}
 --- !u!54 &4709885616576053059
