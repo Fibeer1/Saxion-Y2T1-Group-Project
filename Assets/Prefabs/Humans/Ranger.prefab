@@ -611,7 +611,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 667.88965, y: 0.09, z: 217.51302}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1067433488389739156}
   - {fileID: 748557343485172788}
@@ -1415,7 +1415,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.674, z: 0}
-  m_LocalScale: {x: 9.5, y: 0.005, z: 9.5}
+  m_LocalScale: {x: 20, y: 0.005, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3091829347478425348}
@@ -1505,6 +1505,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: Vision
   targetMarker: {fileID: 0}
+  sensorName: {fileID: 0}
+  dropdownSensor:
+    m_Text: 
+    m_Image: {fileID: 0}
   sensorCollisions: []
   circleRenderer: {fileID: 0}
 --- !u!54 &6101631809023475736

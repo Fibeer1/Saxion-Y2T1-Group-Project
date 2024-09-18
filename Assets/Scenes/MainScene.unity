@@ -3626,7 +3626,7 @@ MonoBehaviour:
   selectionCirclePrefab: {fileID: 6158910173999244613, guid: 83373d3117e963946807350662561868, type: 3}
   currentSelectionCircle: {fileID: 0}
   cameraSpeedDamper: 1.5
-  moveIndicator: {fileID: 6610607166004219918, guid: 9697246fac9d1a0478abe3290a258701, type: 3}
+  moveIndicator: {fileID: 3689020783913681318, guid: bb6d8a14d42839d49a207c951deba649, type: 3}
 --- !u!54 &963194230
 Rigidbody:
   m_ObjectHideFlags: 0
