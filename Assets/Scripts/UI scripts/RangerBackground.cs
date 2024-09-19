@@ -55,6 +55,15 @@ public class RangerBackground : UIMarker
         }
     }
 
+    public void RemoveItemFromInventory(InventoryItem item)
+    {
+        item.itemCount--;
+        if (item.itemCount <= 0)
+        {
+            Destroy(item.gameObject);
+        }
+    }
+
     public void SetUpRangerBG(Player pPlayer)
     {
         player = pPlayer;

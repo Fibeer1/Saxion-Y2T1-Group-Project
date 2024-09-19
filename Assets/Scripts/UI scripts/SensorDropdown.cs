@@ -12,6 +12,31 @@ public class SensorDropdown : MonoBehaviour
 
     private void Start()
     {
+        UpdateSensorDropdown();
+    }
+
+    public void SwitchToSensor()
+    {
+        Player playerCam = FindObjectOfType<Player>();
+
+        playerCam.StartCoroutine(playerCam.MoveTowardsPosition(sensors[sensorList.value].transform.position, 3));
+    }
+
+    public void OnPointerClick()
+    {
+
+        Toggle[] dropdownSensors = GetComponentsInChildren<Toggle>();
+        for (int i = 0; i < sensors.Count; i++)
+        {
+            if (sensors[i].sensorCollisions.Count != 0)
+            {
+                //todo: make triggered sensors appear yellow in the dropdown
+                //dropdownSensors[i].colors.normalColor = Color.yellow;
+            }
+        }
+    }
+    public void UpdateSensorDropdown()
+    {
         sensors = FindObjectsOfType<FieldOfViewTrigger>().ToList();
         TMP_Dropdown.OptionDataList sensorsList = new TMP_Dropdown.OptionDataList();
 
@@ -38,25 +63,5 @@ public class SensorDropdown : MonoBehaviour
         }
         sensorList.ClearOptions();
         sensorList.AddOptions(sensorsList.options);
-    }
-
-    public void SwitchToSensor()
-    {
-        Player playerCam = FindObjectOfType<Player>();
-
-        playerCam.StartCoroutine(playerCam.MoveTowardsPosition(sensors[sensorList.value].transform.position, 3));
-    }
-
-    public void OnPointerClick()
-    {
-        Toggle[] dropdownSensors = GetComponentsInChildren<Toggle>();
-        for (int i = 0; i < sensors.Count; i++)
-        {
-            if (sensors[i].sensorCollisions.Count != 0)
-            {
-                //todo: make triggered sensors appear yellow in the dropdown
-                //dropdownSensors[i].colors.normalColor = Color.yellow;
-            }
-        }
     }
 }

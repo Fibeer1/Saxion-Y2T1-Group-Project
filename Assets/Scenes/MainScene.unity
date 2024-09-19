@@ -1067,6 +1067,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1222532318}
     m_Modifications:
+    - target: {fileID: 4701824784235560200, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 5865636745597017619, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1452,6 +1456,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1222532318}
     m_Modifications:
+    - target: {fileID: 4701824784235560200, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 5865636745597017619, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1658,6 +1666,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1222532318}
     m_Modifications:
+    - target: {fileID: 4701824784235560200, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 5865636745597017619, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -2584,6 +2596,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1222532318}
     m_Modifications:
+    - target: {fileID: 4701824784235560200, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 5865636745597017619, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -2982,6 +2998,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1222532318}
     m_Modifications:
+    - target: {fileID: 4701824784235560200, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 5865636745597017619, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -3681,6 +3701,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1222532318}
     m_Modifications:
+    - target: {fileID: 4701824784235560200, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 5865636745597017619, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -4085,7 +4109,9 @@ MonoBehaviour:
   rangerBackground: {fileID: 7300976668911021385}
   moveIndicator: {fileID: 3689020783913681318, guid: bb6d8a14d42839d49a207c951deba649, type: 3}
   currentObjectToPlace: {fileID: 0}
+  currentObjectToPlaceSprite: {fileID: 0}
   currentObjectToPlaceSelectedMaterial: {fileID: 2100000, guid: da1595588149b6e49b350cf277cf37d7, type: 2}
+  currentObjectToPlaceOriginalMaterials: []
   cameraSpeedDamper: 1.5
 --- !u!54 &963194230
 Rigidbody:
@@ -5041,6 +5067,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1222532318}
     m_Modifications:
+    - target: {fileID: 4701824784235560200, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 5865636745597017619, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -5631,6 +5661,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1222532318}
     m_Modifications:
+    - target: {fileID: 4701824784235560200, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 5865636745597017619, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -6656,6 +6690,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1222532318}
     m_Modifications:
+    - target: {fileID: 4701824784235560200, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 5865636745597017619, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -8075,7 +8113,7 @@ GameObject:
   - component: {fileID: 7549282119528695050}
   - component: {fileID: 601501692406540701}
   - component: {fileID: 2692221224038708347}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8110,7 +8148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8578179255023190351}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: InventoryParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8196,7 +8234,7 @@ GameObject:
   - component: {fileID: 1498769648896875626}
   - component: {fileID: 4948208036965821749}
   - component: {fileID: 203274406702590781}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: InventorySquare2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8244,7 +8282,7 @@ GameObject:
   - component: {fileID: 2292478256204186870}
   - component: {fileID: 5989124258741361731}
   - component: {fileID: 6015375296403652452}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8399,7 +8437,7 @@ GameObject:
   m_Component:
   - component: {fileID: 773576966607097752}
   - component: {fileID: 7715019022324749008}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: ExhaustionSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8684,7 +8722,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8174933855078794372}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8732,7 +8770,7 @@ GameObject:
   - component: {fileID: 2417350680972357179}
   - component: {fileID: 531779281734100243}
   - component: {fileID: 8016123764784318914}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: ExhaustionSliderName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8751,7 +8789,7 @@ GameObject:
   - component: {fileID: 8196022730931035931}
   - component: {fileID: 2893707538493518541}
   - component: {fileID: 4301261317226145739}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: RangerMenuBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8826,7 +8864,7 @@ GameObject:
   - component: {fileID: 4606619706660653026}
   - component: {fileID: 8941922397156905269}
   - component: {fileID: 3019331540793665404}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: RangerName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8914,7 +8952,7 @@ GameObject:
   - component: {fileID: 6273440734609994489}
   - component: {fileID: 8865320351640874516}
   - component: {fileID: 6644730171518196376}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: InventorySquare1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8929,6 +8967,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1222532318}
     m_Modifications:
+    - target: {fileID: 4701824784235560200, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 5865636745597017619, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -8944,6 +8986,10 @@ PrefabInstance:
     - target: {fileID: 8180113672223536588, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_Name
       value: MotionSensor
+      objectReference: {fileID: 0}
+    - target: {fileID: 8206500510761723644, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
+      propertyPath: m_text
+      value: Sensor 1
       objectReference: {fileID: 0}
     - target: {fileID: 8800756138328561464, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9093,7 +9139,7 @@ GameObject:
   - component: {fileID: 8936602770809191778}
   - component: {fileID: 5675508716012977164}
   - component: {fileID: 7035583511282529257}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9179,7 +9225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8415366509180604189}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9197,7 +9243,7 @@ GameObject:
   - component: {fileID: 2933596486153956846}
   - component: {fileID: 5516918075015792223}
   - component: {fileID: 2351009712279093304}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: InventorySquare3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

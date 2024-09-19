@@ -10,10 +10,11 @@ public class InventoryItem : MonoBehaviour
     public int itemCount;
     [SerializeField] private TextMeshProUGUI itemCountText;
     public GameObject objectToPlace;
+    private Player player;
 
     private void Start()
     {
-        
+        player = FindObjectOfType<Player>();
     }
 
     private void Update()
@@ -23,6 +24,11 @@ public class InventoryItem : MonoBehaviour
 
     public void PrepareItemToPlace()
     {
-        Debug.Log("asd");
+        if (player.currentObjectToPlace != null)
+        {
+            return;
+        }
+        GameObject newObject = Instantiate(objectToPlace, Vector3.zero, Quaternion.identity);
+        player.SelectObjectToPlace(newObject, this);
     }
 }

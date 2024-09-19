@@ -17,8 +17,10 @@ public class Player : MonoBehaviour
 
     [Header("Object Placing")]
     public GameObject currentObjectToPlace;
+    public InventoryItem currentObjectToPlaceSprite;
     public Material currentObjectToPlaceSelectedMaterial;
-    private Material currentObjectToPlaceOriginalMaterial;
+    [SerializeField] private List<Material> currentObjectToPlaceOriginalMaterials = new List<Material>();
+    private bool hasOrderedRangerToPlaceObject;
 
     [Header("Camera Movement")]
     [SerializeField] private float cameraSpeedDamper = 5;    
@@ -82,34 +84,45 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                if (hit.transform.tag == "Ground")
-                {
-                    DeselectObject();
-                    return;
-                }
-            }
-        }
-        
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             DeselectObject();
+            DeselectObjectToPlace(true);
             return;
         }
 
+        //THIS BREAKS USING BUTTONS WHILE HAVING SELECTED A RANGER
+        //TODO: Come up with a way to have this code uncommented and at the same time be able to click UI buttons
+
+
+        //if (Input.GetKeyDown(KeyCode.Mouse0))
+        //{
+        //    Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+        //    if (Physics.Raycast(ray, out RaycastHit hit))
+        //    {
+        //        if (hit.transform.tag == "Ground")
+        //        {
+        //            DeselectObject();
+        //            return;
+        //        }
+        //    }
+        //}
+
+
+        Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+        bool hasRayHit = Physics.Raycast(ray, out RaycastHit hit);
+
+        if (currentObjectToPlace != null && hasRayHit && !hasOrderedRangerToPlaceObject)
+        {
+            currentObjectToPlace.transform.position = hit.point;
+        }
 
         if (currentObject.GetComponent<Ranger>() != null)
         {
             Ranger ranger = currentObject.GetComponent<Ranger>();
             if (Input.GetKeyDown(KeyCode.Mouse1) && !ranger.duringAnimation)
-            {
-                Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out RaycastHit hit))
+            {                
+                if (hasRayHit)
                 {
                     if (ranger.target != null)
                     {
@@ -120,6 +133,11 @@ public class Player : MonoBehaviour
                         Instantiate(moveIndicator, hit.point, Quaternion.identity);
                         ranger.GetComponent<NavMeshAgent>().SetDestination(hit.point);
                         ranger.GetComponent<NavMeshAgent>().speed = ranger.defaultSpeed;
+                        if (currentObjectToPlace != null)
+                        {
+                            ranger.SelectTarget(currentObjectToPlace.transform, "PlaceObject");
+                            hasOrderedRangerToPlaceObject = true;
+                        }
                     }
                     else if (hit.transform.GetComponent<Poacher>() != null)
                     {
@@ -136,6 +154,66 @@ public class Player : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SelectObjectToPlace(GameObject objectToPlace, InventoryItem itemSprite)
+    {
+        if (currentObjectToPlace != null)
+        {
+            return;
+        }        
+        hasOrderedRangerToPlaceObject = false;
+        currentObjectToPlaceOriginalMaterials.Clear();
+        currentObjectToPlace = objectToPlace;
+        currentObjectToPlaceSprite = itemSprite;
+        MeshRenderer[] renderers = currentObjectToPlace.GetComponentsInChildren<MeshRenderer>();
+        foreach (var renderer in renderers)
+        {
+            currentObjectToPlaceOriginalMaterials.Add(renderer.material);
+            renderer.material = currentObjectToPlaceSelectedMaterial;
+        }
+        Collider[] colliders = currentObjectToPlace.GetComponentsInChildren<Collider>();
+        foreach (var collider in colliders)
+        {
+            collider.enabled = false;
+        }
+        MonoBehaviour[] scripts = currentObjectToPlace.GetComponentsInChildren<MonoBehaviour>();
+        foreach (var script in scripts)
+        {
+            script.enabled = false;
+        }
+    }
+
+    public void DeselectObjectToPlace(bool shouldDestroyObject = false)
+    {
+        if (currentObjectToPlace == null)
+        {
+            return;
+        }
+        MeshRenderer[] renderers = currentObjectToPlace.GetComponentsInChildren<MeshRenderer>();
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            renderers[i].material = currentObjectToPlaceOriginalMaterials[i];
+        }
+        Collider[] colliders = currentObjectToPlace.GetComponentsInChildren<Collider>();
+        foreach (var collider in colliders)
+        {
+            collider.enabled = true;
+        }
+        MonoBehaviour[] scripts = currentObjectToPlace.GetComponentsInChildren<MonoBehaviour>();
+        foreach (var script in scripts)
+        {
+            script.enabled = true;
+        }
+        hasOrderedRangerToPlaceObject = false;
+        currentObjectToPlaceSprite = null;
+
+        if (shouldDestroyObject)
+        {
+            Destroy(currentObjectToPlace);
+            return;
+        }
+        currentObjectToPlace = null;
     }
 
     public void SelectObject(Interactable clickedObject)

@@ -17,9 +17,15 @@ public class FieldOfViewTrigger : MonoBehaviour
     {
         if (type == "Sensor")
         {
-            originalColor = circleRenderer.material.color;
+            originalColor = new Color(1, 1, 1, 0.03f);
             sensorName = GetComponentInChildren<TextMeshPro>();
-
+            SensorDropdown sensorDropdown = FindObjectOfType<SensorDropdown>();
+            if (!sensorDropdown.sensors.Contains(this))
+            {
+                sensorDropdown.sensors.Add(this);
+                sensorName.text = "Sensor " + sensorDropdown.sensors.Count;
+            }
+            sensorDropdown.UpdateSensorDropdown();
         }
     }
 

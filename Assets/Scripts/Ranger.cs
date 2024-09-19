@@ -33,6 +33,7 @@ public class Ranger : Interactable
             return;
         }
         animator.SetFloat("MoveSpeed", navMeshAgent.velocity.magnitude);
+
         if (target != null)
         {
             navMeshAgent.SetDestination(target.position);
@@ -41,7 +42,7 @@ public class Ranger : Interactable
                 navMeshAgent.destination = transform.position;
                 if (actionToPerform == "PlaceObject")
                 {
-
+                    StartCoroutine(PlaceItem());
                 }
                 else if (actionToPerform == "PickUpEquipment")
                 {
@@ -135,6 +136,17 @@ public class Ranger : Interactable
         GameObject targetItem = Instantiate(tempTarget.GetComponent<Equipment>().itemUIPrefab, FindObjectOfType<Canvas>().transform);
         FindObjectOfType<RangerBackground>().AddItemToInventory(targetItem);
         StartCoroutine(RemoveObject(tempTarget.gameObject));
+    }
+
+    private IEnumerator PlaceItem()
+    {
+        duringAnimation = true;
+        DeselectTarget();
+        animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);
+        FindObjectOfType<RangerBackground>().RemoveItemFromInventory(player.currentObjectToPlaceSprite);
+        yield return new WaitForSeconds(1);
+        player.DeselectObjectToPlace();
+        duringAnimation = false;
     }
 
     private IEnumerator RemoveObject(GameObject gameobject)
