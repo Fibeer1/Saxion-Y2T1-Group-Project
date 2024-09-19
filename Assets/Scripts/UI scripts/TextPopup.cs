@@ -21,7 +21,7 @@ public class TextPopup : MonoBehaviour
     {
         if (textMesh.gameObject.activeInHierarchy)
         {
-            textMesh.text = textMesh.text + "\n" + text;
+            textMesh.text = textMesh.text + "\n\n" + text;
             elapsedTime -= 3; //Increase the lifetime of the text by 1 second each time text is added
             yield break;
         }

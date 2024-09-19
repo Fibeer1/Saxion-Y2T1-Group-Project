@@ -23,6 +23,7 @@ public class Poacher : Wanderer
         trapTimer = 60;
         defaultSpeed = navMeshAgent.speed;
         runSpeed = defaultSpeed + 6.5f;
+        poacherValue = GameManager.poacherValue;
     }
     
     private void Update()

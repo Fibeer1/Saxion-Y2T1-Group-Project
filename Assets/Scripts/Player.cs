@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class Player : MonoBehaviour
     private Rigidbody rb;
     private Vector3 movement;
     private bool isMoving;
+
+    public InventoryItem[] inventory = new InventoryItem[3];
 
 
     void Start()

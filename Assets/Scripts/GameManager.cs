@@ -12,16 +12,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI rangerCount;
     [SerializeField] private TextMeshProUGUI animalCount;
     [SerializeField] private TextMeshProUGUI moneyCount;
+    [SerializeField] private TMP_Dropdown upkeep;
 
 
-    [SerializeField] private float passiveIncomeTimer;
-    private float passiveIncomeTimeMin = 25f;
-    private float passiveIncomeTimeMax = 60f;
+    [SerializeField] private float moneyChangeTimer = 20;
+    private float moneyChangeTime = 20;
 
 
     public int money;
-    private int donationMoneyMin = 50;
-    private int donationMoneyMax = 250;
+    private int donationMoney = 200;
+    private int rangerFee = -100;
+    public static int poacherValue = 1000;
+    public static int animalValue = -700;
 
     private bool hasGameEnded = false;
 
@@ -31,8 +33,16 @@ public class GameManager : MonoBehaviour
         poachers = FindObjectsOfType<Poacher>().ToList();
         animals = FindObjectsOfType<Animal>().ToList();
 
-        passiveIncomeTimer = Random.Range(passiveIncomeTimeMin, passiveIncomeTimeMax);
+        rangerFee *= rangers.Count;
         money = 100; //Starting amount
+
+        upkeep.ClearOptions();
+        List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
+        options.Add(new TMP_Dropdown.OptionData("Passive income: " + donationMoney + "$"));
+        options.Add(new TMP_Dropdown.OptionData("Rangers' fee: " + rangerFee + "$"));
+        options.Add(new TMP_Dropdown.OptionData("Poacher bounty: " + poacherValue + "$"));
+        options.Add(new TMP_Dropdown.OptionData("Animal death cost: " + animalValue + "$"));
+        upkeep.AddOptions(options);
     }
 
 
@@ -48,7 +58,7 @@ public class GameManager : MonoBehaviour
         rangerCount.text = "Rangers: " + rangers.Count;
         animalCount.text = "Animals left: " + animals.Count;
 
-        HandlePassiveIncome();
+        HandleIncomeAndFees();
 
 
         if (poachers.Count == 0)
@@ -68,14 +78,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void HandlePassiveIncome()
+    public void UpdateUpkeepValues()
     {
-        passiveIncomeTimer -= Time.deltaTime;
-        if (passiveIncomeTimer <= 0)
+        
+    }
+
+    private void HandleIncomeAndFees()
+    {
+
+        moneyChangeTimer -= Time.deltaTime;
+        if (moneyChangeTimer <= 0)
         {
-            passiveIncomeTimer = Random.Range(passiveIncomeTimeMin, passiveIncomeTimeMax);
-            int moneyReceived = Random.Range(donationMoneyMin, donationMoneyMax);
-            HandleMoneyChange("Donation received!\nMoney gained: " + moneyReceived + "$", moneyReceived);
+            moneyChangeTimer = moneyChangeTime;
+            HandleMoneyChange("Rangers' fee.\nMoney deducted: " + rangerFee + "$", rangerFee);
+            HandleMoneyChange("Donation received!\nMoney gained: " + donationMoney + "$", donationMoney);
         }
     }
     public void HandleMoneyChange(string text, int moneyChange)

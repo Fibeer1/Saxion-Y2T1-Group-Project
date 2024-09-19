@@ -14,6 +14,7 @@ public class Animal : Wanderer
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         shouldKeepTrackOfTrails = true;
+        animalValue = GameManager.animalValue;
     }
 
     private void Update()

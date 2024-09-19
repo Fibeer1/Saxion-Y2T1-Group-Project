@@ -35,7 +35,6 @@ public class SensorDropdown : MonoBehaviour
         {
             TMP_Dropdown.OptionData sensorData = new TMP_Dropdown.OptionData(sensor.sensorName.text);
             sensorsList.options.Add(sensorData);
-            sensor.dropdownSensor = sensorData;
         }
         sensorList.ClearOptions();
         sensorList.AddOptions(sensorsList.options);
@@ -46,5 +45,18 @@ public class SensorDropdown : MonoBehaviour
         Player playerCam = FindObjectOfType<Player>();
 
         playerCam.StartCoroutine(playerCam.MoveTowardsPosition(sensors[sensorList.value].transform.position, 3));
+    }
+
+    public void OnPointerClick()
+    {
+        Toggle[] dropdownSensors = GetComponentsInChildren<Toggle>();
+        for (int i = 0; i < sensors.Count; i++)
+        {
+            if (sensors[i].sensorCollisions.Count != 0)
+            {
+                //todo: make triggered sensors appear yellow in the dropdown
+                //dropdownSensors[i].colors.normalColor = Color.yellow;
+            }
+        }
     }
 }
