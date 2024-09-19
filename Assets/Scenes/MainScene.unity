@@ -3582,7 +3582,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 25, y: 75}
-  m_SizeDelta: {x: 345.5, y: 186.1}
+  m_SizeDelta: {x: 390.29, y: 186.1}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &819674786
 MonoBehaviour:
@@ -3614,9 +3614,10 @@ MonoBehaviour:
     make the selected object move towards a position or interact with other objects
 
     Left-click
-    on the ground: deselect the current object
+    on the ground: deselect the current object (CURRENTLY DISABLED)
 
-    Escape: Pause'
+    Escape:
+    Pause'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
