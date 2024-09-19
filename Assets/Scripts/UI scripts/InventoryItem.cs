@@ -18,11 +18,11 @@ public class InventoryItem : MonoBehaviour
 
     private void Update()
     {
-        itemCountText.text = itemCount.ToString();
+        itemCountText.text = itemCount.ToString() + "x";
     }
 
     public void PrepareItemToPlace()
     {
-
+        Debug.Log("asd");
     }
 }

@@ -26,9 +26,6 @@ public class Player : MonoBehaviour
     private Vector3 movement;
     private bool isMoving;
 
-    [Header("Inventory")]
-    public InventoryItem[] inventory = new InventoryItem[3];
-
 
     private void Start()
     {
@@ -76,41 +73,6 @@ public class Player : MonoBehaviour
         movement.Normalize();
         movement /= cameraSpeedDamper;
         rb.MovePosition(rb.position + movement);
-    }
-
-    public void AddItemToInventory(InventoryItem item)
-    {
-        int firstEmptyIndex = -1; //The first empty panel in the inventory
-        int firstOccupiedIndex = -1; //The first occupied panel with the same item as in this method
-        for (int i = 0; i < inventory.Length; i++)
-        {
-            InventoryItem inventorySpace = inventory[i];
-            if (inventorySpace == null)
-            {
-                //if the space is not occupied, assign the firstEmptyIndex variable to it
-                firstEmptyIndex = i;
-            }
-            else if (inventorySpace.objectToPlace == item.objectToPlace)
-            {
-                //if the space is occupied, but the item is the same, assign the firstOccupiedIndex variable to it
-                firstOccupiedIndex = i;
-                break;
-            }
-        }
-        if (firstOccupiedIndex != -1)
-        {
-            //If there is already an item like the one called in the method in the inventory, add it
-            inventory[firstOccupiedIndex].itemCount++;
-        }
-        else if (firstEmptyIndex != -1)
-        {
-            inventory[firstEmptyIndex] = item;
-        }
-        else
-        {
-            TextPopup.PopUpText("Cannot add item!\nInventory is full.", 0.5f, 1.5f);
-        }
-
     }
 
     private void HandleObjectInputs()
@@ -169,7 +131,7 @@ public class Player : MonoBehaviour
                     }
                     else if (hit.transform.name.Contains("MotionSensor"))
                     {
-                        ranger.SelectTarget(hit.transform, "Remove Object", false);
+                        ranger.SelectTarget(hit.transform, "PickUpEquipment");
                     }
                 }
             }
@@ -188,9 +150,8 @@ public class Player : MonoBehaviour
         if (currentObject.GetComponent<Ranger>() != null)
         {
             rangerBackground.SetActive(true);
-            rangerBackground.GetComponent<RangerBackground>().target = currentObject.transform;
-            rangerBackground.GetComponent<RangerBackground>().SyncRangerInventoryWithPlayerInventory();
-            rangerBackground.GetComponent<RangerBackground>().ranger = currentObject.GetComponent<Ranger>();
+
+            rangerBackground.GetComponent<RangerBackground>().SetUpRangerBG(this);
         }       
     }
 

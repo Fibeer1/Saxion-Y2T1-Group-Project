@@ -32,7 +32,7 @@ public class UIMarker : MonoBehaviour
 
         }
 
-        targetPos.y += 3;
+        targetPos.y += 50;
         targetPos.x = Mathf.Clamp(targetPos.x, minX, maxX);
         targetPos.y = Mathf.Clamp(targetPos.y, minY, maxY);
 

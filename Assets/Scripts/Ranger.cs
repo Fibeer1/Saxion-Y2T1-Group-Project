@@ -28,6 +28,10 @@ public class Ranger : Interactable
 
     private void Update()
     {
+        if (duringAnimation)
+        {
+            return;
+        }
         animator.SetFloat("MoveSpeed", navMeshAgent.velocity.magnitude);
         if (target != null)
         {
@@ -38,6 +42,10 @@ public class Ranger : Interactable
                 if (actionToPerform == "PlaceObject")
                 {
 
+                }
+                else if (actionToPerform == "PickUpEquipment")
+                {
+                    PickUpItem();
                 }
             }
         }
@@ -115,16 +123,18 @@ public class Ranger : Interactable
             FindObjectOfType<GameManager>().HandleMoneyChange("Trap dismantled!\nMoney received: " +
             GameManager.trapValue + "$", GameManager.trapValue);
         }
-        else if (other.name.Contains("MotionSensor") && other.transform == target)
-        {
-            duringAnimation = true;
-            DeselectTarget();
-            StartCoroutine(TurnTowardsTarget(other.transform, 0.5f));
-            navMeshAgent.destination = transform.position;
-            animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);
-            //player.currentObjectToPlace
-            StartCoroutine(RemoveObject(other.gameObject));
-        }
+    }
+
+    private void PickUpItem()
+    {
+        duringAnimation = true;
+        Transform tempTarget = target;
+        DeselectTarget();
+        StartCoroutine(TurnTowardsTarget(tempTarget, 0.5f));
+        animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);
+        GameObject targetItem = Instantiate(tempTarget.GetComponent<Equipment>().itemUIPrefab, FindObjectOfType<Canvas>().transform);
+        FindObjectOfType<RangerBackground>().AddItemToInventory(targetItem);
+        StartCoroutine(RemoveObject(tempTarget.gameObject));
     }
 
     private IEnumerator RemoveObject(GameObject gameobject)
