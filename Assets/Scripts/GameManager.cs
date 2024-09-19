@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     public int money;
     private int donationMoney = 150;
-    private int rangerFee = -100;
+    private int rangerFee = -50;
     public static int poacherValue = 1000;
     public static int animalValue = -700;
     public static int trapValue = 100;

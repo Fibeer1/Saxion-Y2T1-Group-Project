@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5395141978954876485}
   - component: {fileID: 4111328345395351677}
   - component: {fileID: 7356530950443971465}
+  - component: {fileID: 7291017794581947422}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -103,6 +104,27 @@ MonoBehaviour:
   m_IgnoreFromBuild: 1
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
+--- !u!65 &7291017794581947422
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407431605028696269}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2744010080848071850
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,9 +301,6 @@ MonoBehaviour:
   type: Sensor
   targetMarker: {fileID: 27156463347279055, guid: a17cd64b56f59914a978de3ac5bfd20c, type: 3}
   sensorName: {fileID: 8206500510761723644}
-  dropdownSensor:
-    m_Text: 
-    m_Image: {fileID: 0}
   sensorCollisions: []
   circleRenderer: {fileID: 4783007123323664378}
 --- !u!54 &4709885616576053059

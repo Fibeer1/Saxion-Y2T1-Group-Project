@@ -55,7 +55,7 @@ public class FieldOfViewTrigger : MonoBehaviour
             TextPopup.PopUpText("Movement detected in " + sensorName.text, 0.5f, 5);
             if (currentMarker == null)
             {
-                currentMarker = Instantiate(targetMarker, FindObjectOfType<Canvas>().transform);
+                currentMarker = Instantiate(targetMarker, FindObjectOfType<Canvas>().transform.Find("UIBackground"));
                 currentMarker.GetComponent<TargetMarker>().target = transform;
             }
             circleRenderer.material.color = new Color(1, 1, 0, originalColor.a);

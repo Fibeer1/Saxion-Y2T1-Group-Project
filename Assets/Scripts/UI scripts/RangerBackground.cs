@@ -4,20 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
-public class RangerBackground : MonoBehaviour
+public class RangerBackground : UIMarker
 {
     [SerializeField] private Image[] inventoryPanels;
     private Player player;
+    public Ranger ranger;
 
     private void Start()
     {
         player = FindObjectOfType<Player>();
+        playerCam = player.GetComponent<Camera>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        HandleTargetTracking();
     }
 
     public void SyncRangerInventoryWithPlayerInventory()

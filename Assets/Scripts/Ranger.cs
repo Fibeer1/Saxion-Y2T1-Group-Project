@@ -10,6 +10,7 @@ public class Ranger : Interactable
     public Transform target;
     [SerializeField] private GameObject targetCirclePrefab;
     public GameObject currentTargetCircle;
+    public string actionToPerform;
     public float defaultSpeed;
     public float runSpeed;   
     public bool duringAnimation = false;
@@ -31,26 +32,50 @@ public class Ranger : Interactable
         if (target != null)
         {
             navMeshAgent.SetDestination(target.position);
+            if (Vector3.Distance(transform.position, target.position) < 1)
+            {
+                navMeshAgent.destination = transform.position;
+                if (actionToPerform == "PlaceObject")
+                {
+
+                }
+            }
         }
     }
 
-    public void SelectTarget(Transform pTarget)
+    public void SelectTarget(Transform pTarget, string pActionToPerform, bool shouldSpawnTargetCircle = true)
     {
         if (target != null)
         {
             DeselectTarget();
         }
+        actionToPerform = pActionToPerform;
         target = pTarget;
-        currentTargetCircle = Instantiate(targetCirclePrefab, target.position, Quaternion.identity, target);
+        if (actionToPerform == "Chase")
+        {
+            navMeshAgent.speed = runSpeed;
+        }
+        else
+        {
+            navMeshAgent.speed = defaultSpeed;
+        }
+        if (shouldSpawnTargetCircle)
+        {
+            currentTargetCircle = Instantiate(targetCirclePrefab, target.position, Quaternion.identity, target);
+        }       
     }
 
     public void DeselectTarget()
     {
         if (target != null)
         {
-            Destroy(currentTargetCircle);
-            currentTargetCircle = null;
+            if (currentTargetCircle != null)
+            {
+                Destroy(currentTargetCircle);
+                currentTargetCircle = null;
+            }            
             target = null;
+            actionToPerform = null;
         }        
     }
 
@@ -89,6 +114,16 @@ public class Ranger : Interactable
             StartCoroutine(RemoveObject(trap));
             FindObjectOfType<GameManager>().HandleMoneyChange("Trap dismantled!\nMoney received: " +
             GameManager.trapValue + "$", GameManager.trapValue);
+        }
+        else if (other.name.Contains("MotionSensor") && other.transform == target)
+        {
+            duringAnimation = true;
+            DeselectTarget();
+            StartCoroutine(TurnTowardsTarget(other.transform, 0.5f));
+            navMeshAgent.destination = transform.position;
+            animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);
+            //player.currentObjectToPlace
+            StartCoroutine(RemoveObject(other.gameObject));
         }
     }
 

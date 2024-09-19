@@ -675,7 +675,9 @@ MonoBehaviour:
   player: {fileID: 0}
   target: {fileID: 0}
   targetCirclePrefab: {fileID: 2328507604897591434, guid: e45f73e7cf1c0814390d1b6c0f508bc5, type: 3}
+  rangerBackground: {fileID: 6901615585048758171, guid: 2a3e42557e18c2947862ed83729c9d85, type: 3}
   currentTargetCircle: {fileID: 0}
+  actionToPerform: 
   defaultSpeed: 0
   runSpeed: 0
   duringAnimation: 0
@@ -1506,9 +1508,6 @@ MonoBehaviour:
   type: Vision
   targetMarker: {fileID: 0}
   sensorName: {fileID: 0}
-  dropdownSensor:
-    m_Text: 
-    m_Image: {fileID: 0}
   sensorCollisions: []
   circleRenderer: {fileID: 0}
 --- !u!54 &6101631809023475736
