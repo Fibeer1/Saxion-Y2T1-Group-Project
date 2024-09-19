@@ -87,6 +87,8 @@ public class Ranger : Interactable
             navMeshAgent.destination = transform.position;
             animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);
             StartCoroutine(RemoveObject(trap));
+            FindObjectOfType<GameManager>().HandleMoneyChange("Trap dismantled!\nMoney received: " +
+            GameManager.trapValue + "$", GameManager.trapValue);
         }
     }
 

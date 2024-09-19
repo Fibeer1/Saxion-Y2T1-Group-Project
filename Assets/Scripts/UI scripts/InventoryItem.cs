@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class InventoryItem : MonoBehaviour
 {
-    [SerializeField] private Image itemSprite;
+    public Image itemSprite;
     public int itemCount;
 
     void Start()

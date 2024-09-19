@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI animalCount;
     [SerializeField] private TextMeshProUGUI moneyCount;
     [SerializeField] private TMP_Dropdown upkeep;
+    [SerializeField] private Sprite moneyGainBackground;
+    [SerializeField] private Sprite moneyLossBackground;
 
 
     [SerializeField] private float moneyChangeTimer = 20;
@@ -20,10 +23,11 @@ public class GameManager : MonoBehaviour
 
 
     public int money;
-    private int donationMoney = 200;
+    private int donationMoney = 150;
     private int rangerFee = -100;
     public static int poacherValue = 1000;
     public static int animalValue = -700;
+    public static int trapValue = 100;
 
     private bool hasGameEnded = false;
 
@@ -38,10 +42,14 @@ public class GameManager : MonoBehaviour
 
         upkeep.ClearOptions();
         List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
-        options.Add(new TMP_Dropdown.OptionData("Passive income: " + donationMoney + "$"));
-        options.Add(new TMP_Dropdown.OptionData("Rangers' fee: " + rangerFee + "$"));
-        options.Add(new TMP_Dropdown.OptionData("Poacher bounty: " + poacherValue + "$"));
-        options.Add(new TMP_Dropdown.OptionData("Animal death cost: " + animalValue + "$"));
+        options.Add(new TMP_Dropdown.OptionData("Monthly:"));
+        options.Add(new TMP_Dropdown.OptionData("Donations: " + donationMoney + "$", moneyGainBackground));
+        options.Add(new TMP_Dropdown.OptionData("Rangers' fee: " + rangerFee + "$", moneyLossBackground));
+        options.Add(new TMP_Dropdown.OptionData(" "));
+        options.Add(new TMP_Dropdown.OptionData("One time:"));
+        options.Add(new TMP_Dropdown.OptionData("Poacher bounty: " + poacherValue + "$", moneyGainBackground));
+        options.Add(new TMP_Dropdown.OptionData("Trap dismantling: " + trapValue + "$", moneyGainBackground));
+        options.Add(new TMP_Dropdown.OptionData("Animal death cost: " + animalValue + "$", moneyLossBackground));
         upkeep.AddOptions(options);
     }
 
@@ -78,9 +86,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void UpdateUpkeepValues()
+    public void HandleUpkeepColors()
     {
-        
+        //Toggle[] dropdownItems = GetComponentsInChildren<Toggle>();
+        //Debug.Log("Open");
+        //foreach (var item in dropdownItems)
+        //{
+        //    Debug.Log(item.name);
+        //    TextMeshProUGUI itemName = item.GetComponentInChildren<TextMeshProUGUI>();
+        //    Image itemBackground = item.GetComponentInChildren<Image>();
+        //    if (!itemName.text.Contains("$"))
+        //    {
+        //        continue;
+        //    }
+        //    if (itemName.text.Contains("-"))
+        //    {
+        //        itemBackground.color = new Color(1, 0.5f, 0.5f);
+        //    }
+        //    else
+        //    {
+        //        itemBackground.color = new Color(0.5f, 1, 0.5f);
+        //    }
+        //}
     }
 
     private void HandleIncomeAndFees()
