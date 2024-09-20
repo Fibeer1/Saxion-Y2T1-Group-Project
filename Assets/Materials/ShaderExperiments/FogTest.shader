@@ -11,7 +11,7 @@ Shader "Unlit/FogTest"
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque"  "Queue" = "Transparent" }
+        Tags { "RenderType"="Transparent"  "Queue" = "Transparent" }
         LOD 100
             Blend SrcAlpha OneMinusSrcAlpha
 
@@ -79,7 +79,7 @@ Shader "Unlit/FogTest"
                 // test whether we should render fog or not:
                 float distanceToCenter = length(_CircleCenter1.xyz - i.worldPos.xyz);
                 //if (distanceToCenter < _Radius1) {
-                if (vis.x>0.5) {
+                if (vis.x > 0.5) {
                     col = float4(0, 0, 0, 0); // important: alpha=0
                 } 
 

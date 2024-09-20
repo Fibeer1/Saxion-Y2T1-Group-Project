@@ -4416,12 +4416,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: 0d95b24cad80fb74581e74e546fa0297, type: 2}
-  circleCenters:
-  - {x: 0.4, y: 0.3}
-  - {x: 0.8, y: 0.9}
-  circleRadii:
-  - 0.05
-  - 0.1
+  smoother: 0.01
+  targetObject: {fileID: 1865921931}
+  textureSize: {x: 512, y: 512}
 --- !u!64 &1121187696
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6883,6 +6880,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1857878168}
   m_CullTransparentMesh: 1
+--- !u!1 &1865921931 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2474405710608288390, guid: c21560cd1b3854544a00aa5fe5cabb5a, type: 3}
+  m_PrefabInstance: {fileID: 7440465759307715652}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1891265283
 GameObject:
   m_ObjectHideFlags: 0
