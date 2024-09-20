@@ -62,7 +62,7 @@ public class FieldOfViewTrigger : MonoBehaviour
             if (currentMarker == null)
             {
                 currentMarker = Instantiate(targetMarker, FindObjectOfType<Canvas>().transform.Find("UIBackground"));
-                currentMarker.GetComponent<TargetMarker>().target = transform;
+                currentMarker.GetComponent<UIMarker>().target = transform;
             }
             circleRenderer.material.color = new Color(1, 1, 0, originalColor.a);
         }

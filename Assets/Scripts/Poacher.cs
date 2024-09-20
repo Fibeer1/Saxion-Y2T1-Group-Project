@@ -22,7 +22,7 @@ public class Poacher : Wanderer
         shouldKeepTrackOfTrails = false;
         trapTimer = 60;
         defaultSpeed = navMeshAgent.speed;
-        runSpeed = defaultSpeed + 6.5f;
+        runSpeed = defaultSpeed + 5f;
         poacherValue = GameManager.poacherValue;
     }
     
