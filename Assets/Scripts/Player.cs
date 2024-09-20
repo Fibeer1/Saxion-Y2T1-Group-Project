@@ -91,22 +91,8 @@ public class Player : MonoBehaviour
             return;
         }
 
-        //THIS BREAKS USING BUTTONS WHILE HAVING SELECTED A RANGER
-        //TODO: Come up with a way to have this code uncommented and at the same time be able to click UI buttons
-
-
-        //if (Input.GetKeyDown(KeyCode.Mouse0))
-        //{
-        //    Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
-        //    if (Physics.Raycast(ray, out RaycastHit hit))
-        //    {
-        //        if (hit.transform.tag == "Ground")
-        //        {
-        //            DeselectObject();
-        //            return;
-        //        }
-        //    }
-        //}
+        
+        
 
 
         Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
@@ -117,40 +103,56 @@ public class Player : MonoBehaviour
             currentObjectToPlace.transform.position = hit.point;
         }
 
+        if (Input.GetKeyDown(KeyCode.Mouse0) && hasRayHit)
+        {
+            if (hit.transform.tag == "Ground" && currentObjectToPlace != null)
+            {
+                //THIS BREAKS USING BUTTONS WHILE HAVING SELECTED A RANGER
+                //TODO: Come up with a way to have this code uncommented and at the same time be able to click UI buttons
+                //DeselectObject();                
+                //return;
+            }
+        }
+
+
         if (currentObject.GetComponent<Ranger>() != null)
         {
             Ranger ranger = currentObject.GetComponent<Ranger>();
-            if (Input.GetKeyDown(KeyCode.Mouse1) && !ranger.duringAnimation)
-            {                
-                if (hasRayHit)
+            if (ranger.duringAnimation)
+            {
+                return;
+            }
+            if (Input.GetKeyDown(KeyCode.Mouse1) && hasRayHit)
+            {
+                if (ranger.target != null)
                 {
-                    if (ranger.target != null)
-                    {
-                        ranger.DeselectTarget();
-                    }                    
-                    if (hit.transform.tag == "Ground")
-                    {
-                        Instantiate(moveIndicator, hit.point, Quaternion.identity);
-                        ranger.GetComponent<NavMeshAgent>().SetDestination(hit.point);
-                        ranger.GetComponent<NavMeshAgent>().speed = ranger.defaultSpeed;
-                        if (currentObjectToPlace != null)
-                        {
-                            ranger.SelectTarget(currentObjectToPlace.transform, "PlaceObject");
-                            hasOrderedRangerToPlaceObject = true;
-                        }
-                    }
-                    else if (hit.transform.GetComponent<Poacher>() != null)
-                    {
-                        ranger.SelectTarget(hit.transform, "Chase");
-                    }
-                    else if (hit.transform.tag == "Trap")
-                    {
-                        ranger.SelectTarget(hit.transform, "DisarmTrap");
-                    }
-                    else if (hit.transform.name.Contains("MotionSensor"))
-                    {
-                        ranger.SelectTarget(hit.transform, "PickUpEquipment");
-                    }
+                    ranger.DeselectTarget();
+                }
+                if (hit.transform.tag == "Ground")
+                {
+                    Instantiate(moveIndicator, hit.point, Quaternion.identity);
+                    ranger.GetComponent<NavMeshAgent>().SetDestination(hit.point);
+                    ranger.GetComponent<NavMeshAgent>().speed = ranger.defaultSpeed;
+                }
+                else if (hit.transform.GetComponent<Poacher>() != null)
+                {
+                    ranger.SelectTarget(hit.transform, "Chase");
+                }
+                else if (hit.transform.tag == "Trap")
+                {
+                    ranger.SelectTarget(hit.transform, "DisarmTrap");
+                }
+                else if (hit.transform.name.Contains("MotionSensor"))
+                {
+                    ranger.SelectTarget(hit.transform, "PickUpEquipment");
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.Mouse0) && hasRayHit)
+            {
+                if (hit.transform.tag == "Ground" && currentObjectToPlace != null)
+                {
+                    ranger.SelectTarget(currentObjectToPlace.transform, "PlaceObject");
+                    hasOrderedRangerToPlaceObject = true;
                 }
             }
         }
@@ -166,6 +168,7 @@ public class Player : MonoBehaviour
         currentObjectToPlaceOriginalMaterials.Clear();
         currentObjectToPlace = objectToPlace;
         currentObjectToPlaceSprite = itemSprite;
+
         MeshRenderer[] renderers = currentObjectToPlace.GetComponentsInChildren<MeshRenderer>();
         foreach (var renderer in renderers)
         {

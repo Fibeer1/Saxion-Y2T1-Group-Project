@@ -4,17 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
-public class RangerBackground : UIMarker
+public class RangerBackground : MonoBehaviour
 {
     [SerializeField] private InventoryItem[] inventory;
     [SerializeField] private Image[] inventoryPanels;
     public Player player;
     public Ranger ranger;
-
-    private void Update()
-    {
-        HandleTargetTracking();
-    }
 
     public void AddItemToInventory(GameObject item)
     {
@@ -67,8 +62,6 @@ public class RangerBackground : UIMarker
     public void SetUpRangerBG(Player pPlayer)
     {
         player = pPlayer;
-        target = player.currentObject.transform;        
-        playerCam = player.GetComponent<Camera>();
         ranger = player.currentObject.GetComponent<Ranger>();
     }
 }

@@ -37,7 +37,7 @@ public class Ranger : Interactable
         if (target != null)
         {
             navMeshAgent.SetDestination(target.position);
-            if (Vector3.Distance(transform.position, target.position) < 1)
+            if (Vector3.Distance(transform.position, target.position) < 3)
             {
                 navMeshAgent.destination = transform.position;
                 if (actionToPerform == "PlaceObject")
@@ -135,6 +135,11 @@ public class Ranger : Interactable
         animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);
         GameObject targetItem = Instantiate(tempTarget.GetComponent<Equipment>().itemUIPrefab, FindObjectOfType<Canvas>().transform);
         FindObjectOfType<RangerBackground>().AddItemToInventory(targetItem);
+        FieldOfViewTrigger sensorScript = tempTarget.GetComponent<FieldOfViewTrigger>();
+        if (sensorScript != null && sensorScript.currentMarker != null)
+        {
+            Destroy(sensorScript.currentMarker);
+        }
         StartCoroutine(RemoveObject(tempTarget.gameObject));
     }
 
