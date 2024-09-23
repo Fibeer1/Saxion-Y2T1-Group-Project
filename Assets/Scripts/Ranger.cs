@@ -52,6 +52,10 @@ public class Ranger : Interactable
                 {
                     CatchPoacher();
                 }
+                else if (actionToPerform == "DisarmTrap")
+                {
+                    DisarmTrap();
+                }
             }
         }
     }
@@ -97,28 +101,12 @@ public class Ranger : Interactable
         //Error prevention, must remove when the real assets are imported
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.GetComponent<Poacher>() != null && !duringAnimation)
-        {
-            
-        }
-        else if (other.tag == "Trap" && !duringAnimation)
-        {
-            GameObject trap = other.gameObject;
-            duringAnimation = true;
-            DeselectTarget();
-            StartCoroutine(TurnTowardsTarget(trap.transform, 0.5f));
-            navMeshAgent.destination = transform.position;
-            animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);
-            StartCoroutine(RemoveObject(trap));
-            FindObjectOfType<GameManager>().HandleMoneyChange("Trap dismantled!\nMoney received: " +
-            GameManager.trapValue + "$", GameManager.trapValue);
-        }
-    }
-
     private void PickUpItem()
     {
+        if (duringAnimation)
+        {
+            return;
+        }
         duringAnimation = true;
         Transform tempTarget = target;
         DeselectTarget();
@@ -136,6 +124,10 @@ public class Ranger : Interactable
 
     private IEnumerator PlaceItem()
     {
+        if (duringAnimation)
+        {
+            yield break;
+        }
         duringAnimation = true;
         DeselectTarget();
         animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);
@@ -147,6 +139,10 @@ public class Ranger : Interactable
 
     private void CatchPoacher()
     {
+        if (duringAnimation)
+        {
+            return;
+        }
         duringAnimation = true;
         Poacher poacherHit = target.GetComponent<Poacher>();
         poacherHit.GetComponent<NavMeshAgent>().destination = poacherHit.transform.position;
@@ -161,6 +157,23 @@ public class Ranger : Interactable
         StartCoroutine(RemoveObject(poacherHit.gameObject));
         FindObjectOfType<GameManager>().HandleMoneyChange("Poacher arrested!\nMoney received: " +
         poacherHit.poacherValue + "$", poacherHit.poacherValue);
+    }
+
+    private void DisarmTrap()
+    {
+        if (duringAnimation)
+        {
+            return;
+        }
+        GameObject trap = target.gameObject;
+        duringAnimation = true;
+        DeselectTarget();
+        StartCoroutine(TurnTowardsTarget(trap.transform, 0.5f));
+        navMeshAgent.destination = transform.position;
+        animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);
+        StartCoroutine(RemoveObject(trap));
+        FindObjectOfType<GameManager>().HandleMoneyChange("Trap dismantled!\nMoney received: " +
+        GameManager.trapValue + "$", GameManager.trapValue);
     }
 
     private IEnumerator RemoveObject(GameObject gameobject)

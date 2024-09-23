@@ -26,6 +26,12 @@ public class FOVDebug : MonoBehaviour
         //Toggle visibility of all entities
         foreach (var entity in fovEntities)
         {
+            if (entity == null)
+            {
+                fovEntities.Remove(entity);
+                break;
+            }
+
             //If the entity is not visible by a ranger/sensor, disable its renderers
             if (!entity.isBeingSeen)
             {
