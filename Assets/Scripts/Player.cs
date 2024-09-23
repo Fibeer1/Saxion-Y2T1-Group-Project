@@ -91,10 +91,6 @@ public class Player : MonoBehaviour
             return;
         }
 
-        
-        
-
-
         Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
         bool hasRayHit = Physics.Raycast(ray, out RaycastHit hit);
 
@@ -132,6 +128,7 @@ public class Player : MonoBehaviour
                 {
                     Instantiate(moveIndicator, hit.point, Quaternion.identity);
                     ranger.SelectTarget(null, hit.point, "Walk", false);
+                    DeselectObjectToPlace(true);
                 }
                 else if (hit.transform.GetComponent<Poacher>() != null)
                 {
@@ -148,7 +145,7 @@ public class Player : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.Mouse0) && hasRayHit)
             {
-                if (hit.transform.tag == "Ground" && currentObjectToPlace != null)
+                if (hit.transform.tag == "Ground" && currentObjectToPlace != null && !hasOrderedRangerToPlaceObject)
                 {
                     ranger.SelectTarget(currentObjectToPlace.transform, hit.point, "PlaceObject");
                     hasOrderedRangerToPlaceObject = true;
@@ -192,7 +189,16 @@ public class Player : MonoBehaviour
         {
             return;
         }
-        MeshRenderer[] renderers = currentObjectToPlace.GetComponentsInChildren<MeshRenderer>();
+        hasOrderedRangerToPlaceObject = false;        
+        if (shouldDestroyObject)
+        {
+            Destroy(currentObjectToPlace);
+            currentObjectToPlace = null;
+            currentObjectToPlaceSprite = null;
+            return;
+        }
+
+        Renderer[] renderers = currentObjectToPlace.GetComponentsInChildren<Renderer>();
         for (int i = 0; i < renderers.Length; i++)
         {
             renderers[i].material = currentObjectToPlaceOriginalMaterials[i];
@@ -207,15 +213,8 @@ public class Player : MonoBehaviour
         {
             script.enabled = true;
         }
-        hasOrderedRangerToPlaceObject = false;
-        currentObjectToPlaceSprite = null;
-
-        if (shouldDestroyObject)
-        {
-            Destroy(currentObjectToPlace);
-            return;
-        }
         currentObjectToPlace = null;
+        currentObjectToPlaceSprite = null;
     }
 
     public void SelectObject(Interactable clickedObject)
