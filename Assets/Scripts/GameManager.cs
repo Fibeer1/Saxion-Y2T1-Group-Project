@@ -62,9 +62,9 @@ public class GameManager : MonoBehaviour
         }
         
 
-        moneyCount.text = "$" + money;
-        rangerCount.text = "Rangers: " + rangers.Count;
-        animalCount.text = "Animals left: " + animals.Count;
+        moneyCount.text = "$ " + money;
+        rangerCount.text = rangers.Count + "x";
+        animalCount.text = animals.Count + "x";
 
         HandleIncomeAndFees();
 
