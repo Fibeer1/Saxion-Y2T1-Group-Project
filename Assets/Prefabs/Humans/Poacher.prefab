@@ -2059,8 +2059,11 @@ MonoBehaviour:
   wanderTimerDuration: 5
   followingTrail: 0
   targetRanger: {fileID: 0}
+  duringAnimation: 0
   trapPrefab: {fileID: 485911522869029594, guid: 08da777225a303a4bb8afea4380d17e6, type: 3}
   trapTimer: 0
+  poacherValue: 100
+  isBeingArrested: 0
 --- !u!114 &3823158168604681657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2088,7 +2091,7 @@ NavMeshAgent:
   m_Acceleration: 15
   avoidancePriority: 50
   m_AngularSpeed: 1000
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

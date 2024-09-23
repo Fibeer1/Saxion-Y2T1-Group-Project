@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     public InventoryItem currentObjectToPlaceSprite;
     public Material currentObjectToPlaceSelectedMaterial;
     [SerializeField] private List<Material> currentObjectToPlaceOriginalMaterials = new List<Material>();
-    private bool hasOrderedRangerToPlaceObject;
+    private Ranger rangerOrderedToPlaceObject;
 
     [Header("Camera Movement")]
     [SerializeField] private float cameraSpeedDamper = 5;    
@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
         Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
         bool hasRayHit = Physics.Raycast(ray, out RaycastHit hit);
 
-        if (currentObjectToPlace != null && hasRayHit && !hasOrderedRangerToPlaceObject)
+        if (currentObjectToPlace != null && hasRayHit && rangerOrderedToPlaceObject == null)
         {
             currentObjectToPlace.transform.position = hit.point;
         }
@@ -127,8 +127,11 @@ public class Player : MonoBehaviour
                 if (hit.transform.tag == "Ground")
                 {
                     Instantiate(moveIndicator, hit.point, Quaternion.identity);
-                    ranger.SelectTarget(null, hit.point, "Walk", false);
-                    DeselectObjectToPlace(true);
+                    if (ranger.actionToPerform == "PlaceObject")
+                    {
+                        DeselectObjectToPlace(true);
+                    }
+                    ranger.SelectTarget(null, hit.point, "Walk", false);                                   
                 }
                 else if (hit.transform.GetComponent<Poacher>() != null)
                 {
@@ -145,10 +148,10 @@ public class Player : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.Mouse0) && hasRayHit)
             {
-                if (hit.transform.tag == "Ground" && currentObjectToPlace != null && !hasOrderedRangerToPlaceObject)
+                if (hit.transform.tag == "Ground" && currentObjectToPlace != null && rangerOrderedToPlaceObject == null)
                 {
                     ranger.SelectTarget(currentObjectToPlace.transform, hit.point, "PlaceObject");
-                    hasOrderedRangerToPlaceObject = true;
+                    rangerOrderedToPlaceObject = ranger;
                 }
             }
         }
@@ -159,8 +162,7 @@ public class Player : MonoBehaviour
         if (currentObjectToPlace != null)
         {
             return;
-        }        
-        hasOrderedRangerToPlaceObject = false;
+        }
         currentObjectToPlaceOriginalMaterials.Clear();
         currentObjectToPlace = objectToPlace;
         currentObjectToPlaceSprite = itemSprite;
@@ -189,7 +191,7 @@ public class Player : MonoBehaviour
         {
             return;
         }
-        hasOrderedRangerToPlaceObject = false;        
+        rangerOrderedToPlaceObject = null;        
         if (shouldDestroyObject)
         {
             Destroy(currentObjectToPlace);
