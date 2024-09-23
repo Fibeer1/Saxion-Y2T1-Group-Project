@@ -10,7 +10,7 @@ public class FieldOfViewTrigger : MonoBehaviour
     public GameObject currentMarker;
     public TextMeshPro sensorName;
     public List<GameObject> sensorCollisions = new List<GameObject>();
-    [SerializeField] private Renderer circleRenderer;
+    [SerializeField] private Light fovLight;
     private Color originalColor;
 
     private void Start()
@@ -26,6 +26,7 @@ public class FieldOfViewTrigger : MonoBehaviour
                 sensorName.text = "Sensor " + sensorDropdown.sensors.Count;
             }
             sensorDropdown.UpdateSensorDropdown();
+            fovLight = GetComponentInChildren<Light>();
         }
     }
 
@@ -43,7 +44,7 @@ public class FieldOfViewTrigger : MonoBehaviour
         }
         else if (type == "Sensor")
         {
-            circleRenderer.material.color = originalColor;
+            fovLight.color = originalColor;
             if (currentMarker != null)
             {
                 Destroy(currentMarker);
@@ -64,7 +65,7 @@ public class FieldOfViewTrigger : MonoBehaviour
                 currentMarker = Instantiate(targetMarker, FindObjectOfType<Canvas>().transform.Find("UIBackground"));
                 currentMarker.GetComponent<UIMarker>().target = transform;
             }
-            circleRenderer.material.color = new Color(1, 1, 0, originalColor.a);
+            fovLight.color = new Color(1, 1, 0, originalColor.a);
         }
     }
 
@@ -87,7 +88,7 @@ public class FieldOfViewTrigger : MonoBehaviour
             sensorCollisions.Remove(other.gameObject);
             if (sensorCollisions.Count == 0)
             {
-                circleRenderer.material.color = originalColor;
+                fovLight.color = originalColor;
             }
             if (currentMarker != null)
             {

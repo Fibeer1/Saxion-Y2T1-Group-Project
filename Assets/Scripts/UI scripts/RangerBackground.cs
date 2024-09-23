@@ -10,10 +10,17 @@ public class RangerBackground : MonoBehaviour
     [SerializeField] private Image[] inventoryPanels;
     [SerializeField] Slider fatigueSlider;
     [SerializeField] Image fatigueSliderBackground;
-    private Color fatigueFillColor = new Color(0.9f, 0.9f, 0, 0.75f);
-    private Color fatigueEmptyColor = new Color(0, 0.9f, 0, 0.75f);
+    private Color fatigueFillColor = new Color(0.9f, 0.9f, 0, 1);
+    private Color fatigueEmptyColor = new Color(0, 0.9f, 0, 1);
     public Player player;
     public Ranger ranger;
+
+
+    private void Update()
+    {
+        fatigueSlider.value = ranger.fatigue;
+        fatigueSliderBackground.color = Color.Lerp(fatigueEmptyColor, fatigueFillColor, ranger.fatigue);
+    }
 
     public void AddItemToInventory(GameObject item)
     {

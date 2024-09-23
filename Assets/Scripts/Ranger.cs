@@ -11,9 +11,11 @@ public class Ranger : Interactable
     [SerializeField] private GameObject targetCirclePrefab;
     public GameObject currentTargetCircle;
     public string actionToPerform;
+    public float fatigue = 0;
     public float defaultSpeed;
     public float runSpeed;   
     public bool duringAnimation = false;
+    private bool duringFatigueRechargePhase = false;
 
 
     private void Start()
@@ -21,6 +23,7 @@ public class Ranger : Interactable
         player = FindObjectOfType<Player>();
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        fatigue = 0;
         defaultSpeed = navMeshAgent.speed;
         runSpeed = defaultSpeed + 7.5f;
     }
@@ -34,8 +37,23 @@ public class Ranger : Interactable
         }
         animator.SetFloat("MoveSpeed", navMeshAgent.velocity.magnitude);
 
-        if (target != null)
+        if (duringFatigueRechargePhase)
         {
+            HandleFatigueRecharging();
+            return;
+        }       
+        
+        if (navMeshAgent.velocity.magnitude > 1)
+        {
+            fatigue += Time.deltaTime / 10;
+            if (fatigue >= 1)
+            {
+                duringFatigueRechargePhase = true;
+            }
+        }
+
+        if (target != null)
+        {           
             navMeshAgent.SetDestination(target.position);
             if (Vector3.Distance(transform.position, target.position) < 3)
             {
@@ -57,6 +75,16 @@ public class Ranger : Interactable
                     DisarmTrap();
                 }
             }
+        }
+    }
+
+    private void HandleFatigueRecharging()
+    {
+        fatigue -= Time.deltaTime / 25;
+        if (fatigue <= 0)
+        {
+            duringFatigueRechargePhase = false;
+            fatigue = 0;
         }
     }
 
