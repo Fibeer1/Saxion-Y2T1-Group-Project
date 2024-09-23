@@ -164,11 +164,12 @@ public class Ranger : Interactable
 
     private void CatchPoacher()
     {
-        if (duringAnimation)
+        if (duringAnimation || target.GetComponent<Poacher>().isBeingArrested)
         {
             return;
         }
         duringAnimation = true;
+        target.GetComponent<Poacher>().isBeingArrested = true;
         Poacher poacherHit = target.GetComponent<Poacher>();
         poacherHit.GetComponent<NavMeshAgent>().destination = poacherHit.transform.position;
         poacherHit.GetComponent<NavMeshAgent>().enabled = false;

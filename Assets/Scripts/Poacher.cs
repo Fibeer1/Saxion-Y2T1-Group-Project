@@ -15,6 +15,8 @@ public class Poacher : Wanderer
     private float runSpeed; //Must be lower than the rangers' speed
     public int poacherValue = 100;
 
+    public bool isBeingArrested;
+
     private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
