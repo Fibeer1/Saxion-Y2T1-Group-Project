@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7631785036988337661, guid: 530df3c548eb3634c8a74d13b01c468a, type: 3}
+  - {fileID: 2100000, guid: cacdd49493674d04baf9af5c4583874e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -136,9 +136,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBeingSeen: 0
-  ignoreRaycastLayer:
-    serializedVersion: 2
-    m_Bits: 4
 --- !u!54 &-8014875890265259254
 Rigidbody:
   m_ObjectHideFlags: 0

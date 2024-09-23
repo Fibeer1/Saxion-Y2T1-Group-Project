@@ -113,7 +113,7 @@ public class Ranger : Interactable
         }
         if (shouldSpawnTargetCircle)
         {
-            currentTargetCircle = Instantiate(targetCirclePrefab, targetPosition, Quaternion.identity, target);
+            currentTargetCircle = Instantiate(targetCirclePrefab, target.position, Quaternion.identity, target);
         }       
     }
 
