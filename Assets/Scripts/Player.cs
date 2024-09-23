@@ -127,10 +127,11 @@ public class Player : MonoBehaviour
                 if (hit.transform.tag == "Ground")
                 {
                     Instantiate(moveIndicator, hit.point, Quaternion.identity);
-                    if (ranger.actionToPerform == "PlaceObject")
+                    if (ranger == rangerOrderedToPlaceObject)
                     {
                         DeselectObjectToPlace(true);
                     }
+                    Debug.Log("Walk");
                     ranger.SelectTarget(null, hit.point, "Walk", false);                                   
                 }
                 else if (hit.transform.GetComponent<Poacher>() != null)
