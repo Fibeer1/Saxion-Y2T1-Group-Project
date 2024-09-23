@@ -8,10 +8,12 @@ public class Ranger : Interactable
     private Animator animator;
     private NavMeshAgent navMeshAgent;
     public Transform target;
+    public Vector3 targetPosition;
     [SerializeField] private GameObject targetCirclePrefab;
     public GameObject currentTargetCircle;
     public string actionToPerform;
     public float fatigue = 0;
+    private float fatigueSpeed;
     public float defaultSpeed;
     public float runSpeed;   
     public bool duringAnimation = false;
@@ -26,6 +28,7 @@ public class Ranger : Interactable
         fatigue = 0;
         defaultSpeed = navMeshAgent.speed;
         runSpeed = defaultSpeed + 7.5f;
+        fatigueSpeed = defaultSpeed - 2;
     }
 
 
@@ -45,50 +48,53 @@ public class Ranger : Interactable
         
         if (navMeshAgent.velocity.magnitude > 1)
         {
-            fatigue += Time.deltaTime / 10;
+            fatigue += Time.deltaTime / 25;
             if (fatigue >= 1)
             {
                 duringFatigueRechargePhase = true;
+                navMeshAgent.speed = fatigueSpeed;
             }
         }
 
-        if (target != null)
-        {           
-            navMeshAgent.SetDestination(target.position);
-            if (Vector3.Distance(transform.position, target.position) < 3)
+        navMeshAgent.SetDestination(targetPosition);
+
+        if (target != null && Vector3.Distance(transform.position, target.position) < 3)
+        {
+            navMeshAgent.destination = transform.position;
+            if (actionToPerform == "PlaceObject")
             {
-                navMeshAgent.destination = transform.position;
-                if (actionToPerform == "PlaceObject")
-                {
-                    StartCoroutine(PlaceItem());
-                }
-                else if (actionToPerform == "PickUpEquipment")
-                {
-                    PickUpItem();
-                }
-                else if (actionToPerform == "ChasePoacher")
-                {
-                    CatchPoacher();
-                }
-                else if (actionToPerform == "DisarmTrap")
-                {
-                    DisarmTrap();
-                }
+                StartCoroutine(PlaceItem());
+            }
+            else if (actionToPerform == "PickUpEquipment")
+            {
+                PickUpItem();
+            }
+            else if (actionToPerform == "ChasePoacher")
+            {
+                CatchPoacher();
+            }
+            else if (actionToPerform == "DisarmTrap")
+            {
+                DisarmTrap();
             }
         }
     }
 
     private void HandleFatigueRecharging()
     {
-        fatigue -= Time.deltaTime / 25;
-        if (fatigue <= 0)
+        if (navMeshAgent.velocity.magnitude <= 1)
         {
-            duringFatigueRechargePhase = false;
-            fatigue = 0;
+            fatigue -= Time.deltaTime / 25;
+            if (fatigue <= 0)
+            {
+                duringFatigueRechargePhase = false;
+                navMeshAgent.speed = defaultSpeed;
+                fatigue = 0;
+            }
         }
     }
 
-    public void SelectTarget(Transform pTarget, string pActionToPerform, bool shouldSpawnTargetCircle = true)
+    public void SelectTarget(Transform pTarget, Vector3 pTargetPos, string pActionToPerform, bool shouldSpawnTargetCircle = true)
     {
         if (target != null)
         {
@@ -96,6 +102,7 @@ public class Ranger : Interactable
         }
         actionToPerform = pActionToPerform;
         target = pTarget;
+        targetPosition = pTargetPos;
         if (actionToPerform == "ChasePoacher")
         {
             navMeshAgent.speed = runSpeed;
@@ -106,7 +113,7 @@ public class Ranger : Interactable
         }
         if (shouldSpawnTargetCircle)
         {
-            currentTargetCircle = Instantiate(targetCirclePrefab, target.position, Quaternion.identity, target);
+            currentTargetCircle = Instantiate(targetCirclePrefab, targetPosition, Quaternion.identity, target);
         }       
     }
 
@@ -120,6 +127,7 @@ public class Ranger : Interactable
                 currentTargetCircle = null;
             }            
             target = null;
+            targetPosition = transform.position;
             actionToPerform = null;
         }        
     }

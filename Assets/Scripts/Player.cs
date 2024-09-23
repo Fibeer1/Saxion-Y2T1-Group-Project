@@ -131,27 +131,26 @@ public class Player : MonoBehaviour
                 if (hit.transform.tag == "Ground")
                 {
                     Instantiate(moveIndicator, hit.point, Quaternion.identity);
-                    ranger.GetComponent<NavMeshAgent>().SetDestination(hit.point);
-                    ranger.GetComponent<NavMeshAgent>().speed = ranger.defaultSpeed;
+                    ranger.SelectTarget(null, hit.point, "Walk", false);
                 }
                 else if (hit.transform.GetComponent<Poacher>() != null)
                 {
-                    ranger.SelectTarget(hit.transform, "ChasePoacher");
+                    ranger.SelectTarget(hit.transform, hit.transform.position, "ChasePoacher");
                 }
                 else if (hit.transform.tag == "Trap")
                 {
-                    ranger.SelectTarget(hit.transform, "DisarmTrap");
+                    ranger.SelectTarget(hit.transform, hit.transform.position, "DisarmTrap");
                 }
                 else if (hit.transform.name.Contains("MotionSensor"))
                 {
-                    ranger.SelectTarget(hit.transform, "PickUpEquipment");
+                    ranger.SelectTarget(hit.transform, hit.transform.position, "PickUpEquipment");
                 }
             }
             else if (Input.GetKeyDown(KeyCode.Mouse0) && hasRayHit)
             {
                 if (hit.transform.tag == "Ground" && currentObjectToPlace != null)
                 {
-                    ranger.SelectTarget(currentObjectToPlace.transform, "PlaceObject");
+                    ranger.SelectTarget(currentObjectToPlace.transform, hit.transform.position, "PlaceObject");
                     hasOrderedRangerToPlaceObject = true;
                 }
             }
