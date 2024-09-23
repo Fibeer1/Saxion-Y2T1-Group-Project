@@ -8671,8 +8671,8 @@ MonoBehaviour:
   - {fileID: 6644730171518196376}
   - {fileID: 203274406702590781}
   - {fileID: 2351009712279093304}
-  fatigueSlider: {fileID: 0}
-  fatigueSliderBackground: {fileID: 0}
+  fatigueSlider: {fileID: 7715019022324749008}
+  fatigueSliderBackground: {fileID: 6015375296403652452}
   player: {fileID: 0}
   ranger: {fileID: 0}
 --- !u!224 &4606619706660653026
@@ -8739,7 +8739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9, g: 0.9, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.9, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
