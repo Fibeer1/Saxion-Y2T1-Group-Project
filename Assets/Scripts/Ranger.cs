@@ -127,12 +127,13 @@ public class Ranger : Interactable
 
     private void PickUpItem()
     {
-        if (duringAnimation)
+        if (duringAnimation || target.GetComponent<Equipment>().isBeingPickedUp)
         {
             return;
         }
         duringAnimation = true;
         Transform tempTarget = target;
+        tempTarget.GetComponent<Equipment>().isBeingPickedUp = true;
         DeselectTarget();
         StartCoroutine(TurnTowardsTarget(tempTarget, 0.5f));
         animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);
