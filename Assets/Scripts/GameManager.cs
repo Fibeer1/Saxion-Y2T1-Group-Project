@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         animals = FindObjectsOfType<Animal>().ToList();
 
         rangerFee *= rangers.Count;
-        money = 100; //Starting amount
+        money = 2000; //Starting amount
 
         upkeep.ClearOptions();
         List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();

@@ -1,4 +1,4 @@
-Shader "Custom/FogShader"
+Shader "Painted Render Texture Shader"
 {
     Properties
     {

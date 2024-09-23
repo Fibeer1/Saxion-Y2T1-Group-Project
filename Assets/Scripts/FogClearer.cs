@@ -2,16 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class FogClearer : MonoBehaviour
 {
     public Camera fogCamera;
-    public Renderer myRenderer;
+    private Renderer[] renderers;
     [Range(0f, 1f)] public float threshold = 0.1f;
 
     // made so all instances share the same texture, reducing texture reads
     private static Texture2D myT2D;
     private static Rect r_rect;
     private static bool isDirty = true;// used so that only one instance will update the RenderTexture per frame
+
+    private void Start()
+    {
+        renderers = GetComponentsInChildren<Renderer>();
+    }
 
     private Color GetColorAtPosition()
     {
@@ -53,12 +58,11 @@ public class NewBehaviourScript : MonoBehaviour
 
     void LateUpdate()
     {
-        if (!myRenderer)
-        {
-            enabled = false;
-            return;
-        }
 
-        myRenderer.enabled = GetColorAtPosition().grayscale >= threshold;
+        bool shouldEnableRenderers = GetColorAtPosition().grayscale >= threshold;
+        foreach (var renderer in renderers)
+        {
+            renderer.enabled = shouldEnableRenderers;
+        }
     }
 }

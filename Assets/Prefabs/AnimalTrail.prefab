@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2089503387417631080}
   - component: {fileID: 7850094830038451926}
   - component: {fileID: -5545237866861609345}
+  - component: {fileID: 5345292488013163623}
   m_Layer: 2
   m_Name: AnimalTrail
   m_TagString: Untagged
@@ -163,3 +164,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
+--- !u!114 &5345292488013163623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7022502912396159351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90338c5d9e0c6d544b9747a683c295ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fogCamera: {fileID: 0}
+  myRenderer: {fileID: 0}
+  threshold: 0.1
