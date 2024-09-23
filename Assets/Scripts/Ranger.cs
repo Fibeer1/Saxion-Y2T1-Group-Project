@@ -48,6 +48,10 @@ public class Ranger : Interactable
                 {
                     PickUpItem();
                 }
+                else if (actionToPerform == "ChasePoacher")
+                {
+                    CatchPoacher();
+                }
             }
         }
     }
@@ -60,7 +64,7 @@ public class Ranger : Interactable
         }
         actionToPerform = pActionToPerform;
         target = pTarget;
-        if (actionToPerform == "Chase")
+        if (actionToPerform == "ChasePoacher")
         {
             navMeshAgent.speed = runSpeed;
         }
@@ -97,20 +101,7 @@ public class Ranger : Interactable
     {
         if (other.GetComponent<Poacher>() != null && !duringAnimation)
         {
-            duringAnimation = true;
-            Poacher poacherHit = other.GetComponent<Poacher>();
-            poacherHit.GetComponent<NavMeshAgent>().destination = poacherHit.transform.position;
-            poacherHit.GetComponent<NavMeshAgent>().enabled = false;
-            poacherHit.duringAnimation = true;
-            DeselectTarget();
-            StartCoroutine(poacherHit.TurnTowardsTarget(transform, 0.5f));
-            StartCoroutine(TurnTowardsTarget(poacherHit.transform, 0.5f));           
-            navMeshAgent.destination = transform.position;
-            animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);
-            GameManager.poachers.Remove(poacherHit);
-            StartCoroutine(RemoveObject(poacherHit.gameObject));
-            FindObjectOfType<GameManager>().HandleMoneyChange("Poacher arrested!\nMoney received: " +
-            poacherHit.poacherValue + "$", poacherHit.poacherValue);
+            
         }
         else if (other.tag == "Trap" && !duringAnimation)
         {
@@ -152,6 +143,24 @@ public class Ranger : Interactable
         yield return new WaitForSeconds(1);
         player.DeselectObjectToPlace();
         duringAnimation = false;
+    }
+
+    private void CatchPoacher()
+    {
+        duringAnimation = true;
+        Poacher poacherHit = target.GetComponent<Poacher>();
+        poacherHit.GetComponent<NavMeshAgent>().destination = poacherHit.transform.position;
+        poacherHit.GetComponent<NavMeshAgent>().enabled = false;
+        poacherHit.duringAnimation = true;
+        DeselectTarget();
+        StartCoroutine(poacherHit.TurnTowardsTarget(transform, 0.5f));
+        StartCoroutine(TurnTowardsTarget(poacherHit.transform, 0.5f));
+        navMeshAgent.destination = transform.position;
+        animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);
+        GameManager.poachers.Remove(poacherHit);
+        StartCoroutine(RemoveObject(poacherHit.gameObject));
+        FindObjectOfType<GameManager>().HandleMoneyChange("Poacher arrested!\nMoney received: " +
+        poacherHit.poacherValue + "$", poacherHit.poacherValue);
     }
 
     private IEnumerator RemoveObject(GameObject gameobject)

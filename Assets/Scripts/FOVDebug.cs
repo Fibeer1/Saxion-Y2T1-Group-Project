@@ -21,21 +21,21 @@ public class FOVDebug : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            //Toggle visibility of all entities
-            foreach (var entity in fovEntities)
+            shouldEnableEntities = !shouldEnableEntities;            
+        }
+        //Toggle visibility of all entities
+        foreach (var entity in fovEntities)
+        {
+            //If the entity is not visible by a ranger/sensor, disable its renderers
+            if (!entity.isBeingSeen)
             {
-                //If the entity is not visible by a ranger/sensor, disable its renderers
-                if (!entity.isBeingSeen)
+                List<Renderer> entityRenderers = entity.GetComponentsInChildren<Renderer>().ToList();
+                foreach (var renderer in entityRenderers)
                 {
-                    List<Renderer> entityRenderers = entity.GetComponentsInChildren<Renderer>().ToList();
-                    foreach (var renderer in entityRenderers)
-                    {
-                        renderer.enabled = !shouldEnableEntities;
-                    }
+                    renderer.enabled = !shouldEnableEntities;
                 }
-                entity.enabled = shouldEnableEntities;                
             }
-            shouldEnableEntities = !shouldEnableEntities;
+            entity.enabled = shouldEnableEntities;
         }
     }
 

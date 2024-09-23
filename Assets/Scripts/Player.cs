@@ -136,7 +136,7 @@ public class Player : MonoBehaviour
                 }
                 else if (hit.transform.GetComponent<Poacher>() != null)
                 {
-                    ranger.SelectTarget(hit.transform, "Chase");
+                    ranger.SelectTarget(hit.transform, "ChasePoacher");
                 }
                 else if (hit.transform.tag == "Trap")
                 {

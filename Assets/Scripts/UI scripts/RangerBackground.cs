@@ -8,6 +8,10 @@ public class RangerBackground : MonoBehaviour
 {
     [SerializeField] private InventoryItem[] inventory;
     [SerializeField] private Image[] inventoryPanels;
+    [SerializeField] Slider fatigueSlider;
+    [SerializeField] Image fatigueSliderBackground;
+    private Color fatigueFillColor = new Color(1, 0.5f, 0, 0.75f);
+    private Color fatigueEmptyColor = new Color(1, 0, 0, 0.75f);
     public Player player;
     public Ranger ranger;
 
