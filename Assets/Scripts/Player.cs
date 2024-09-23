@@ -131,7 +131,6 @@ public class Player : MonoBehaviour
                     {
                         DeselectObjectToPlace(true);
                     }
-                    Debug.Log("Walk");
                     ranger.SelectTarget(null, hit.point, "Walk", false);                                   
                 }
                 else if (hit.transform.GetComponent<Poacher>() != null)
