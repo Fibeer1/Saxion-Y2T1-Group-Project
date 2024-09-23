@@ -150,7 +150,7 @@ public class Player : MonoBehaviour
             {
                 if (hit.transform.tag == "Ground" && currentObjectToPlace != null)
                 {
-                    ranger.SelectTarget(currentObjectToPlace.transform, hit.transform.position, "PlaceObject");
+                    ranger.SelectTarget(currentObjectToPlace.transform, hit.point, "PlaceObject");
                     hasOrderedRangerToPlaceObject = true;
                 }
             }

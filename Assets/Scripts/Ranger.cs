@@ -40,12 +40,6 @@ public class Ranger : Interactable
         }
         animator.SetFloat("MoveSpeed", navMeshAgent.velocity.magnitude);
 
-        if (duringFatigueRechargePhase)
-        {
-            HandleFatigueRecharging();
-            return;
-        }       
-        
         if (navMeshAgent.velocity.magnitude > 1)
         {
             fatigue += Time.deltaTime / 25;
@@ -54,6 +48,22 @@ public class Ranger : Interactable
                 duringFatigueRechargePhase = true;
                 navMeshAgent.speed = fatigueSpeed;
             }
+        }
+        else
+        {
+            fatigue -= Time.deltaTime / 25;
+            if (fatigue <= 0 && navMeshAgent.speed == fatigueSpeed)
+            {
+                duringFatigueRechargePhase = false;
+                navMeshAgent.speed = defaultSpeed;
+                fatigue = 0;
+            }
+
+        }
+
+        if (duringFatigueRechargePhase)
+        {
+            return;
         }
 
         navMeshAgent.SetDestination(targetPosition);
@@ -76,20 +86,6 @@ public class Ranger : Interactable
             else if (actionToPerform == "DisarmTrap")
             {
                 DisarmTrap();
-            }
-        }
-    }
-
-    private void HandleFatigueRecharging()
-    {
-        if (navMeshAgent.velocity.magnitude <= 1)
-        {
-            fatigue -= Time.deltaTime / 25;
-            if (fatigue <= 0)
-            {
-                duringFatigueRechargePhase = false;
-                navMeshAgent.speed = defaultSpeed;
-                fatigue = 0;
             }
         }
     }
