@@ -51,17 +51,6 @@ public class Poacher : Wanderer
         }
     }
 
-    void Footstep(int footstepIndex)
-    {
-
-        TrailNode currentTrailNode = Instantiate(trailNodePrefab, transform.position, transform.rotation).GetComponent<TrailNode>();
-        if (footstepIndex == 0)
-        {
-            currentTrailNode.transform.Rotate(0, 0, 180);
-        }
-        FOVDebug.FindFOVEntities();
-    }
-
     private void HandleTraps()
     {
         trapTimer -= Time.deltaTime;

@@ -552,8 +552,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Size: {x: 304.47495, y: 3.6778216, z: 301.59634}
-  m_Center: {x: 151.73747, y: 1.3389113, z: 150.29817}
+  m_Size: {x: 304.47495, y: 4.533489, z: 301.59634}
+  m_Center: {x: 151.73747, y: 1.7667454, z: 150.29817}
   m_Area: 1
   m_AffectedAgents: ffffffff
 --- !u!1 &112212326
@@ -3466,7 +3466,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1416879689}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.81333333
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

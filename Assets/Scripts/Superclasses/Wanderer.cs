@@ -7,8 +7,6 @@ public class Wanderer : Entity
 {
     [SerializeField] private protected GameObject trailNodePrefab;
     public List<TrailNode> trail;
-    public float trailTimer = 1;
-    public float trailTimerDuration = 1;
     [SerializeField] private protected float wanderTimer = 10;
     [SerializeField] private protected float wanderTimerDuration;
     private protected NavMeshAgent navMeshAgent;
@@ -29,39 +27,39 @@ public class Wanderer : Entity
             {
                 PickRandomPosition(25);
                 wanderTimer = wanderTimerDuration;
-                if (GetComponent<Animal>() != null)
-                {
-                    GetComponent<Animal>().trailTimer = 0;
-                }
             }
         }
     }
 
-    private protected void HandleTrailLeaving()
+    protected void Footstep(int footstepIndex)
     {
-        if (navMeshAgent.velocity.magnitude < 0.5f)
+        float footstepdistanceFromCenter = 5;
+        float reverseFootstepValue = 180;
+        if (GetComponent<Animal>() != null)
+        {
+            footstepdistanceFromCenter = 1;
+            reverseFootstepValue = 0;
+            Debug.Log("animal footstep");
+        }
+        TrailNode currentTrailNode = Instantiate(trailNodePrefab, transform.position + transform.right / footstepdistanceFromCenter, transform.rotation).GetComponent<TrailNode>();
+        if (footstepIndex == 0)
+        {
+            currentTrailNode.transform.Rotate(0, 0, reverseFootstepValue);
+            currentTrailNode.transform.position -= transform.right / footstepdistanceFromCenter;
+        }
+        FOVDebug.FindFOVEntities();
+        if (!shouldKeepTrackOfTrails)
         {
             return;
         }
-
-        trailTimer -= Time.deltaTime;
-        if (trailTimer <= 0)
+        currentTrailNode.animal = GetComponent<Animal>();
+        trail.Add(currentTrailNode.GetComponent<TrailNode>());
+        if (trail.IndexOf(currentTrailNode) > 0)
         {
-            trailTimer = trailTimerDuration;
-            TrailNode currentTrailNode = Instantiate(trailNodePrefab, transform.position, transform.rotation).GetComponent<TrailNode>();
-            if (!shouldKeepTrackOfTrails)
-            {
-                return;
-            }
-            currentTrailNode.animal = GetComponent<Animal>();
-            trail.Add(currentTrailNode.GetComponent<TrailNode>());
-            if (trail.IndexOf(currentTrailNode) > 0)
-            {
-                //If there are other nodes before this one, add it to the last spawned node as its next node
-                trail[trail.IndexOf(currentTrailNode) - 1].nextTrailNode = currentTrailNode;
-            }
-            FOVDebug.FindFOVEntities();
+            //If there are other nodes before this one, add it to the last spawned node as its next node
+            trail[trail.IndexOf(currentTrailNode) - 1].nextTrailNode = currentTrailNode;
         }
+        
     }
 
     private protected void PickRandomPosition(float distance)

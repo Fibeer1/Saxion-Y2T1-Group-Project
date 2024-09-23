@@ -25,7 +25,6 @@ public class Animal : Wanderer
         }
         animator.SetFloat("MoveSpeed", navMeshAgent.velocity.magnitude);
         HandleWandering();
-        HandleTrailLeaving();
     }
 
     public IEnumerator Die()
