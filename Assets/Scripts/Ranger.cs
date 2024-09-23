@@ -58,7 +58,11 @@ public class Ranger : Interactable
 
         }
 
-        navMeshAgent.SetDestination(targetPosition);
+        NavMeshHit navHit;
+
+        NavMesh.SamplePosition(targetPosition, out navHit, 5, -1);
+
+        navMeshAgent.SetDestination(navHit.position);
 
         if (target != null && Vector3.Distance(transform.position, target.position) < 3)
         {
