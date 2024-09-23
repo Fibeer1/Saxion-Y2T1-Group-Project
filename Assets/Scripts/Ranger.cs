@@ -17,7 +17,6 @@ public class Ranger : Interactable
     public float defaultSpeed;
     public float runSpeed;   
     public bool duringAnimation = false;
-    private bool duringFatigueRechargePhase = false;
 
 
     private void Start()
@@ -45,7 +44,6 @@ public class Ranger : Interactable
             fatigue += Time.deltaTime / 25;
             if (fatigue >= 1)
             {
-                duringFatigueRechargePhase = true;
                 navMeshAgent.speed = fatigueSpeed;
             }
         }
@@ -54,16 +52,10 @@ public class Ranger : Interactable
             fatigue -= Time.deltaTime / 25;
             if (fatigue <= 0 && navMeshAgent.speed == fatigueSpeed)
             {
-                duringFatigueRechargePhase = false;
                 navMeshAgent.speed = defaultSpeed;
                 fatigue = 0;
             }
 
-        }
-
-        if (duringFatigueRechargePhase)
-        {
-            return;
         }
 
         navMeshAgent.SetDestination(targetPosition);
