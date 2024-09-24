@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 113.29, y: 9.281605, z: 67.47}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8801004121127216383}
@@ -107,8 +107,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.6832733, y: 2.5388832, z: 4.134758}
-  m_Center: {x: -0.15834808, y: 0.7694416, z: 0.5087395}
+  m_Size: {x: 2.6832733, y: 3.9632072, z: 7.9323425}
+  m_Center: {x: -0.15834808, y: 1.4816036, z: 0.72467804}
 --- !u!114 &4385066538814995256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,7 +124,7 @@ MonoBehaviour:
   trailNodePrefab: {fileID: 7022502912396159351, guid: 5d35ffd4c9f17e445a93cb8b23d8ecb6, type: 3}
   trail: []
   wanderTimer: 10
-  wanderTimerDuration: 0
+  wanderTimerDuration: 10
   isDead: 0
 --- !u!114 &8373098681251559098
 MonoBehaviour:
@@ -1204,7 +1204,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6505168582700976019}

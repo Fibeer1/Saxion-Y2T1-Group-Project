@@ -475,7 +475,7 @@ MonoBehaviour:
   trailNodePrefab: {fileID: 7022502912396159351, guid: 5d35ffd4c9f17e445a93cb8b23d8ecb6, type: 3}
   trail: []
   wanderTimer: 10
-  wanderTimerDuration: 0
+  wanderTimerDuration: 10
   isDead: 0
 --- !u!114 &3225756226609770322
 MonoBehaviour:
