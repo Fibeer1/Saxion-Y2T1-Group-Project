@@ -30,10 +30,12 @@ public class GameManager : MonoBehaviour
 
 
     public int money;
-    private int donationMoney = 150;
+    private int donationMoney = 0;
+    private int donationMin = 0;
+    private int donationMax = 300;
     private int rangerFee = -50;
-    public static int poacherValue = 1000;
-    public static int animalValue = -700;
+    public static int poacherValue = 500;
+    public static int animalValue = -750;
     public static int trapValue = 100;
 
     private bool hasGameEnded = false;
@@ -139,6 +141,7 @@ public class GameManager : MonoBehaviour
         if (moneyChangeTimer <= 0)
         {
             moneyChangeTimer = moneyChangeTime;
+            donationMoney = Random.Range(donationMin, donationMax);
             HandleMoneyChange("Rangers' fee.\nMoney deducted: " + rangerFee + "$", rangerFee);
             HandleMoneyChange("Donation received!\nMoney gained: " + donationMoney + "$", donationMoney);
         }
