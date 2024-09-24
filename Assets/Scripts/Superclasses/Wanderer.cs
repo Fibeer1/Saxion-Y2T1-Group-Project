@@ -39,7 +39,6 @@ public class Wanderer : Entity
         {
             footstepdistanceFromCenter = 1;
             reverseFootstepValue = 0;
-            Debug.Log("animal footstep");
         }
         TrailNode currentTrailNode = Instantiate(trailNodePrefab, transform.position + transform.right / footstepdistanceFromCenter, transform.rotation).GetComponent<TrailNode>();
         if (footstepIndex == 0)

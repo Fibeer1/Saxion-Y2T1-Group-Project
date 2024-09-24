@@ -57,6 +57,13 @@ public class Player : MonoBehaviour
         }
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.z = Input.GetAxisRaw("Vertical");
+        float verticalMovement = Input.GetKey(KeyCode.Q) ? -0.5f : Input.GetKey(KeyCode.E) ? 0.5f : 0;
+
+        Vector3 newTransform = transform.position + new Vector3(0, verticalMovement, 0);
+        if (newTransform.y >= 10 && newTransform.y <= 20 && verticalMovement != 0)
+        {
+            transform.position = newTransform;
+        }
 
         bool[] movementChecks = 
             { 
