@@ -212,6 +212,5 @@ public class Ranger : Interactable
         Destroy(gameobject);
         duringAnimation = false;
         FOVDebug.FindFOVEntities();
-        
     }
 }

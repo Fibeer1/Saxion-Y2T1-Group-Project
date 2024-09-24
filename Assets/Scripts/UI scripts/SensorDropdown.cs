@@ -38,6 +38,8 @@ public class SensorDropdown : MonoBehaviour
     public void UpdateSensorDropdown()
     {
         sensorList.gameObject.SetActive(true);
+        sensorList.ClearOptions();
+        sensors.Clear();
         sensors = FindObjectsOfType<FieldOfViewTrigger>().ToList();
         TMP_Dropdown.OptionDataList sensorsList = new TMP_Dropdown.OptionDataList();
 
@@ -59,10 +61,14 @@ public class SensorDropdown : MonoBehaviour
 
         foreach (var sensor in sensors)
         {
+            if (sensor == null)
+            {
+                break;
+            }
             TMP_Dropdown.OptionData sensorData = new TMP_Dropdown.OptionData(sensor.sensorName.text);
             sensorsList.options.Add(sensorData);
         }
-        sensorList.ClearOptions();
+        
         if (sensors.Count == 0)
         {
             sensorList.gameObject.SetActive(false);

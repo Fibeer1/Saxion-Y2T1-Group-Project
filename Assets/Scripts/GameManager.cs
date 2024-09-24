@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
         animals = FindObjectsOfType<Animal>().ToList();
 
         rangerFee *= rangers.Count;
-        money = 2000; //Starting amount
+        money = 1600; //Starting amount
         poacherSpawnTimer = Random.Range(poacherSpawnTimeMin, poacherSpawnTimeMax);
 
         upkeep.ClearOptions();
