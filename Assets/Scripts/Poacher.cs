@@ -142,7 +142,10 @@ public class Poacher : Wanderer
         navMeshAgent.destination = transform.position;
         animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);
         yield return new WaitForSeconds(1);
-        animal.StartCoroutine(targetAnimal.Die());
+        if (!animal.isDead)
+        {
+            animal.StartCoroutine(targetAnimal.Die());
+        }
         duringAnimation = false;
         followingTrail = false;
     }

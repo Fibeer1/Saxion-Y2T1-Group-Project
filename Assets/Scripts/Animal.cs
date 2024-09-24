@@ -55,8 +55,9 @@ public class Animal : Wanderer
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Trap")
+        if (other.GetComponent<Trap>() != null)
         {
+            other.GetComponent<Trap>().PlayAnimation("TriggerTrap");
             trapTriggered = other.gameObject;
             StartCoroutine(Die());
         }
