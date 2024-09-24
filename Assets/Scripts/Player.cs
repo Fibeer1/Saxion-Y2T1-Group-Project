@@ -160,8 +160,28 @@ public class Player : MonoBehaviour
             {
                 if (hit.transform.tag == "Ground" && currentObjectToPlace != null && rangerOrderedToPlaceObject == null)
                 {
-                    ranger.SelectTarget(currentObjectToPlace.transform, hit.point, "PlaceObject");
-                    rangerOrderedToPlaceObject = ranger;
+                    if (currentObjectToPlace.GetComponent<Drone>() != null)
+                    {
+
+                    }
+                    else
+                    {
+                        ranger.SelectTarget(currentObjectToPlace.transform, hit.point, "PlaceObject");
+                        rangerOrderedToPlaceObject = ranger;
+                    }
+                }
+            }
+        }
+
+        if (currentObject.GetComponent<Drone>() != null)
+        {
+            Drone drone = currentObject.GetComponent<Drone>();
+            if (Input.GetKeyDown(KeyCode.Mouse1) && hasRayHit)
+            {
+                if (hit.transform.tag == "Ground")
+                {
+                    Instantiate(moveIndicator, hit.point, Quaternion.identity);
+                    drone.PickTarget(hit.point);
                 }
             }
         }

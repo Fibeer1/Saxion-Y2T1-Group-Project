@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Sprite moneyGainBackground;
     [SerializeField] private Sprite moneyLossBackground;
 
+    [SerializeField] private Transform rangerSpawnPosition;
+    [SerializeField] private GameObject rangerPrefab;
+    [SerializeField] private int maxRangers = 3;
 
     [SerializeField] private float moneyChangeTimer = 20;
     private float moneyChangeTime = 20;
@@ -24,8 +27,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform[] poacherSpawnPositions;
     [SerializeField] private GameObject poacherPrefab;
     [SerializeField] private float poacherSpawnTimer;
-    [SerializeField] private float poacherSpawnTimeMin = 30;
-    [SerializeField] private float poacherSpawnTimeMax = 60;
+    private float poacherSpawnTimeMin = 30;
+    private float poacherSpawnTimeMax = 60;
     private float maxPoachers = 3;
 
     public int villageUpgradeCount = 0;
@@ -111,6 +114,27 @@ public class GameManager : MonoBehaviour
             poachers.Add(spawnedPoacher);
             FOVDebug.FindFOVEntities();
         }
+    }
+
+    public void SpawnRanger()
+    {
+        if (rangers.Count >= maxRangers)
+        {
+            return;
+        }
+
+        Ranger spawnedRanger = Instantiate(rangerPrefab, rangerSpawnPosition.position, Quaternion.identity).GetComponent<Ranger>();
+        rangers.Add(spawnedRanger);
+        rangerFee = -50 * rangers.Count;
+        upkeep.options[2].text = "Rangers' fee: " + rangerFee + "$";
+    }
+
+    public void FireRanger(Ranger ranger)
+    {
+        Destroy(ranger);
+        rangers = FindObjectsOfType<Ranger>().ToList();
+        rangerFee = -50 * rangers.Count;
+        upkeep.options[2].text = "Rangers' fee: " + rangerFee + "$";
     }
 
     public void HandleUpkeepColors()

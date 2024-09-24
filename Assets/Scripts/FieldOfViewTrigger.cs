@@ -5,7 +5,7 @@ using TMPro;
 
 public class FieldOfViewTrigger : MonoBehaviour
 {
-    public string type; //Can be Sensor or Vision
+    public string type; //Can be Sensor, Camera, Drone or Vision
     [SerializeField] private GameObject targetMarker;
     public GameObject currentMarker;
     public TextMeshPro sensorName;
@@ -16,7 +16,7 @@ public class FieldOfViewTrigger : MonoBehaviour
 
     private void Start()
     {
-        if (type == "Sensor")
+        if (type == "Sensor" || type == "Camera" || type == "Drone")
         {
             originalColor = new Color(1, 1, 1, 0.03f);
             sensorName = GetComponentInChildren<TextMeshPro>();
@@ -24,7 +24,7 @@ public class FieldOfViewTrigger : MonoBehaviour
             if (!sensorDropdown.sensors.Contains(this))
             {
                 sensorDropdown.sensors.Add(this);
-                sensorName.text = "Sensor " + sensorDropdown.sensors.Count;
+                sensorName.text = type + " " + sensorDropdown.sensors.Count;
             }
             sensorDropdown.UpdateSensorDropdown();
             fovLight = GetComponentInChildren<Light>();
@@ -43,7 +43,7 @@ public class FieldOfViewTrigger : MonoBehaviour
                 }
             }
         }
-        else if (type == "Sensor")
+        else if (type == "Sensor" || type == "Camera" || type == "Drone")
         {
             fovLight.color = originalColor;
             if (currentMarker != null)
@@ -55,7 +55,7 @@ public class FieldOfViewTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (type == "Sensor" && 
+        if ((type == "Sensor" || type == "Drone" || type == "Camera") && 
             other.gameObject.GetComponent<FOVEntity>() != null && 
             other.gameObject.GetComponent<TrailNode>() == null)
         {
@@ -72,7 +72,7 @@ public class FieldOfViewTrigger : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (type == "Vision" && other.gameObject.GetComponent<FOVEntity>() != null)
+        if ((type == "Vision" || type == "Camera" || type == "Drone") && other.gameObject.GetComponent<FOVEntity>() != null)
         {
             other.GetComponent<FOVEntity>().isBeingSeen = true;
         }
@@ -80,11 +80,11 @@ public class FieldOfViewTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (type == "Vision" && other.gameObject.GetComponent<FOVEntity>() != null)
+        if ((type == "Vision" || type == "Camera" || type == "Drone") && other.gameObject.GetComponent<FOVEntity>() != null)
         {
             other.GetComponent<FOVEntity>().isBeingSeen = false;
         }
-        if (type == "Sensor" && sensorCollisions.Contains(other.gameObject))
+        if ((type == "Sensor" || type == "Camera" || type == "Drone") && sensorCollisions.Contains(other.gameObject))
         {
             sensorCollisions.Remove(other.gameObject);
             if (sensorCollisions.Count == 0)
@@ -94,9 +94,7 @@ public class FieldOfViewTrigger : MonoBehaviour
             if (currentMarker != null)
             {
                 Destroy(currentMarker);
-            }
-            
+            }            
         }
     }
-
 }

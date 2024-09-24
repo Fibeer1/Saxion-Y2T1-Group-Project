@@ -14,10 +14,15 @@ public class Interactable : Entity
         }
 
         Ranger ranger = GetComponent<Ranger>();
+        Drone drone = GetComponent<Drone>();
 
         if (ranger != null && !ranger.duringAnimation)
         {
             player.SelectObject(ranger);
+        }
+        else if (drone != null)
+        {
+            player.SelectObject(drone);
         }
     }
 

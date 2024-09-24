@@ -70,7 +70,7 @@ public class Ranger : Interactable
 
         navMeshAgent.SetDestination(navHit.position);
 
-        if (target != null && Vector3.Distance(transform.position, target.position) < 3)
+        if (target != null && Vector3.Distance(transform.position, navHit.position) < 3)
         {
             navMeshAgent.destination = transform.position;
             if (actionToPerform == "PlaceObject")
