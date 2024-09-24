@@ -482,7 +482,8 @@ MonoBehaviour:
   currentMarker: {fileID: 0}
   sensorName: {fileID: 8206500510761723644}
   sensorCollisions: []
-  fovLight: {fileID: 0}
+  fovLight: {fileID: 6529629552246792133}
+  triggeredColor: {r: 1, g: 0.64705884, b: 0, a: 1}
 --- !u!114 &7908103629498120891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,6 +498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemUIPrefab: {fileID: 418692437376078065, guid: 907d54499a3617d4a89606e1c0853a32, type: 3}
   originItem: {fileID: 0}
+  isBeingPickedUp: 0
 --- !u!54 &4709885616576053059
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -644,7 +646,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Sensor 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

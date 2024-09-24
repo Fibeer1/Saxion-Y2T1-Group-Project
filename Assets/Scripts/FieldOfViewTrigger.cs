@@ -12,6 +12,7 @@ public class FieldOfViewTrigger : MonoBehaviour
     public List<GameObject> sensorCollisions = new List<GameObject>();
     [SerializeField] private Light fovLight;
     private Color originalColor;
+    [SerializeField] private Color triggeredColor;
 
     private void Start()
     {
@@ -65,7 +66,7 @@ public class FieldOfViewTrigger : MonoBehaviour
                 currentMarker = Instantiate(targetMarker, FindObjectOfType<Canvas>().transform.Find("UIBackground"));
                 currentMarker.GetComponent<UIMarker>().target = transform;
             }
-            fovLight.color = new Color(1, 1, 0, originalColor.a);
+            fovLight.color = triggeredColor;
         }
     }
 

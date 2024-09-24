@@ -937,7 +937,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 263311641}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2448,14 +2448,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2108135932}
-    - target: {fileID: 33560439553971711, guid: c21560cd1b3854544a00aa5fe5cabb5a, type: 3}
-      propertyPath: runSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 33560439553971711, guid: c21560cd1b3854544a00aa5fe5cabb5a, type: 3}
-      propertyPath: defaultSpeed
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 2474405710608288390, guid: c21560cd1b3854544a00aa5fe5cabb5a, type: 3}
       propertyPath: m_Name
       value: Ranger (1)
@@ -3184,7 +3176,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &641048113
 Transform:
   m_ObjectHideFlags: 0
@@ -4366,14 +4358,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2108135932}
-    - target: {fileID: 33560439553971711, guid: c21560cd1b3854544a00aa5fe5cabb5a, type: 3}
-      propertyPath: runSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 33560439553971711, guid: c21560cd1b3854544a00aa5fe5cabb5a, type: 3}
-      propertyPath: defaultSpeed
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 2474405710608288390, guid: c21560cd1b3854544a00aa5fe5cabb5a, type: 3}
       propertyPath: m_Name
       value: Ranger
@@ -6732,29 +6716,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1411670068}
     m_Modifications:
-    - target: {fileID: 4701824784235560200, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-    - target: {fileID: 5865636745597017619, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6745640010597091771, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
-      propertyPath: sensorName
-      value: 
-      objectReference: {fileID: 1413597358}
-    - target: {fileID: 7093553132468360951, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8180113672223536588, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_Name
       value: MotionSensor
-      objectReference: {fileID: 0}
-    - target: {fileID: 8206500510761723644, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
-      propertyPath: m_text
-      value: Sensor 1
       objectReference: {fileID: 0}
     - target: {fileID: 8800756138328561464, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6809,17 +6773,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8800756138328561464, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
   m_PrefabInstance: {fileID: 1413597356}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1413597358 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8206500510761723644, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
-  m_PrefabInstance: {fileID: 1413597356}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1416879688
 GameObject:
   m_ObjectHideFlags: 0
@@ -9628,6 +9581,22 @@ PrefabInstance:
     - target: {fileID: 5865636745597017619, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6745640010597091771, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
+      propertyPath: triggeredColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6745640010597091771, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
+      propertyPath: triggeredColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6745640010597091771, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
+      propertyPath: triggeredColor.g
+      value: 0.64705884
+      objectReference: {fileID: 0}
+    - target: {fileID: 6745640010597091771, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
+      propertyPath: triggeredColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7093553132468360951, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
       propertyPath: m_Mesh
