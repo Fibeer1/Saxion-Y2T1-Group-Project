@@ -24,8 +24,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform[] poacherSpawnPositions;
     [SerializeField] private GameObject poacherPrefab;
     [SerializeField] private float poacherSpawnTimer;
-    private float poacherSpawnTimeMin = 30;
-    private float poacherSpawnTimeMax = 60;
+    [SerializeField] private float poacherSpawnTimeMin = 30;
+    [SerializeField] private float poacherSpawnTimeMax = 60;
     private float maxPoachers = 3;
 
     public int villageUpgradeCount = 0;
@@ -166,6 +166,8 @@ public class GameManager : MonoBehaviour
         {
             money -= villageUpgrade.price;
             poacherSpawnReductionPercentage += villageUpgrade.poacherPercentageReduction;
+            poacherSpawnTimeMin += poacherSpawnTimeMin / 100 * poacherSpawnReductionPercentage;
+            poacherSpawnTimeMax += poacherSpawnTimeMax / 100 * poacherSpawnReductionPercentage;
             if (poacherSpawnReductionPercentage >= 50)
             {
                 maxPoachers = 2;

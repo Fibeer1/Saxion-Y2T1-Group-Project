@@ -133,7 +133,7 @@ public class Poacher : Wanderer
 
     public IEnumerator ShootAnimal(Animal animal)
     {
-        if (duringAnimation)
+        if (duringAnimation || animal.isDead)
         {
             yield break;
         }
@@ -142,10 +142,7 @@ public class Poacher : Wanderer
         navMeshAgent.destination = transform.position;
         animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);
         yield return new WaitForSeconds(1);
-        if (!animal.isDead)
-        {
-            animal.StartCoroutine(targetAnimal.Die());
-        }
+        animal.StartCoroutine(targetAnimal.Die());
         duringAnimation = false;
         followingTrail = false;
     }
