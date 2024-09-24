@@ -147,11 +147,11 @@ public class Player : MonoBehaviour
                 {
                     ranger.SelectTarget(hit.transform, hit.transform.position, "ChasePoacher");
                 }
-                else if (hit.transform.tag == "Trap")
+                else if (hit.transform.GetComponent<Trap>() != null)
                 {
                     ranger.SelectTarget(hit.transform, hit.transform.position, "DisarmTrap");
                 }
-                else if (hit.transform.name.Contains("MotionSensor"))
+                else if (hit.transform.GetComponent<Equipment>() != null)
                 {
                     ranger.SelectTarget(hit.transform, hit.transform.position, "PickUpEquipment");
                 }
