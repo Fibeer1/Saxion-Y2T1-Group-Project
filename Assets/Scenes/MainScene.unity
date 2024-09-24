@@ -4344,12 +4344,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Controls:
 
-    W,A,S,D: Move the camera
+    W,A,S,D: Move the camera horizontally
+
+    Q,E: Move the
+    camera vertically
 
     Left-click: select an object
 
-    Right-click:
-    make the selected object move towards a position or interact with other objects
+    Right-click: make the
+    selected object move towards a position or interact with other objects
 
     Escape:
     deselect the current object & Pause'
@@ -4771,7 +4774,7 @@ Rigidbody:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -7552,6 +7555,19 @@ MonoBehaviour:
   moneyGainBackground: {fileID: 21300000, guid: 6cfd7fb71fcc30849ad504b96eb24217, type: 3}
   moneyLossBackground: {fileID: 21300000, guid: c7f908109a51ce943bbb31479b4f0349, type: 3}
   moneyChangeTimer: 20
+  poacherSpawnPositions:
+  - {fileID: 1063310398416533194}
+  - {fileID: 1232479989}
+  - {fileID: 2049731253}
+  - {fileID: 1408287235}
+  - {fileID: 107442905}
+  - {fileID: 1970848320}
+  - {fileID: 1611218832}
+  - {fileID: 1540473461}
+  - {fileID: 939037323}
+  - {fileID: 1548301733}
+  poacherPrefab: {fileID: 7303774812032407758, guid: 4dccbd1f13f7c544e802e4ac7453c6a6, type: 3}
+  poacherSpawnTimer: 0
   money: 0
 --- !u!4 &1621311533
 Transform:

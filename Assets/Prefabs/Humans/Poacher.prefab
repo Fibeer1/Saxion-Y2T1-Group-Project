@@ -2053,8 +2053,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trailNodePrefab: {fileID: 4884537129176565498, guid: 0c638813527cf294caa9b3a0a9246ac6, type: 3}
   trail: []
-  trailTimer: 1
-  trailTimerDuration: 0.6
   wanderTimer: 5
   wanderTimerDuration: 5
   followingTrail: 0
@@ -2077,6 +2075,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBeingSeen: 0
+  transparentMaterial: {fileID: 2100000, guid: fe4bb7f1b6af9134e9faeed5f2bc268e, type: 2}
 --- !u!195 &4039003460749825987
 NavMeshAgent:
   m_ObjectHideFlags: 0

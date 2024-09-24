@@ -119,6 +119,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBeingSeen: 0
-  ignoreRaycastLayer:
-    serializedVersion: 2
-    m_Bits: 4
+  transparentMaterial: {fileID: 2100000, guid: fe4bb7f1b6af9134e9faeed5f2bc268e, type: 2}

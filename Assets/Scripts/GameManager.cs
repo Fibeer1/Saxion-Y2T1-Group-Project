@@ -21,6 +21,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float moneyChangeTimer = 20;
     private float moneyChangeTime = 20;
 
+    [SerializeField] private Transform[] poacherSpawnPositions;
+    [SerializeField] private GameObject poacherPrefab;
+    [SerializeField] private float poacherSpawnTimer;
+    private float poacherSpawnTimeMin = 30;
+    private float poacherSpawnTimeMax = 60;
+    private float maxPoachers = 3;
+
 
     public int money;
     private int donationMoney = 150;
@@ -39,6 +46,7 @@ public class GameManager : MonoBehaviour
 
         rangerFee *= rangers.Count;
         money = 2000; //Starting amount
+        poacherSpawnTimer = Random.Range(poacherSpawnTimeMin, poacherSpawnTimeMax);
 
         upkeep.ClearOptions();
         List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
@@ -67,6 +75,7 @@ public class GameManager : MonoBehaviour
         animalCount.text = animals.Count + "x";
 
         HandleIncomeAndFees();
+        HandlePoacherSpawning();
 
 
         if (poachers.Count == 0)
@@ -83,6 +92,19 @@ public class GameManager : MonoBehaviour
         {
             hasGameEnded = true;
             EndScreen.ToggleEndScreen("You lose!\nYou ran out of money.", 0.5f, 0.1f);
+        }
+    }
+
+    private void HandlePoacherSpawning()
+    {
+        poacherSpawnTimer -= Time.deltaTime;
+        if (poacherSpawnTimer <= 0 && poachers.Count < maxPoachers)
+        {
+            poacherSpawnTimer = Random.Range(poacherSpawnTimeMin, poacherSpawnTimeMax);
+            Transform chosenSpawnPos = poacherSpawnPositions[Random.Range(0, poacherSpawnPositions.Length)];
+            Poacher spawnedPoacher = Instantiate(poacherPrefab, chosenSpawnPos.position, Quaternion.identity).GetComponent<Poacher>();
+            poachers.Add(spawnedPoacher);
+            FOVDebug.FindFOVEntities();
         }
     }
 

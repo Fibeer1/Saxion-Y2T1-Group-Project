@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBeingSeen: 0
+  transparentMaterial: {fileID: 2100000, guid: fe4bb7f1b6af9134e9faeed5f2bc268e, type: 2}
 --- !u!54 &-5545237866861609345
 Rigidbody:
   m_ObjectHideFlags: 0
