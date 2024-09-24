@@ -264,7 +264,7 @@ public class Player : MonoBehaviour
         isMoving = true;
         float elapsedTime = 0;
         position.z -= 20;
-        position.y += 20;
+        position.y = transform.position.y;
         while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime;

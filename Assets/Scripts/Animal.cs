@@ -50,7 +50,6 @@ public class Animal : Wanderer
         FOVDebug.FindFOVEntities();
         FindObjectOfType<GameManager>().HandleMoneyChange("One of your animals has died.\nMoney deducted: " + 
             animalValue + "$", animalValue);
-        Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)

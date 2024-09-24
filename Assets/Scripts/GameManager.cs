@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     private float poacherSpawnTimeMax = 60;
     private float maxPoachers = 3;
 
+    public int villageUpgradeCount = 0;
+    public int poacherSpawnReductionPercentage = 0;
 
     public int money;
     private int donationMoney = 0;
@@ -80,10 +82,10 @@ public class GameManager : MonoBehaviour
         HandlePoacherSpawning();
 
 
-        if (poachers.Count == 0)
+        if (villageUpgradeCount >= 6)
         {
             hasGameEnded = true;
-            EndScreen.ToggleEndScreen("You win!\nYou caught all poachers.", 0.5f, 0.1f);
+            EndScreen.ToggleEndScreen("You win!\nYou have eliminated poaching.", 0.5f, 0.1f);
         }
         if (animals.Count == 0)
         {
@@ -103,6 +105,7 @@ public class GameManager : MonoBehaviour
         if (poacherSpawnTimer <= 0 && poachers.Count < maxPoachers)
         {
             poacherSpawnTimer = Random.Range(poacherSpawnTimeMin, poacherSpawnTimeMax);
+            poacherSpawnTimer += poacherSpawnTimer * (poacherSpawnReductionPercentage / 100);
             Transform chosenSpawnPos = poacherSpawnPositions[Random.Range(0, poacherSpawnPositions.Length)];
             Poacher spawnedPoacher = Instantiate(poacherPrefab, chosenSpawnPos.position, Quaternion.identity).GetComponent<Poacher>();
             poachers.Add(spawnedPoacher);
@@ -150,5 +153,25 @@ public class GameManager : MonoBehaviour
     {
         TextPopup.PopUpText(text, 0.5f, 2);
         money += moneyChange;
+    }
+
+    public void BuyVillageUpgrade(VillageUpgrade villageUpgrade)
+    {
+        int moneyafterPurchase =  money - villageUpgrade.price;
+        if (moneyafterPurchase <= 0)
+        {
+            TextPopup.PopUpText("Not enough money!", 0.5f, 2);
+        }
+        else
+        {
+            money -= villageUpgrade.price;
+            poacherSpawnReductionPercentage += villageUpgrade.poacherPercentageReduction;
+            if (poacherSpawnReductionPercentage >= 50)
+            {
+                maxPoachers = 2;
+            }
+            villageUpgradeCount++;
+            villageUpgrade.boughtIndicator.SetActive(true);
+        }
     }
 }
