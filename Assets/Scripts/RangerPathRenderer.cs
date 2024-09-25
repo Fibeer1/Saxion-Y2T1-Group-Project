@@ -11,15 +11,16 @@ public class RangerPathRenderer : MonoBehaviour
     void Start()
     {
         line = GetComponent<LineRenderer>();
-        ranger = GetComponentInParent<Ranger>();
-        GetPath();
+        ranger = GetComponent<Ranger>();
+        StartCoroutine(GetPath());
     }
 
-    private IEnumerator GetPath()
+    public IEnumerator GetPath()
     {
-        line.SetPosition(0, transform.position); //set the line's origin
+        line.SetPosition(0, Vector3.zero); //set the line's origin
 
-        yield return new WaitForEndOfFrame(); //wait for the path to generate
+        //yield return new WaitForEndOfFrame(); //wait for the path to generate
+        yield return null;
 
         DrawPath(ranger.GetComponent<NavMeshAgent>().path);
 
@@ -28,7 +29,11 @@ public class RangerPathRenderer : MonoBehaviour
     private void DrawPath(NavMeshPath path)
     {
         if (path.corners.Length < 2) //if the path has 1 or no corners, there is no need
+        {
+            Debug.Log("Path too short");
             return;
+        }
+            
 
         line.positionCount = path.corners.Length;
 

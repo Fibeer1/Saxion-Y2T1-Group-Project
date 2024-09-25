@@ -11,6 +11,7 @@ public class Ranger : Interactable
     public Vector3 targetPosition;
     [SerializeField] private GameObject targetCirclePrefab;
     public GameObject currentTargetCircle;
+    private LineRenderer pathLine;
     public string actionToPerform;
     public float fatigue = 0;
     private float fatigueSpeed;
@@ -24,6 +25,7 @@ public class Ranger : Interactable
         player = FindObjectOfType<Player>();
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        pathLine = GetComponent<LineRenderer>();
         fatigue = 0;
         defaultSpeed = navMeshAgent.speed;
         runSpeed = defaultSpeed + 7.5f;
@@ -69,6 +71,8 @@ public class Ranger : Interactable
         NavMesh.SamplePosition(targetPosition, out navHit, 5, -1);
 
         navMeshAgent.SetDestination(navHit.position);
+        //pathLine.SetPosition(0, transform.position);
+        //pathLine.SetPosition(pathLine.positionCount - 1, navHit.position);
 
         if (target != null && Vector3.Distance(transform.position, navHit.position) < 3)
         {
@@ -101,6 +105,13 @@ public class Ranger : Interactable
         actionToPerform = pActionToPerform;
         target = pTarget;
         targetPosition = pTargetPos;
+
+        //NavMeshHit navHit;
+
+        //NavMesh.SamplePosition(targetPosition, out navHit, 5, -1);
+
+        //navMeshAgent.SetDestination(navHit.position);
+
         if (actionToPerform == "ChasePoacher")
         {
             navMeshAgent.speed = runSpeed;
@@ -108,6 +119,12 @@ public class Ranger : Interactable
         else
         {
             navMeshAgent.speed = defaultSpeed;
+            pathLine.positionCount = navMeshAgent.path.corners.Length;
+
+            for (var i = 1; i < navMeshAgent.path.corners.Length; i++)
+            {
+                //pathLine.SetPosition(i, navMeshAgent.path.corners[i]);
+            }
         }
         if (shouldSpawnTargetCircle)
         {
