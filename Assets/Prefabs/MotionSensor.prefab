@@ -478,12 +478,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: Sensor
-  targetMarker: {fileID: 27156463347279055, guid: a17cd64b56f59914a978de3ac5bfd20c, type: 3}
-  currentMarker: {fileID: 0}
   sensorName: {fileID: 8206500510761723644}
   sensorCollisions: []
   fovLight: {fileID: 6529629552246792133}
-  triggeredColor: {r: 1, g: 0.64705884, b: 0, a: 1}
+  triggeredColor: {r: 1, g: 0.06387092, b: 0, a: 1}
 --- !u!114 &7908103629498120891
 MonoBehaviour:
   m_ObjectHideFlags: 0
