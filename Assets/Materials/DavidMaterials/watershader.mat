@@ -32,7 +32,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
+  m_LockedProperties: _Flowspeed
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -81,7 +81,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _Flowspeed: 27
-    - _FoamDensity: 18
+    - _FoamDensity: 25
     - _FoamThickness: 7
     - _Foamspeed: 0.7
     - _GlossMapScale: 1
