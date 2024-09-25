@@ -150,8 +150,8 @@ MonoBehaviour:
   itemCount: 1
   itemCountText: {fileID: 1556124265297256861}
   objectToPlace: {fileID: 8180113672223536588, guid: ef6258505e1fe6a479a19ee06fd21796, type: 3}
-  buyValue: 0
-  sellValue: 0
+  buyValue: 200
+  sellValue: 100
 --- !u!1 &4152777144812595364
 GameObject:
   m_ObjectHideFlags: 0

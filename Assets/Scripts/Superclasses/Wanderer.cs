@@ -39,7 +39,7 @@ public class Wanderer : Entity
         {
             reverseFootstepValue = 0;
         }
-        TrailNode currentTrailNode = Instantiate(trailNodePrefab, feet[footstepIndex].position + Vector3.up, transform.rotation).GetComponent<TrailNode>();
+        TrailNode currentTrailNode = Instantiate(trailNodePrefab, feet[footstepIndex].position + Vector3.up / 10, transform.rotation).GetComponent<TrailNode>();
         if (footstepIndex == 0)
         {
             currentTrailNode.transform.Rotate(0, 0, reverseFootstepValue);

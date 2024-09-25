@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Dropdown upkeep;
     [SerializeField] private Sprite moneyGainBackground;
     [SerializeField] private Sprite moneyLossBackground;
-    private RangerBackground rangerBackground;
+    [SerializeField] private RangerBackground rangerBackground;
 
     [SerializeField] private Transform rangerSpawnPosition;
     [SerializeField] private GameObject rangerPrefab;
@@ -52,8 +52,6 @@ public class GameManager : MonoBehaviour
         rangers = FindObjectsOfType<Ranger>().ToList();
         poachers = FindObjectsOfType<Poacher>().ToList();
         animals = FindObjectsOfType<Animal>().ToList();
-
-        rangerBackground = FindObjectOfType<RangerBackground>();
 
         rangerFee = rangerPrice * rangers.Count;
         money = 1600; //Starting amount
@@ -140,12 +138,12 @@ public class GameManager : MonoBehaviour
         upkeep.options[2].text = "Rangers' fee: " + rangerFee + "$";
     }
 
-    public void FireRanger(Ranger ranger)
+    public void FireRanger()
     {
+        Destroy(FindObjectOfType<Player>().currentObject.gameObject);
+        rangers.Remove(FindObjectOfType<Player>().currentObject.gameObject.GetComponent<Ranger>());
         FindObjectOfType<Player>().DeselectObject();
         FindObjectOfType<Player>().DeselectObjectToPlace();
-        Destroy(ranger);
-        rangers = FindObjectsOfType<Ranger>().ToList();
         rangerFee = rangerPrice * rangers.Count;
         upkeep.options[2].text = "Rangers' fee: " + rangerFee + "$";
     }
@@ -218,11 +216,13 @@ public class GameManager : MonoBehaviour
     {
         bool inventoryFull = true;
 
+        InventoryItem itemDuplicate = Instantiate(item.itemBeingSold, FindObjectOfType<Canvas>().transform).GetComponent<InventoryItem>();
+
         InventoryItem[] inventoryPanels = rangerBackground.inventory;
 
         foreach (var inventoryPanel in inventoryPanels)
         {
-            if (inventoryPanel == null)
+            if (inventoryPanel == null || inventoryPanel.objectToPlace == itemDuplicate.objectToPlace)
             {
                 inventoryFull = false;
             }
@@ -234,31 +234,49 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        int moneyafterPurchase = money - item.itemBeingSold.buyValue;
+        int moneyafterPurchase = money - itemDuplicate.buyValue;
         if (moneyafterPurchase <= 0)
         {
             TextPopup.PopUpText("Not enough money!", 0.5f, 2);
         }
         else
         {
-            money -= item.itemBeingSold.buyValue;
+            money -= itemDuplicate.buyValue;
             item.stock--;
             if (item.stock <= 0)
             {
                 item.soldOutIndicator.SetActive(true);
             }
-            rangerBackground.AddItemToInventory(item.itemBeingSold.gameObject);
+            rangerBackground.AddItemToInventory(itemDuplicate.gameObject);
         }
     }
 
     public void SellShopItem(ShopItem item)
     {
-        money += item.itemBeingSold.sellValue;
+        InventoryItem shopItemItem = item.itemBeingSold.GetComponent<InventoryItem>();
+
+        int soldItemPanelIndex = -1;
+        InventoryItem[] inventoryPanels = rangerBackground.inventory;
+
+        for (int i = 0; i < inventoryPanels.Length; i++)
+        {
+            if (inventoryPanels[i] != null && inventoryPanels[i].objectToPlace == shopItemItem.objectToPlace)
+            {
+                soldItemPanelIndex = i;
+            }
+        }
+
+        if (soldItemPanelIndex == -1)
+        {
+            return;
+        }
+
+        money += inventoryPanels[soldItemPanelIndex].sellValue;
         item.stock++;
         if (item.stock >= 0)
         {
             item.soldOutIndicator.SetActive(false);
         }
-        rangerBackground.RemoveItemFromInventory(item.itemBeingSold);
+        rangerBackground.RemoveItemFromInventory(inventoryPanels[soldItemPanelIndex]);
     }
 }
