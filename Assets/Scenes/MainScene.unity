@@ -6810,7 +6810,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5393700826340424479, guid: f768e8fe6b8780a43b2e4d469e0aa699, type: 3}
       propertyPath: m_Name
-      value: Elephant (2)
+      value: Elephant
       objectReference: {fileID: 0}
     - target: {fileID: 7952239783055964913, guid: f768e8fe6b8780a43b2e4d469e0aa699, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10493,7 +10493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7303774812032407758, guid: 4dccbd1f13f7c544e802e4ac7453c6a6, type: 3}
       propertyPath: m_Name
-      value: Poacher (1)
+      value: Poacher (clone)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12369,7 +12369,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1390924648
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16904,7 +16904,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5393700826340424479, guid: f768e8fe6b8780a43b2e4d469e0aa699, type: 3}
       propertyPath: m_Name
-      value: Elephant (1)
+      value: Elephant
       objectReference: {fileID: 0}
     - target: {fileID: 7952239783055964913, guid: f768e8fe6b8780a43b2e4d469e0aa699, type: 3}
       propertyPath: m_LocalPosition.x

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Linq;
 
 public class FieldOfViewTrigger : MonoBehaviour
 {
@@ -52,7 +53,10 @@ public class FieldOfViewTrigger : MonoBehaviour
             other.gameObject.GetComponent<TrailNode>() == null)
         {
             sensorCollisions.Add(other.gameObject);
-            TextPopup.PopUpText("Movement detected in " + sensorName.text, 0.5f, 5);
+            string detectedObject = type == "Drone" || type == "Camera" ? other.name : "Movement";
+
+            detectedObject = detectedObject.Split(' ').First();
+            TextPopup.PopUpText(detectedObject + " detected in " + sensorName.text, 0.5f, 5);
             fovLight.color = triggeredColor;
         }
     }

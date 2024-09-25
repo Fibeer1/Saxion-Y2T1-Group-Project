@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Dropdown upkeep;
     [SerializeField] private Sprite moneyGainBackground;
     [SerializeField] private Sprite moneyLossBackground;
+    private RangerBackground rangerBackground;
 
     [SerializeField] private Transform rangerSpawnPosition;
     [SerializeField] private GameObject rangerPrefab;
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
     private int donationMoney = 0;
     private int donationMin = 0;
     private int donationMax = 300;
+    private int rangerPrice = -50;
     private int rangerFee = -50;
     public static int poacherValue = 500;
     public static int animalValue = -750;
@@ -51,7 +53,9 @@ public class GameManager : MonoBehaviour
         poachers = FindObjectsOfType<Poacher>().ToList();
         animals = FindObjectsOfType<Animal>().ToList();
 
-        rangerFee *= rangers.Count;
+        rangerBackground = FindObjectOfType<RangerBackground>();
+
+        rangerFee = rangerPrice * rangers.Count;
         money = 1600; //Starting amount
         poacherSpawnTimer = Random.Range(poacherSpawnTimeMin, poacherSpawnTimeMax);
 
@@ -116,24 +120,33 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SpawnRanger()
+    public void HireRanger()
     {
         if (rangers.Count >= maxRangers)
         {
+            TextPopup.PopUpText("You have already reached the maximum amount of rangers!", 0.5f, 2);
+            return;
+        }
+        int moneyafterPurchase = money - rangerPrice;
+        if (moneyafterPurchase <= 0)
+        {
+            TextPopup.PopUpText("Not enough money!", 0.5f, 2);
             return;
         }
 
         Ranger spawnedRanger = Instantiate(rangerPrefab, rangerSpawnPosition.position, Quaternion.identity).GetComponent<Ranger>();
         rangers.Add(spawnedRanger);
-        rangerFee = -50 * rangers.Count;
+        rangerFee = rangerPrice * rangers.Count;
         upkeep.options[2].text = "Rangers' fee: " + rangerFee + "$";
     }
 
     public void FireRanger(Ranger ranger)
     {
+        FindObjectOfType<Player>().DeselectObject();
+        FindObjectOfType<Player>().DeselectObjectToPlace();
         Destroy(ranger);
         rangers = FindObjectsOfType<Ranger>().ToList();
-        rangerFee = -50 * rangers.Count;
+        rangerFee = rangerPrice * rangers.Count;
         upkeep.options[2].text = "Rangers' fee: " + rangerFee + "$";
     }
 
@@ -199,5 +212,53 @@ public class GameManager : MonoBehaviour
             villageUpgradeCount++;
             villageUpgrade.boughtIndicator.SetActive(true);
         }
+    }
+
+    public void BuyShopItem(ShopItem item)
+    {
+        bool inventoryFull = true;
+
+        InventoryItem[] inventoryPanels = rangerBackground.inventory;
+
+        foreach (var inventoryPanel in inventoryPanels)
+        {
+            if (inventoryPanel == null)
+            {
+                inventoryFull = false;
+            }
+        }
+
+        if (inventoryFull)
+        {
+            TextPopup.PopUpText("Cannot buy item! Inventory full.", 0.5f, 2);
+            return;
+        }
+
+        int moneyafterPurchase = money - item.itemBeingSold.buyValue;
+        if (moneyafterPurchase <= 0)
+        {
+            TextPopup.PopUpText("Not enough money!", 0.5f, 2);
+        }
+        else
+        {
+            money -= item.itemBeingSold.buyValue;
+            item.stock--;
+            if (item.stock <= 0)
+            {
+                item.soldOutIndicator.SetActive(true);
+            }
+            rangerBackground.AddItemToInventory(item.itemBeingSold.gameObject);
+        }
+    }
+
+    public void SellShopItem(ShopItem item)
+    {
+        money += item.itemBeingSold.sellValue;
+        item.stock++;
+        if (item.stock >= 0)
+        {
+            item.soldOutIndicator.SetActive(false);
+        }
+        rangerBackground.RemoveItemFromInventory(item.itemBeingSold);
     }
 }

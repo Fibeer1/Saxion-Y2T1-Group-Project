@@ -6,7 +6,7 @@ using System.Linq;
 
 public class RangerBackground : MonoBehaviour
 {
-    [SerializeField] private InventoryItem[] inventory;
+    public InventoryItem[] inventory;
     [SerializeField] private Image[] inventoryPanels;
     [SerializeField] Slider fatigueSlider;
     [SerializeField] Image fatigueSliderBackground;

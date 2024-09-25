@@ -7,6 +7,8 @@ public class ShopItem : MonoBehaviour
 {
     public int stock;
     [SerializeField] private TextMeshProUGUI stockText;
+    public InventoryItem itemBeingSold;
+    public GameObject soldOutIndicator;
 
     void Start()
     {
