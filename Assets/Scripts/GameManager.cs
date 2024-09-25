@@ -216,13 +216,13 @@ public class GameManager : MonoBehaviour
     {
         bool inventoryFull = true;
 
-        InventoryItem itemDuplicate = Instantiate(item.itemBeingSold, FindObjectOfType<Canvas>().transform).GetComponent<InventoryItem>();
+        
 
         InventoryItem[] inventoryPanels = rangerBackground.inventory;
 
         foreach (var inventoryPanel in inventoryPanels)
         {
-            if (inventoryPanel == null || inventoryPanel.objectToPlace == itemDuplicate.objectToPlace)
+            if (inventoryPanel == null || inventoryPanel.objectToPlace == item.itemBeingSold.GetComponent<InventoryItem>().objectToPlace)
             {
                 inventoryFull = false;
             }
@@ -234,21 +234,23 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        int moneyafterPurchase = money - itemDuplicate.buyValue;
+        int moneyafterPurchase = money - item.itemBeingSold.GetComponent<InventoryItem>().buyValue;
         if (moneyafterPurchase <= 0)
         {
             TextPopup.PopUpText("Not enough money!", 0.5f, 2);
+            return;
         }
-        else
+
+        InventoryItem itemDuplicate = Instantiate(item.itemBeingSold, FindObjectOfType<Canvas>().transform).GetComponent<InventoryItem>();
+
+
+        money -= itemDuplicate.buyValue;
+        item.stock--;
+        if (item.stock <= 0)
         {
-            money -= itemDuplicate.buyValue;
-            item.stock--;
-            if (item.stock <= 0)
-            {
-                item.soldOutIndicator.SetActive(true);
-            }
-            rangerBackground.AddItemToInventory(itemDuplicate.gameObject);
+            item.soldOutIndicator.SetActive(true);
         }
+        rangerBackground.AddItemToInventory(itemDuplicate.gameObject);
     }
 
     public void SellShopItem(ShopItem item)

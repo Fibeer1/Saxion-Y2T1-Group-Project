@@ -75,7 +75,7 @@ public class Ranger : Interactable
 
         navMeshAgent.SetDestination(navHit.position);
 
-        DrawPath();
+        //DrawPath();
         
 
         if (target != null && Vector3.Distance(transform.position, navHit.position) < 3)
