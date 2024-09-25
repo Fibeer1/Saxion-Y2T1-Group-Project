@@ -214,9 +214,7 @@ public class GameManager : MonoBehaviour
 
     public void BuyShopItem(ShopItem item)
     {
-        bool inventoryFull = true;
-
-        
+        bool inventoryFull = true;       
 
         InventoryItem[] inventoryPanels = rangerBackground.inventory;
 
