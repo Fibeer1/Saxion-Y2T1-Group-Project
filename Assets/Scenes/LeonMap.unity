@@ -6534,7 +6534,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Motion Detector
+  m_text: Camera
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 361b162695acd7b4bb03a31666d5f7ee, type: 2}
   m_sharedMaterial: {fileID: -2566194228036789323, guid: 361b162695acd7b4bb03a31666d5f7ee, type: 2}
@@ -10026,7 +10026,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1151479472
 RectTransform:
   m_ObjectHideFlags: 0
