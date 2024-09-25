@@ -7,6 +7,8 @@ public class Drone : Interactable
 {
     private NavMeshAgent navMeshAgent;
     public Transform target;
+    [SerializeField] private GameObject targetCirclePrefab;
+    public GameObject currentTargetCircle;
     [SerializeField] private float wanderTimer;
     private float wanderTime = 10;
 
@@ -44,9 +46,10 @@ public class Drone : Interactable
     public void PickTarget(Transform pTarget, Vector3 targetPosition)
     {
         if (pTarget != null)
-        {
+        {           
             target = pTarget;
             targetPosition = pTarget.position;
+            currentTargetCircle = Instantiate(targetCirclePrefab, target.position, Quaternion.identity, target);
         }
 
         wanderTimer = wanderTime;
@@ -72,6 +75,11 @@ public class Drone : Interactable
 
         if (navMeshAgent.velocity.magnitude < 1 && navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance)
         {
+            if (currentTargetCircle != null)
+            {
+                Destroy(currentTargetCircle);
+                currentTargetCircle = null;
+            }
             if (target.GetComponent<Ranger>() != null)
             {
                 GameObject targetItem = Instantiate(GetComponent<Equipment>().itemUIPrefab, FindObjectOfType<Canvas>().transform);

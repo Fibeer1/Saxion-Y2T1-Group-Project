@@ -7,6 +7,7 @@ public class Wanderer : Entity
 {
     [SerializeField] private protected GameObject trailNodePrefab;
     public List<TrailNode> trail;
+    [SerializeField] private Transform[] feet;
     [SerializeField] private protected float wanderTimer = 10;
     [SerializeField] private protected float wanderTimerDuration;
     private protected NavMeshAgent navMeshAgent;
@@ -33,18 +34,15 @@ public class Wanderer : Entity
 
     protected void Footstep(int footstepIndex)
     {
-        float footstepdistanceFromCenter = 5;
         float reverseFootstepValue = 180;
         if (GetComponent<Animal>() != null)
         {
-            footstepdistanceFromCenter = 1;
             reverseFootstepValue = 0;
         }
-        TrailNode currentTrailNode = Instantiate(trailNodePrefab, transform.position + transform.right / footstepdistanceFromCenter, transform.rotation).GetComponent<TrailNode>();
+        TrailNode currentTrailNode = Instantiate(trailNodePrefab, feet[footstepIndex].position + Vector3.up, transform.rotation).GetComponent<TrailNode>();
         if (footstepIndex == 0)
         {
             currentTrailNode.transform.Rotate(0, 0, reverseFootstepValue);
-            currentTrailNode.transform.position -= transform.right / footstepdistanceFromCenter;
         }
         FOVDebug.FindFOVEntities();
         if (!shouldKeepTrackOfTrails)

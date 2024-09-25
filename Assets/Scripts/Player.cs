@@ -260,7 +260,11 @@ public class Player : MonoBehaviour
             rangerBackground.SetActive(true);
 
             rangerBackground.GetComponent<RangerBackground>().SetUpRangerBG(this);
-        }       
+        }      
+        if (currentObject.GetComponent<Drone>() != null)
+        {
+            currentSelectionCircle.transform.localScale = new Vector3(3, 3, 3);
+        }
     }
 
     public void DeselectObject()
