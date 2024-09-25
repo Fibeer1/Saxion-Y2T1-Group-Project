@@ -30,6 +30,9 @@ public class Ranger : Interactable
         defaultSpeed = navMeshAgent.speed;
         runSpeed = defaultSpeed + 7.5f;
         fatigueSpeed = defaultSpeed - 2;
+        pathLine.startWidth = 0.15f;
+        pathLine.endWidth = 0.15f;
+        pathLine.positionCount = 0;
     }
 
 
@@ -71,8 +74,9 @@ public class Ranger : Interactable
         NavMesh.SamplePosition(targetPosition, out navHit, 5, -1);
 
         navMeshAgent.SetDestination(navHit.position);
-        //pathLine.SetPosition(0, transform.position);
-        //pathLine.SetPosition(pathLine.positionCount - 1, navHit.position);
+
+        DrawPath();
+        
 
         if (target != null && Vector3.Distance(transform.position, navHit.position) < 3)
         {
@@ -96,6 +100,25 @@ public class Ranger : Interactable
         }
     }
 
+    private void DrawPath()
+    {
+        pathLine.positionCount = navMeshAgent.path.corners.Length;
+        pathLine.SetPosition(0, Vector3.zero);
+
+        if (navMeshAgent.path.corners.Length < 2)
+        {
+            return;
+        }
+
+        for (int i = 0; i < navMeshAgent.path.corners.Length; i++)
+        {
+            Vector3 pointPosition = new Vector3(navMeshAgent.path.corners[i].x, navMeshAgent.path.corners[i].y, navMeshAgent.path.corners[i].z);
+            pathLine.SetPosition(i, pointPosition);
+        }
+
+        pathLine.SetPositions(navMeshAgent.path.corners);
+    }
+
     public void SelectTarget(Transform pTarget, Vector3 pTargetPos, string pActionToPerform, bool shouldSpawnTargetCircle = true)
     {
         if (target != null)
@@ -105,12 +128,6 @@ public class Ranger : Interactable
         actionToPerform = pActionToPerform;
         target = pTarget;
         targetPosition = pTargetPos;
-
-        //NavMeshHit navHit;
-
-        //NavMesh.SamplePosition(targetPosition, out navHit, 5, -1);
-
-        //navMeshAgent.SetDestination(navHit.position);
 
         if (actionToPerform == "ChasePoacher")
         {
@@ -166,11 +183,6 @@ public class Ranger : Interactable
         animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);
         GameObject targetItem = Instantiate(tempTarget.GetComponent<Equipment>().itemUIPrefab, FindObjectOfType<Canvas>().transform);
         FindObjectOfType<RangerBackground>().AddItemToInventory(targetItem);
-        FieldOfViewTrigger sensorScript = tempTarget.GetComponent<FieldOfViewTrigger>();
-        if (sensorScript != null && sensorScript.currentMarker != null)
-        {
-            Destroy(sensorScript.currentMarker);
-        }
         StartCoroutine(RemoveObject(tempTarget.gameObject));
     }
 

@@ -593,7 +593,7 @@ GameObject:
   - component: {fileID: 33560439553971711}
   - component: {fileID: 9171501734847310010}
   - component: {fileID: 857138124648396603}
-  - component: {fileID: 6032268836107444390}
+  - component: {fileID: 358446080241157522}
   m_Layer: 0
   m_Name: Ranger
   m_TagString: Untagged
@@ -679,6 +679,7 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0, z: 0}
   targetCirclePrefab: {fileID: 2328507604897591434, guid: e45f73e7cf1c0814390d1b6c0f508bc5, type: 3}
   currentTargetCircle: {fileID: 0}
+  pathLine: {fileID: 0}
   actionToPerform: 
   fatigue: 0
   defaultSpeed: 5
@@ -733,7 +734,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!120 &6032268836107444390
+--- !u!120 &358446080241157522
 LineRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0

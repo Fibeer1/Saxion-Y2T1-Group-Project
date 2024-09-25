@@ -19,6 +19,7 @@ public class Drone : Interactable
 
     private void Update()
     {
+        MoveTowardsTarget();
         HandleWandering();
     }
 
@@ -36,12 +37,18 @@ public class Drone : Interactable
 
             randDirection += transform.position;
 
-            PickTarget(randDirection);
+            PickTarget(null, randDirection);
         }
     }
 
-    public void PickTarget(Vector3 targetPosition)
+    public void PickTarget(Transform pTarget, Vector3 targetPosition)
     {
+        if (pTarget != null)
+        {
+            target = pTarget;
+            targetPosition = pTarget.position;
+        }
+
         wanderTimer = wanderTime;
 
         NavMeshHit navHit;
@@ -49,5 +56,30 @@ public class Drone : Interactable
         NavMesh.SamplePosition(targetPosition, out navHit, 35, -1);
 
         navMeshAgent.SetDestination(navHit.position);
+    }
+
+    private void MoveTowardsTarget()
+    {
+        if (target == null)
+        {
+            return;
+        }
+        NavMeshHit navHit;
+
+        NavMesh.SamplePosition(target.position, out navHit, 35, -1);
+
+        navMeshAgent.SetDestination(navHit.position);
+
+        if (navMeshAgent.velocity.magnitude < 1 && navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance)
+        {
+            if (target.GetComponent<Ranger>() != null)
+            {
+                GameObject targetItem = Instantiate(GetComponent<Equipment>().itemUIPrefab, FindObjectOfType<Canvas>().transform);
+                player.SelectObject(target.GetComponent<Interactable>());
+                FindObjectOfType<RangerBackground>().AddItemToInventory(targetItem);
+                Destroy(gameObject);
+            }
+            target = null;
+        }
     }
 }

@@ -6,8 +6,6 @@ using TMPro;
 public class FieldOfViewTrigger : MonoBehaviour
 {
     public string type; //Can be Sensor, Camera, Drone or Vision
-    [SerializeField] private GameObject targetMarker;
-    public GameObject currentMarker;
     public TextMeshPro sensorName;
     public List<GameObject> sensorCollisions = new List<GameObject>();
     [SerializeField] private Light fovLight;
@@ -44,10 +42,6 @@ public class FieldOfViewTrigger : MonoBehaviour
         else if (type == "Sensor" || type == "Camera" || type == "Drone")
         {
             fovLight.color = originalColor;
-            if (currentMarker != null)
-            {
-                Destroy(currentMarker);
-            }
         }
     }
 
@@ -59,11 +53,6 @@ public class FieldOfViewTrigger : MonoBehaviour
         {
             sensorCollisions.Add(other.gameObject);
             TextPopup.PopUpText("Movement detected in " + sensorName.text, 0.5f, 5);
-            if (currentMarker == null)
-            {
-                currentMarker = Instantiate(targetMarker, FindObjectOfType<Canvas>().transform.Find("UIBackground"));
-                currentMarker.GetComponent<UIMarker>().target = transform;
-            }
             fovLight.color = triggeredColor;
         }
     }
@@ -88,11 +77,7 @@ public class FieldOfViewTrigger : MonoBehaviour
             if (sensorCollisions.Count == 0)
             {
                 fovLight.color = originalColor;
-            }
-            if (currentMarker != null)
-            {
-                Destroy(currentMarker);
-            }            
+            }           
         }
     }
 }
