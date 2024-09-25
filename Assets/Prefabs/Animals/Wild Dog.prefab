@@ -123,6 +123,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trailNodePrefab: {fileID: 7022502912396159351, guid: bd032ea89941e6f45a6b4849bdd115fc, type: 3}
   trail: []
+  feet:
+  - {fileID: 5052257171957382924}
+  - {fileID: 8283839484574772544}
   wanderTimer: 10
   wanderTimerDuration: 10
   isDead: 0
@@ -885,7 +888,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: -2900695116720507921, guid: 731b23b3969d30342bdc80534eba143f, type: 3}
+  m_Mesh: {fileID: -2900695116720507921, guid: 7cc25738da6bdee4d9c173979acf212d, type: 3}
   m_Bones:
   - {fileID: 6505168582700976019}
   - {fileID: 1582382291160496418}

@@ -160,15 +160,8 @@ public class Player : MonoBehaviour
             {
                 if (hit.transform.tag == "Ground" && currentObjectToPlace != null && rangerOrderedToPlaceObject == null)
                 {
-                    if (currentObjectToPlace.GetComponent<Drone>() != null)
-                    {
-
-                    }
-                    else
-                    {
-                        ranger.SelectTarget(currentObjectToPlace.transform, hit.point, "PlaceObject");
-                        rangerOrderedToPlaceObject = ranger;
-                    }
+                    ranger.SelectTarget(currentObjectToPlace.transform, hit.point, "PlaceObject");
+                    rangerOrderedToPlaceObject = ranger;
                 }
             }
         }
@@ -181,7 +174,11 @@ public class Player : MonoBehaviour
                 if (hit.transform.tag == "Ground")
                 {
                     Instantiate(moveIndicator, hit.point, Quaternion.identity);
-                    drone.PickTarget(hit.point);
+                    drone.PickTarget(null, hit.point);
+                }
+                else if (hit.transform.GetComponent<Ranger>() != null)
+                {
+                    drone.PickTarget(hit.transform, hit.transform.position);
                 }
             }
         }
@@ -263,7 +260,11 @@ public class Player : MonoBehaviour
             rangerBackground.SetActive(true);
 
             rangerBackground.GetComponent<RangerBackground>().SetUpRangerBG(this);
-        }       
+        }      
+        if (currentObject.GetComponent<Drone>() != null)
+        {
+            currentSelectionCircle.transform.localScale = new Vector3(3, 3, 3);
+        }
     }
 
     public void DeselectObject()

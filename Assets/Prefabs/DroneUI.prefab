@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3441857624936554225}
   - component: {fileID: 8039620679069397491}
   m_Layer: 5
-  m_Name: CameraUI
+  m_Name: DroneUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 77de09d8f980469459aa8adc8ff27f39, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cc180538a94604847981b98e98207c47, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -149,7 +149,7 @@ MonoBehaviour:
   itemSprite: {fileID: 3881799144038482209}
   itemCount: 1
   itemCountText: {fileID: 9049384744173989050}
-  objectToPlace: {fileID: 7402906212732193796, guid: 35505b0439e90604291b712dbffe5ce6, type: 3}
+  objectToPlace: {fileID: 8421499388888078536, guid: b39ef8cbd0bb468438d2dfbc18a4a69e, type: 3}
   buyValue: 500
   sellValue: 250
 --- !u!1 &4672934796523155468

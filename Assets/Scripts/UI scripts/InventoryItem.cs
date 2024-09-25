@@ -11,6 +11,8 @@ public class InventoryItem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemCountText;
     public GameObject objectToPlace;
     private Player player;
+    public int buyValue;
+    public int sellValue;
 
     private void Start()
     {
@@ -26,6 +28,12 @@ public class InventoryItem : MonoBehaviour
     {
         if (player.currentObjectToPlace != null)
         {
+            return;
+        }
+        if (objectToPlace.GetComponent<Drone>() != null)
+        {
+            Instantiate(objectToPlace, player.currentObject.transform.position + Vector3.up * 8 + player.currentObject.transform.forward * 2, Quaternion.identity);
+            FindObjectOfType<RangerBackground>().RemoveItemFromInventory(this);
             return;
         }
         GameObject newObject = Instantiate(objectToPlace, Vector3.zero, Quaternion.identity);
