@@ -58,9 +58,13 @@ public class Player : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.z = Input.GetAxisRaw("Vertical");
         float verticalMovement = Input.GetKey(KeyCode.Q) ? -0.5f : 
+<<<<<<< Updated upstream
             Input.GetKey(KeyCode.E) ? 0.5f : 
             -Input.mouseScrollDelta.y != 0 ? 
             -Input.mouseScrollDelta.y : 0; ;
+=======
+            Input.GetKey(KeyCode.E) ? 0.5f : 0;
+>>>>>>> Stashed changes
 
         Vector3 newTransform = transform.position + new Vector3(0, verticalMovement, 0);
         if (newTransform.y >= 30 && newTransform.y <= 50 && verticalMovement != 0)

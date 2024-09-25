@@ -19,7 +19,6 @@ public class FieldOfViewTrigger : MonoBehaviour
         if (type == "Sensor" || type == "Camera" || type == "Drone")
         {
             originalColor = new Color(1, 1, 1, 0.03f);
-            sensorName = GetComponentInChildren<TextMeshPro>();
             SensorDropdown sensorDropdown = FindObjectOfType<SensorDropdown>();
             if (!sensorDropdown.sensors.Contains(this))
             {
@@ -27,7 +26,6 @@ public class FieldOfViewTrigger : MonoBehaviour
                 sensorName.text = type + " " + sensorDropdown.sensors.Count;
             }
             sensorDropdown.UpdateSensorDropdown();
-            fovLight = GetComponentInChildren<Light>();
         }
     }
 
