@@ -30,9 +30,9 @@ public class Ranger : Interactable
         defaultSpeed = navMeshAgent.speed;
         runSpeed = defaultSpeed + 7.5f;
         fatigueSpeed = defaultSpeed - 2;
-        pathLine.startWidth = 0.15f;
-        pathLine.endWidth = 0.15f;
-        pathLine.positionCount = 0;
+        //pathLine.startWidth = 0.15f;
+        //pathLine.endWidth = 0.15f;
+        //pathLine.positionCount = 0;
     }
 
 
@@ -136,12 +136,6 @@ public class Ranger : Interactable
         else
         {
             navMeshAgent.speed = defaultSpeed;
-            pathLine.positionCount = navMeshAgent.path.corners.Length;
-
-            for (var i = 1; i < navMeshAgent.path.corners.Length; i++)
-            {
-                //pathLine.SetPosition(i, navMeshAgent.path.corners[i]);
-            }
         }
         if (shouldSpawnTargetCircle)
         {
@@ -180,7 +174,7 @@ public class Ranger : Interactable
         tempTarget.GetComponent<Equipment>().isBeingPickedUp = true;
         DeselectTarget();
         StartCoroutine(TurnTowardsTarget(tempTarget, 0.5f));
-        animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);
+        animator.CrossFadeInFixedTime("Armature_001|interact cycle", 0.25f);
         GameObject targetItem = Instantiate(tempTarget.GetComponent<Equipment>().itemUIPrefab, FindObjectOfType<Canvas>().transform);
         FindObjectOfType<RangerBackground>().AddItemToInventory(targetItem);
         StartCoroutine(RemoveObject(tempTarget.gameObject));
@@ -194,7 +188,7 @@ public class Ranger : Interactable
         }
         duringAnimation = true;
         DeselectTarget();
-        animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);
+        animator.CrossFadeInFixedTime("Armature_001|interact cycle", 0.25f);
         FindObjectOfType<RangerBackground>().RemoveItemFromInventory(player.currentObjectToPlaceSprite);
         yield return new WaitForSeconds(1);
         player.DeselectObjectToPlace();
@@ -217,7 +211,7 @@ public class Ranger : Interactable
         StartCoroutine(poacherHit.TurnTowardsTarget(transform, 0.5f));
         StartCoroutine(TurnTowardsTarget(poacherHit.transform, 0.5f));
         navMeshAgent.destination = transform.position;
-        animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);
+        animator.CrossFadeInFixedTime("Armature_001|interact cycle", 0.25f);
         GameManager.poachers.Remove(poacherHit);
         StartCoroutine(RemoveObject(poacherHit.gameObject));
         FindObjectOfType<GameManager>().HandleMoneyChange("Poacher arrested!\nMoney received: " +
@@ -235,7 +229,7 @@ public class Ranger : Interactable
         DeselectTarget();
         StartCoroutine(TurnTowardsTarget(trap.transform, 0.5f));
         navMeshAgent.destination = transform.position;
-        animator.CrossFadeInFixedTime("Ranger|Jumpscare", 0.25f);
+        animator.CrossFadeInFixedTime("Armature_001|interact cycle", 0.25f);
         trap.GetComponent<Trap>().PlayAnimation("Disarm");
         StartCoroutine(RemoveObject(trap));
         FindObjectOfType<GameManager>().HandleMoneyChange("Trap dismantled!\nMoney received: " +
