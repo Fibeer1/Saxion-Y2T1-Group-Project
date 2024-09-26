@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
-using System.Runtime.InteropServices.WindowsRuntime;
 
 public class TutorialUI : MonoBehaviour
 {
@@ -23,6 +22,14 @@ public class TutorialUI : MonoBehaviour
     }
 
     [SerializeField] private TutorialStep[] steps;
+
+    private void Awake()
+    {
+        if (PlayerPrefs.GetInt("TutorialCompleted") == 1)
+        {
+            gameObject.SetActive(false);
+        }
+    }
 
     void Update()
     {
@@ -82,6 +89,7 @@ public class TutorialUI : MonoBehaviour
             if (currentStep >= steps.Length - 1)
             {
                 gameObject.SetActive(false);
+                PlayerPrefs.SetInt("TutorialCompleted", 1);
                 return;
             }
 

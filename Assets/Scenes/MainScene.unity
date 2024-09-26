@@ -8265,9 +8265,6 @@ MonoBehaviour:
   store: {fileID: 1390924647}
   tech: {fileID: 1607823313}
   village: {fileID: 1765135350}
-  hasOpenedStore: 0
-  hasOpenedTech: 0
-  hasOpenedVillage: 0
   steps:
   - currentText: "Hello ranger,\n\nWelcome to the nature reserve. \r\n\nYour goals
       is to stop poaching and help the villages nearby so they don't have to poach
@@ -26620,7 +26617,7 @@ MonoBehaviour:
   villageUpgradeCount: 0
   poacherSpawnReductionPercentage: 0
   money: 0
-  donationMin: 50
+  donationMin: 75
   donationMax: 300
 --- !u!4 &1621311533
 Transform:
