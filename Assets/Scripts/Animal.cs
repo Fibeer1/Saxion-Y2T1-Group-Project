@@ -7,6 +7,7 @@ public class Animal : Wanderer
 {
     public bool isDead = false;
     private GameObject trapTriggered;
+
     private int animalValue = 100; //Placeholder value
 
     private void Start()
