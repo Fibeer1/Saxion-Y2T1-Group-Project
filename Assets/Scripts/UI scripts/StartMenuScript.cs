@@ -1,29 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class StartMenuScript : MonoBehaviour
 {
-    [SerializeField] private string newGameLevel = "MainScene";
-    [SerializeField] private string loadSettings = "Settings Menu";
-    [SerializeField] private string loadMainMenu = "Main Menu";
-
-    public void NewGameButton()
+    public void LoadScene(string sceneName)
     {
-        SceneManager.LoadScene(newGameLevel);
-    }
-    public void LoadSettings()
-    {
-        SceneManager.LoadScene(loadSettings);
+        SceneManager.LoadScene(sceneName);
+        Debug.Log("Loading Scene: " + sceneName);
     }
     public void QuitGame()
     {
         Debug.Log("Quitting game...");
         Application.Quit();
     }
-    public void LoadMainMenu()
+
+    public void OpenURL()
     {
-        SceneManager.LoadScene(loadMainMenu);
+        Application.OpenURL("https://safeworldwide.org/projects/anti-poaching-campaign/");
     }
 }   
