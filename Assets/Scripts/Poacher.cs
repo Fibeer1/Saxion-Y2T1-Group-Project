@@ -100,7 +100,6 @@ public class Poacher : Wanderer
         }
 
         float distance = Vector3.Distance(transform.position, targetAnimal.transform.position);
-        Debug.Log(distance);
         if (distance < 10)
         {
             StartCoroutine(ShootAnimal(targetAnimal));

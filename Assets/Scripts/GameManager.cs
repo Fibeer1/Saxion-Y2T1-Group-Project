@@ -251,6 +251,25 @@ public class GameManager : MonoBehaviour
         rangerBackground.AddItemToInventory(itemDuplicate.gameObject);
     }
 
+    public void ResearchItem(ResearchItem item)
+    {
+        int moneyafterPurchase = money - item.researchPrice;
+        if (moneyafterPurchase <= 0)
+        {
+            TextPopup.PopUpText("Not enough money!", 0.5f, 2);
+            return;
+        }
+
+
+        money -= item.researchPrice;
+        item.researchedItemBlock.SetActive(true);
+        item.shopItemBlock.SetActive(false);
+        if (item.nextItemResearchBlock != null)
+        {
+            item.nextItemResearchBlock.SetActive(false);
+        }
+    }
+
     public void SellShopItem(ShopItem item)
     {
         InventoryItem shopItemItem = item.itemBeingSold.GetComponent<InventoryItem>();
