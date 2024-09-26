@@ -55,7 +55,12 @@ public class FieldOfViewTrigger : MonoBehaviour
             sensorCollisions.Add(other.gameObject);
             string detectedObject = type == "Drone" || type == "Camera" ? other.name : "Movement";
 
-            detectedObject = detectedObject.Split(' ').First();
+            string[] splitObject = detectedObject.Split(' ');
+            detectedObject = splitObject.First();
+            if (splitObject.Length > 2)
+            {
+                detectedObject += " " + splitObject[1];
+            }
             TextPopup.PopUpText(detectedObject + " detected in " + sensorName.text, 0.5f, 5);
             fovLight.color = triggeredColor;
         }
