@@ -11,6 +11,7 @@ public class Animal : Wanderer
     [SerializeField] private AudioClip deathSound;
     [SerializeField] private AudioSource audioSource3D;
     [SerializeField] private AudioSource audioSource2D;
+    [SerializeField] private GameObject horn;
     private int animalValue = 100; //Placeholder value
 
     private void Start()
@@ -50,6 +51,12 @@ public class Animal : Wanderer
         navMeshAgent.enabled = false;
         GameManager.animals.Remove(this);
         yield return new WaitForSeconds(1.5f);
+        
+        if (horn)
+        {
+            horn.SetActive(false);
+        }
+
         if (trapTriggered != null)
         {
             Destroy(trapTriggered);

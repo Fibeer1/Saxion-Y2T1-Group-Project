@@ -1043,6 +1043,7 @@ MonoBehaviour:
   deathSound: {fileID: 8300000, guid: 3f9703ddc33296d429c5b31bb96d174d, type: 3}
   audioSource3D: {fileID: 1955847874321753548}
   audioSource2D: {fileID: 7703362260329970294}
+  horn: {fileID: 470590644930927069}
 --- !u!114 &6714373038511110811
 MonoBehaviour:
   m_ObjectHideFlags: 0
