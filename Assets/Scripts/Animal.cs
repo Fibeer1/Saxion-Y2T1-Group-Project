@@ -7,7 +7,10 @@ public class Animal : Wanderer
 {
     public bool isDead = false;
     private GameObject trapTriggered;
-
+    [SerializeField] private AudioClip[] idleSounds;
+    [SerializeField] private AudioClip deathSound;
+    [SerializeField] private AudioSource audioSource3D;
+    [SerializeField] private AudioSource audioSource2D;
     private int animalValue = 100; //Placeholder value
 
     private void Start()
@@ -28,6 +31,11 @@ public class Animal : Wanderer
         HandleWandering();
     }
 
+    void IdleSounds()
+    {
+        audioSource3D.PlayOneShot(idleSounds[Random.Range(0, idleSounds.Length)]);
+    }
+
     public IEnumerator Die()
     {
         if (isDead)
@@ -43,7 +51,7 @@ public class Animal : Wanderer
         {
             Destroy(trapTriggered);
         }
-        Destroy(this);
+        audioSource2D.PlayOneShot(deathSound);
         if (name.Contains("Elephant"))
         {
             animator.Play("Armature|ElephantDeath");
@@ -55,6 +63,7 @@ public class Animal : Wanderer
         FOVDebug.FindFOVEntities();
         FindObjectOfType<GameManager>().HandleMoneyChange("One of your animals has died.\nMoney deducted: " + 
             animalValue + "$", animalValue);
+        Destroy(this);
     }
 
     private void OnTriggerEnter(Collider other)
