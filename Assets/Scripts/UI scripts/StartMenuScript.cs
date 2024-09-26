@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class StartMenuScript : MonoBehaviour
 {
-    [SerializeField] private string newGameLevel = "LeonMap";
+    [SerializeField] private string newGameLevel = "MainScene";
     [SerializeField] private string loadSettings = "Settings Menu";
     [SerializeField] private string loadMainMenu = "Main Menu";
 

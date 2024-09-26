@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Start Menu.unity
     guid: 29cb8baa5b5b4a049b2ea0a014017efc
   - enabled: 1
-    path: Assets/Scenes/LeonMap.unity
-    guid: 5df3c1b9d921ca04eaf7b7a212d92d2f
+    path: Assets/Scenes/MainScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}
