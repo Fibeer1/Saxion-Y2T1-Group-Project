@@ -44,9 +44,10 @@ public class Wanderer : Entity
         if (footstepIndex == 0)
         {
             currentTrailNode.transform.Rotate(0, 0, reverseFootstepValue);
+            Destroy(currentTrailNode);
         }
         FOVDebug.FindFOVEntities();
-        if (!shouldKeepTrackOfTrails)
+        if (!shouldKeepTrackOfTrails || footstepIndex == 0)
         {
             return;
         }

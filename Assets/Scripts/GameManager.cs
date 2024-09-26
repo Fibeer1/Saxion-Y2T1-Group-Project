@@ -35,17 +35,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform[] poacherSpawnPositions;
     [SerializeField] private GameObject poacherPrefab;
     [SerializeField] private float poacherSpawnTimer;
-    private float poacherSpawnTimeMin = 30;
-    private float poacherSpawnTimeMax = 60;
-    private float maxPoachers = 3;
+    private float poacherSpawnTimeMin = 15;
+    private float poacherSpawnTimeMax = 45;
+    private float maxPoachers = 5;
 
     public int villageUpgradeCount = 0;
     public int poacherSpawnReductionPercentage = 0;
 
     public int money;
     private int donationMoney = 0;
-    [SerializeField] private float donationMin = 50;
-    [SerializeField] private float donationMax = 300;
+    [SerializeField] private float donationMin = 150;
+    [SerializeField] private float donationMax = 500;
     private int rangerPrice = -50;
     private int rangerFee = -50;
     public static int poacherValue = 500;
