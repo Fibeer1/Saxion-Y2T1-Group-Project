@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     private Rigidbody rb;
     private Vector3 movement;
     private bool isMoving;
+    [SerializeField] private float mapBoundaryRaycastDistance;
 
 
     private void Start()
@@ -70,10 +71,10 @@ public class Player : MonoBehaviour
 
         bool[] movementChecks = 
             { 
-                movement.x > 0 && Physics.Raycast(transform.position, Vector3.right, 10), //Right
-                movement.z > 0 && Physics.Raycast(transform.position, Vector3.forward, 10), //Forward
-                movement.x < 0 && Physics.Raycast(transform.position, -Vector3.right, 10), //Left
-                movement.z < 0 && Physics.Raycast(transform.position, -Vector3.forward, 10), //Back
+                movement.x > 0 && Physics.Raycast(transform.position, Vector3.right, mapBoundaryRaycastDistance), //Right
+                movement.z > 0 && Physics.Raycast(transform.position, Vector3.forward, mapBoundaryRaycastDistance), //Forward
+                movement.x < 0 && Physics.Raycast(transform.position, -Vector3.right, mapBoundaryRaycastDistance), //Left
+                movement.z < 0 && Physics.Raycast(transform.position, -Vector3.forward, mapBoundaryRaycastDistance), //Back
             };
         foreach (var check in movementChecks)
         {
