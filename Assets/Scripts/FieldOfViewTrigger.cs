@@ -10,6 +10,7 @@ public class FieldOfViewTrigger : MonoBehaviour
     public TextMeshPro sensorName;
     public List<GameObject> sensorCollisions = new List<GameObject>();
     [SerializeField] private Light fovLight;
+    [SerializeField] private AudioSource audioSource;
     private Color originalColor;
     [SerializeField] private Color triggeredColor;
 
@@ -53,6 +54,11 @@ public class FieldOfViewTrigger : MonoBehaviour
             other.gameObject.GetComponent<TrailNode>() == null)
         {
             sensorCollisions.Add(other.gameObject);
+
+            if (sensorCollisions.Count == 1)
+            {
+                audioSource.Play();
+            }
             string detectedObject = type == "Drone" || type == "Camera" ? other.name : "Movement";
 
             string[] splitObject = detectedObject.Split(' ');

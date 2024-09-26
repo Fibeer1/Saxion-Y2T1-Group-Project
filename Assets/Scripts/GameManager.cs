@@ -25,6 +25,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float moneyChangeTimer = 20;
     private float moneyChangeTime = 20;
 
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip moneyGainClip;
+    [SerializeField] private AudioClip notEnoughMoneyClip;
+    [SerializeField] private AudioClip researchTreeClip;
+    [SerializeField] private AudioClip uiButtonClick;
+    [SerializeField] private AudioClip purchaseClip;
+
     [SerializeField] private Transform[] poacherSpawnPositions;
     [SerializeField] private GameObject poacherPrefab;
     [SerializeField] private float poacherSpawnTimer;
@@ -52,6 +59,8 @@ public class GameManager : MonoBehaviour
         rangers = FindObjectsOfType<Ranger>().ToList();
         poachers = FindObjectsOfType<Poacher>().ToList();
         animals = FindObjectsOfType<Animal>().ToList();
+
+        audioSource = GetComponent<AudioSource>();
 
         rangerFee = rangerPrice * rangers.Count;
         money = 1600; //Starting amount
@@ -113,6 +122,7 @@ public class GameManager : MonoBehaviour
             poacherSpawnTimer += poacherSpawnTimer * (poacherSpawnReductionPercentage / 100);
             Transform chosenSpawnPos = poacherSpawnPositions[Random.Range(0, poacherSpawnPositions.Length)];
             Poacher spawnedPoacher = Instantiate(poacherPrefab, chosenSpawnPos.position, Quaternion.identity).GetComponent<Poacher>();
+            spawnedPoacher.name = "Poacher (Clone)";
             poachers.Add(spawnedPoacher);
             FOVDebug.FindFOVEntities();
         }
@@ -120,17 +130,22 @@ public class GameManager : MonoBehaviour
 
     public void HireRanger()
     {
+        audioSource.PlayOneShot(uiButtonClick);
         if (rangers.Count >= maxRangers)
         {
             TextPopup.PopUpText("You have already reached the maximum amount of rangers!", 0.5f, 2);
+            audioSource.PlayOneShot(notEnoughMoneyClip);
             return;
         }
         int moneyafterPurchase = money - rangerPrice;
         if (moneyafterPurchase <= 0)
         {
             TextPopup.PopUpText("Not enough money!", 0.5f, 2);
+            audioSource.PlayOneShot(notEnoughMoneyClip);
             return;
         }
+
+        audioSource.PlayOneShot(purchaseClip);
 
         Ranger spawnedRanger = Instantiate(rangerPrefab, rangerSpawnPosition.position, Quaternion.identity).GetComponent<Ranger>();
         rangers.Add(spawnedRanger);
@@ -174,7 +189,6 @@ public class GameManager : MonoBehaviour
 
     private void HandleIncomeAndFees()
     {
-
         moneyChangeTimer -= Time.deltaTime;
         if (moneyChangeTimer <= 0)
         {
@@ -188,32 +202,39 @@ public class GameManager : MonoBehaviour
     {
         TextPopup.PopUpText(text, 0.5f, 2);
         money += moneyChange;
+        if (moneyChange >= 0)
+        {
+            audioSource.PlayOneShot(moneyGainClip);
+        }
     }
 
     public void BuyVillageUpgrade(VillageUpgrade villageUpgrade)
     {
+        audioSource.PlayOneShot(uiButtonClick);
         int moneyafterPurchase =  money - villageUpgrade.price;
         if (moneyafterPurchase <= 0)
         {
             TextPopup.PopUpText("Not enough money!", 0.5f, 2);
+            audioSource.PlayOneShot(notEnoughMoneyClip);
+            return;
         }
-        else
+
+        audioSource.PlayOneShot(purchaseClip);
+        money -= villageUpgrade.price;
+        poacherSpawnReductionPercentage += villageUpgrade.poacherPercentageReduction;
+        poacherSpawnTimeMin += poacherSpawnTimeMin / 100 * poacherSpawnReductionPercentage;
+        poacherSpawnTimeMax += poacherSpawnTimeMax / 100 * poacherSpawnReductionPercentage;
+        if (poacherSpawnReductionPercentage >= 50)
         {
-            money -= villageUpgrade.price;
-            poacherSpawnReductionPercentage += villageUpgrade.poacherPercentageReduction;
-            poacherSpawnTimeMin += poacherSpawnTimeMin / 100 * poacherSpawnReductionPercentage;
-            poacherSpawnTimeMax += poacherSpawnTimeMax / 100 * poacherSpawnReductionPercentage;
-            if (poacherSpawnReductionPercentage >= 50)
-            {
-                maxPoachers = 2;
-            }
-            villageUpgradeCount++;
-            villageUpgrade.boughtIndicator.SetActive(true);
+            maxPoachers = 2;
         }
+        villageUpgradeCount++;
+        villageUpgrade.boughtIndicator.SetActive(true);
     }
 
     public void BuyShopItem(ShopItem item)
     {
+        audioSource.PlayOneShot(uiButtonClick);
         bool inventoryFull = true;       
 
         InventoryItem[] inventoryPanels = rangerBackground.inventory;
@@ -229,6 +250,7 @@ public class GameManager : MonoBehaviour
         if (inventoryFull)
         {
             TextPopup.PopUpText("Cannot buy item! Inventory full.", 0.5f, 2);
+            audioSource.PlayOneShot(notEnoughMoneyClip);
             return;
         }
 
@@ -236,8 +258,11 @@ public class GameManager : MonoBehaviour
         if (moneyafterPurchase <= 0)
         {
             TextPopup.PopUpText("Not enough money!", 0.5f, 2);
+            audioSource.PlayOneShot(notEnoughMoneyClip);
             return;
         }
+
+        audioSource.PlayOneShot(purchaseClip);
 
         InventoryItem itemDuplicate = Instantiate(item.itemBeingSold, FindObjectOfType<Canvas>().transform).GetComponent<InventoryItem>();
 
@@ -257,9 +282,11 @@ public class GameManager : MonoBehaviour
         if (moneyafterPurchase <= 0)
         {
             TextPopup.PopUpText("Not enough money!", 0.5f, 2);
+            audioSource.PlayOneShot(notEnoughMoneyClip);
             return;
         }
 
+        audioSource.PlayOneShot(researchTreeClip);
 
         money -= item.researchPrice;
         item.researchedItemBlock.SetActive(true);
@@ -272,6 +299,9 @@ public class GameManager : MonoBehaviour
 
     public void SellShopItem(ShopItem item)
     {
+        audioSource.PlayOneShot(uiButtonClick);
+        audioSource.PlayOneShot(moneyGainClip);
+
         InventoryItem shopItemItem = item.itemBeingSold.GetComponent<InventoryItem>();
 
         int soldItemPanelIndex = -1;

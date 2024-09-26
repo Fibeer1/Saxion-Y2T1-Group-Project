@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     public Material currentObjectToPlaceSelectedMaterial;
     [SerializeField] private List<Material> currentObjectToPlaceOriginalMaterials = new List<Material>();
     private Ranger rangerOrderedToPlaceObject;
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip selectObjectClip;
 
     [Header("Camera Movement")]
     [SerializeField] private float cameraSpeedDamper = 5;    
@@ -33,6 +35,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
         rangerBackground.SetActive(false);
     }
 
@@ -253,6 +256,7 @@ public class Player : MonoBehaviour
         {
             DeselectObject();
         }
+        audioSource.PlayOneShot(selectObjectClip);
         currentObject = clickedObject;
 
         currentSelectionCircle = Instantiate(selectionCirclePrefab, currentObject.transform.position, Quaternion.identity, currentObject.transform);

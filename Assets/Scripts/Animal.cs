@@ -33,7 +33,10 @@ public class Animal : Wanderer
 
     void IdleSounds()
     {
-        audioSource3D.PlayOneShot(idleSounds[Random.Range(0, idleSounds.Length)]);
+        if (GetComponent<FOVEntity>().isBeingSeen && idleSounds.Length > 0)
+        {
+            audioSource3D.PlayOneShot(idleSounds[Random.Range(0, idleSounds.Length)]);
+        }
     }
 
     public IEnumerator Die()

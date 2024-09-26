@@ -10,6 +10,9 @@ public class Ranger : Interactable
     public Transform target;
     public Vector3 targetPosition;
     [SerializeField] private GameObject targetCirclePrefab;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip disarmTrap;
+    [SerializeField] private AudioClip placeObject;
     public GameObject currentTargetCircle;
     private LineRenderer pathLine;
     public string actionToPerform;
@@ -191,6 +194,7 @@ public class Ranger : Interactable
         animator.CrossFadeInFixedTime("Armature_001|interact cycle", 0.25f);
         FindObjectOfType<RangerBackground>().RemoveItemFromInventory(player.currentObjectToPlaceSprite);
         yield return new WaitForSeconds(1);
+        audioSource.PlayOneShot(placeObject);
         player.DeselectObjectToPlace();
         duringAnimation = false;
     }
@@ -231,6 +235,7 @@ public class Ranger : Interactable
         navMeshAgent.destination = transform.position;
         animator.CrossFadeInFixedTime("Armature_001|interact cycle", 0.25f);
         trap.GetComponent<Trap>().PlayAnimation("Disarm");
+        audioSource.PlayOneShot(disarmTrap);
         StartCoroutine(RemoveObject(trap));
         FindObjectOfType<GameManager>().HandleMoneyChange("Trap dismantled!\nMoney received: " +
         GameManager.trapValue + "$", GameManager.trapValue);

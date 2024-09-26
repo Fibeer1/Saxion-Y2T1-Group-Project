@@ -5,10 +5,10 @@ using UnityEngine.AI;
 
 public class Poacher : Wanderer
 {
-    [SerializeField] private bool followingTrail = false;
+    
     private Animal targetAnimal;
-    [SerializeField] private Ranger targetRanger;
-    public bool duringAnimation = false;
+    [SerializeField] private Ranger targetRanger;    
+    [SerializeField] private AudioSource audioSource;
     [SerializeField] private GameObject trapPrefab;
     [SerializeField] private float trapTimer;
     private float defaultSpeed;
@@ -16,6 +16,8 @@ public class Poacher : Wanderer
     public int poacherValue = 100;
 
     public bool isBeingArrested;
+    public bool duringAnimation = false;
+    [SerializeField] private bool followingTrail = false;
 
     private void Start()
     {
@@ -140,6 +142,7 @@ public class Poacher : Wanderer
         StartCoroutine(TurnTowardsTarget(targetAnimal.transform, 0.5f));
         navMeshAgent.destination = transform.position;
         animator.CrossFadeInFixedTime("Armature_001|shooting", 0.25f);
+        audioSource.Play();
         yield return new WaitForSeconds(1);
         animal.StartCoroutine(targetAnimal.Die());
         duringAnimation = false;
