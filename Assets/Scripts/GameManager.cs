@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
 
     public int money;
     private int donationMoney = 0;
-    private int donationMin = 0;
+    private int donationMin = 50;
     private int donationMax = 300;
     private int rangerPrice = -50;
     private int rangerFee = -50;
