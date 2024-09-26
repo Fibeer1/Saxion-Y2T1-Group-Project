@@ -57,7 +57,7 @@ public class RangerBackground : MonoBehaviour
         }
         else
         {
-            TextPopup.PopUpText("Cannot add item!\nInventory is full.", 0.5f, 1.5f);
+            TextPopup.PopUpText("Cannot add item!\nInventory is full.", Color.white, 0.5f, 1.5f);
         }
     }
 

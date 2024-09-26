@@ -44,8 +44,8 @@ public class GameManager : MonoBehaviour
 
     public int money;
     private int donationMoney = 0;
-    private int donationMin = 50;
-    private int donationMax = 300;
+    [SerializeField] private float donationMin = 50;
+    [SerializeField] private float donationMax = 300;
     private int rangerPrice = -50;
     private int rangerFee = -50;
     public static int poacherValue = 500;
@@ -133,14 +133,14 @@ public class GameManager : MonoBehaviour
         audioSource.PlayOneShot(uiButtonClick);
         if (rangers.Count >= maxRangers)
         {
-            TextPopup.PopUpText("You have already reached the maximum amount of rangers!", 0.5f, 2);
+            TextPopup.PopUpText("You have already reached the maximum amount of rangers!", Color.white, 0.5f, 2);
             audioSource.PlayOneShot(notEnoughMoneyClip);
             return;
         }
         int moneyafterPurchase = money - rangerPrice;
         if (moneyafterPurchase <= 0)
         {
-            TextPopup.PopUpText("Not enough money!", 0.5f, 2);
+            TextPopup.PopUpText("Not enough money!", Color.white, 0.5f, 2);
             audioSource.PlayOneShot(notEnoughMoneyClip);
             return;
         }
@@ -193,14 +193,15 @@ public class GameManager : MonoBehaviour
         if (moneyChangeTimer <= 0)
         {
             moneyChangeTimer = moneyChangeTime;
-            donationMoney = Random.Range(donationMin, donationMax);
+            donationMoney = Random.Range((int)donationMin, (int)donationMax);
             HandleMoneyChange("Rangers' fee.\nMoney deducted: " + rangerFee + "$", rangerFee);
             HandleMoneyChange("Donation received!\nMoney gained: " + donationMoney + "$", donationMoney);
         }
     }
     public void HandleMoneyChange(string text, int moneyChange)
     {
-        TextPopup.PopUpText(text, 0.5f, 2);
+        Color textColor = moneyChange > 0 ? Color.green : Color.red;
+        TextPopup.PopUpText(text, textColor, 0.5f, 2);
         money += moneyChange;
         if (moneyChange >= 0)
         {
@@ -214,7 +215,7 @@ public class GameManager : MonoBehaviour
         int moneyafterPurchase =  money - villageUpgrade.price;
         if (moneyafterPurchase <= 0)
         {
-            TextPopup.PopUpText("Not enough money!", 0.5f, 2);
+            TextPopup.PopUpText("Not enough money!", Color.white, 0.5f, 2);
             audioSource.PlayOneShot(notEnoughMoneyClip);
             return;
         }
@@ -224,6 +225,10 @@ public class GameManager : MonoBehaviour
         poacherSpawnReductionPercentage += villageUpgrade.poacherPercentageReduction;
         poacherSpawnTimeMin += poacherSpawnTimeMin / 100 * poacherSpawnReductionPercentage;
         poacherSpawnTimeMax += poacherSpawnTimeMax / 100 * poacherSpawnReductionPercentage;
+
+        donationMin += donationMin / 100 * poacherSpawnReductionPercentage;
+        donationMax += donationMax / 100 * poacherSpawnReductionPercentage;
+
         if (poacherSpawnReductionPercentage >= 50)
         {
             maxPoachers = 2;
@@ -249,7 +254,7 @@ public class GameManager : MonoBehaviour
 
         if (inventoryFull)
         {
-            TextPopup.PopUpText("Cannot buy item! Inventory full.", 0.5f, 2);
+            TextPopup.PopUpText("Cannot buy item! Inventory full.", Color.white, 0.5f, 2);
             audioSource.PlayOneShot(notEnoughMoneyClip);
             return;
         }
@@ -257,7 +262,7 @@ public class GameManager : MonoBehaviour
         int moneyafterPurchase = money - item.itemBeingSold.GetComponent<InventoryItem>().buyValue;
         if (moneyafterPurchase <= 0)
         {
-            TextPopup.PopUpText("Not enough money!", 0.5f, 2);
+            TextPopup.PopUpText("Not enough money!", Color.white, 0.5f, 2);
             audioSource.PlayOneShot(notEnoughMoneyClip);
             return;
         }
@@ -281,7 +286,7 @@ public class GameManager : MonoBehaviour
         int moneyafterPurchase = money - item.researchPrice;
         if (moneyafterPurchase <= 0)
         {
-            TextPopup.PopUpText("Not enough money!", 0.5f, 2);
+            TextPopup.PopUpText("Not enough money!", Color.white, 0.5f, 2);
             audioSource.PlayOneShot(notEnoughMoneyClip);
             return;
         }

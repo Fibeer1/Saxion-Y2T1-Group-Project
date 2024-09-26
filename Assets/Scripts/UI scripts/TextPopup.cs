@@ -6,73 +6,33 @@ using TMPro;
 public class TextPopup : MonoBehaviour
 {
     public static TextPopup instance;
-    private Vector3 originalPosition;
-    [SerializeField] private TextMeshProUGUI textMesh;
-    private float elapsedTime = 0;
-    private float fadeElapsedTime = 0;
+    [SerializeField] private Transform textMeshParent;
+    [SerializeField] private GameObject textMeshPrefab;
+    public List<TextPopUpInstance> textMeshes;
 
     private void Awake()
     {
-        originalPosition = textMesh.rectTransform.localPosition;
-        textMesh.gameObject.SetActive(false);
         instance = this;
     }
 
-    private IEnumerator OnTextPopUp(string text, float fadeDuration, float lifeTime)
+    private void OnTextPopUp(string text, Color textColor, float fadeDuration, float lifeTime)
     {
-        if (textMesh.gameObject.activeInHierarchy)
-        {
-            textMesh.text = textMesh.text + "\n\n" + text;
-            textMesh.alpha = 1;
-            fadeElapsedTime = 0;
-            elapsedTime -= 3; //Increase the lifetime of the text by 1 second each time text is added
-            yield break;
-        }
-        textMesh.text = text;
-        bool shouldFadeIn = true;
-        textMesh.gameObject.SetActive(true);
-        textMesh.transform.localPosition = originalPosition;        
-        textMesh.alpha = 0;
-        
-        elapsedTime = 0;
-        fadeElapsedTime = 0;
-
-        while (true)
-        {
-            elapsedTime += Time.deltaTime;
-            textMesh.transform.position += textMesh.transform.up / 50;
-            if (shouldFadeIn)
-            {
-                fadeElapsedTime += Time.deltaTime;
-                textMesh.alpha = Mathf.Lerp(0, 1, fadeElapsedTime / fadeDuration);
-            }
-            if (fadeElapsedTime >= fadeDuration)
-            {
-                shouldFadeIn = false;
-                fadeElapsedTime = 0;
-            }
-
-
-            if (elapsedTime >= lifeTime)
-            {
-                if (!shouldFadeIn)
-                {
-                    fadeElapsedTime += Time.deltaTime;
-                    textMesh.alpha = Mathf.Lerp(1, 0, fadeElapsedTime / fadeDuration);
-                    if (fadeElapsedTime >= fadeDuration)
-                    {
-                        break;
-                    }
-                }               
-            }
-            yield return null;
-        }
-        textMesh.gameObject.SetActive(false);
+        TextPopUpInstance textInstance = Instantiate(textMeshPrefab, textMeshParent.position, Quaternion.identity, textMeshParent).GetComponent<TextPopUpInstance>();
+        textInstance.transform.localPosition = Vector3.zero;
+        textInstance.textMesh.text = text;
+        textInstance.opaqueColor = textColor;
+        textInstance.opaqueColor.a = 1;
+        textInstance.transparentColor = new Color(textColor.r, textColor.g, textColor.b, 0);
+        textInstance.fadeDuration = fadeDuration;
+        textInstance.lifeTime = lifeTime;
+        textInstance.transform.position -= Vector3.up * 75 * textMeshes.Count;
+        textInstance.textPopupHandler = this;
+        textMeshes.Add(textInstance);
     }
 
-    public static void PopUpText(string text, float fadeDuration, float lifeTime)
+    public static void PopUpText(string text, Color textColor, float fadeDuration, float lifeTime)
     {
-        instance.StartCoroutine(instance.OnTextPopUp(text, fadeDuration, lifeTime));
+        instance.OnTextPopUp(text, textColor, fadeDuration, lifeTime);
     }
 
 }

@@ -67,7 +67,7 @@ public class FieldOfViewTrigger : MonoBehaviour
             {
                 detectedObject += " " + splitObject[1];
             }
-            TextPopup.PopUpText(detectedObject + " detected in " + sensorName.text, 0.5f, 5);
+            TextPopup.PopUpText(detectedObject + " detected in " + sensorName.text, Color.yellow, 0.5f, 5);
             fovLight.color = triggeredColor;
         }
     }

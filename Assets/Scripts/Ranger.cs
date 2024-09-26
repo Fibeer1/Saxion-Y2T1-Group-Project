@@ -59,11 +59,11 @@ public class Ranger : Interactable
         {
             if (navMeshAgent.velocity.magnitude > 1)
             {
-                fatigue -= Time.deltaTime / 100;
+                fatigue -= Time.deltaTime / 75;
             }
             else
             {
-                fatigue -= Time.deltaTime / 25;
+                fatigue -= Time.deltaTime / 10;
             }
             if (fatigue <= 0 && navMeshAgent.speed == fatigueSpeed)
             {
