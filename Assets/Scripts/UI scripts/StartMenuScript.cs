@@ -3,10 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class StartMenuScript : MonoBehaviour
 {
-    public void LoadScene(string sceneName)
+    public void LoadScene(int sceneIndex)
     {
-        SceneManager.LoadScene(sceneName);
-        Debug.Log("Loading Scene: " + sceneName);
+        SceneManager.LoadScene(sceneIndex);
+        Debug.Log("Loading Scene: " + SceneManager.GetSceneByBuildIndex(sceneIndex));
     }
     public void QuitGame()
     {
